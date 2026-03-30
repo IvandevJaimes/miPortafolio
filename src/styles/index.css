@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-shine: shine 2.5s linear infinite;
+
+  @keyframes shine {
+    0% {
+      left: -150%;
+    }
+    100% {
+      left: 150%;
+    }
+  }
+}
+
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(26, 25, 25);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #39ff88 #1a1a1a;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track:hover {
+  background: #242424;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #39ff88 0%, #00ff9c 100%);
+  border-radius: 4px;
+  border: 2px solid #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #4fff9a 0%, #33ffb3 100%);
+  box-shadow: 0 0 10px rgba(57, 255, 136, 0.5);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #2add75 0%, #00e68a 100%);
+}
+
+::-webkit-scrollbar-corner {
+  background: #1a1a1a;
+}
+
+::selection {
+  background: rgba(57, 255, 136, 0.3);
+  color: #ffffff;
+}

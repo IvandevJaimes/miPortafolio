@@ -1,0 +1,141 @@
+/* Animación de entrada */
+.skills-fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 800ms ease, transform 800ms ease;
+}
+
+.skills-fade-in.visible,
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Labels de sección */
+.label-line {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #39ff88);
+}
+
+.label-line:last-child {
+  background: linear-gradient(90deg, #39ff88, transparent);
+}
+
+.label-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #39ff88;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.title-accent {
+  background: linear-gradient(135deg, #39ff88 0%, #00ff9c 50%, #22c55e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Tabs de categorías */
+.skills-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 300ms ease;
+}
+
+.skills-tab:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #f1f5f9;
+  transform: translateY(-2px);
+}
+
+.skills-tab.active {
+  background: rgba(57, 255, 136, 0.1);
+  border-color: rgba(57, 255, 136, 0.4);
+  color: #39ff88;
+  box-shadow: 0 0 20px rgba(57, 255, 136, 0.15);
+}
+
+/* Cards de habilidades */
+.skill-card {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 400ms ease;
+}
+
+.skill-card:hover {
+  border-color: rgba(57, 255, 136, 0.4);
+  background: rgba(35, 35, 35, 0.8);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(57, 255, 136, 0.1);
+}
+
+.skill-card.hovered {
+  border-color: rgba(57, 255, 136, 0.3);
+}
+
+/* Badges de nivel */
+.badge-advanced {
+  background: rgba(57, 255, 136, 0.15);
+  color: #39ff88;
+  border: 1px solid rgba(57, 255, 136, 0.3);
+}
+
+.badge-intermediate {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.badge-basic {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+/* Barras de progreso */
+.bar-advanced {
+  background: linear-gradient(90deg, #39ff88, #00ff9c);
+  box-shadow: 0 0 10px rgba(57, 255, 136, 0.5);
+}
+
+.bar-intermediate {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+}
+
+.bar-basic {
+  background: linear-gradient(90deg, #94a3b8, #64748b);
+}
+
+/* Cards de idiomas */
+.language-card {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 300ms ease;
+}
+
+.language-card:hover {
+  border-color: rgba(57, 255, 136, 0.3);
+  transform: translateY(-4px);
+}
+
+@media (max-width: 640px) {
+  .skills-tab {
+    padding: 8px 12px;
+  }
+}
