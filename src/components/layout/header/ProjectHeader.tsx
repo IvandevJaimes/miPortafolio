@@ -36,12 +36,10 @@ const ProjectHeader = () => {
             </a>
           </div>
 
-          {/* Botón descargar CV */}
           <div className="hidden md:block">
             <PrimaryButton className="text-sm">Descargar CV</PrimaryButton>
           </div>
 
-          {/* Mobile */}
           <div className="md:hidden flex items-center gap-2">
             <div className="block md:hidden">
               <PrimaryButton className="sm:text-[12px] text-xs">

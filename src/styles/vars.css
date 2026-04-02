@@ -46,6 +46,14 @@
     var(--green-matrix),
     var(--green-500)
   );
+
+  --success-100: #d1fae5;
+  --success-500: #059669;
+  --success-600: #047857;
+  
+  --error-100: #fee2e2;
+  --error-500: #dc2626;
+  --error-600: #b91c1c;
 }
 
 [data-theme="dark"] {

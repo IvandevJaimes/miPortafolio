@@ -4,9 +4,7 @@ const ProjectPage = () => {
   return (
     <>
       <ProjectHeader />
-      <main className="pt-20">
-        {/* Proyecto individual */}
-      </main>
+      <main className="pt-20"></main>
     </>
   );
 };

@@ -268,7 +268,6 @@ const languages = [
   },
 ];
 
-// Configuración de nivel
 const getLevelConfig = (level: string) => {
   switch (level) {
     case "advanced":
@@ -300,7 +299,6 @@ const Skills = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
-  // Animación de entrada
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -320,7 +318,6 @@ const Skills = () => {
       <div
         className={`max-w-6xl mx-auto relative z-10 ${isVisible ? "visible" : ""}`}
       >
-        {/* Encabezado */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-3 mb-5">
             <span className="label-line" />
@@ -336,7 +333,6 @@ const Skills = () => {
           </p>
         </div>
 
-        {/* Pestañas de categorías */}
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map((cat) => (
             <button
@@ -352,7 +348,6 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Grid de habilidades con descripción */}
         {currentCategory && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
             {currentCategory.skills.map((skill) => {
@@ -406,7 +401,6 @@ const Skills = () => {
           </div>
         )}
 
-        {/* Idiomas */}
         <div className="border-t border-white/[0.06] pt-12">
           <h3 className="text-xl font-bold text-slate-50 text-center mb-8">
             Idiomas

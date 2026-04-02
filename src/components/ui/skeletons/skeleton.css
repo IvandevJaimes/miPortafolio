@@ -1,0 +1,539 @@
+.skeleton-section {
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.skeleton-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.skeleton-particles::before,
+.skeleton-particles::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 200%;
+  top: 0;
+  left: 0;
+  animation: particles-float 15s linear infinite;
+}
+
+.skeleton-particles::before {
+  background:
+    radial-gradient(3px 3px at 10% 10%, var(--green-neon) 50%, transparent 50%),
+    radial-gradient(4px 4px at 30% 25%, var(--green-400) 50%, transparent 50%),
+    radial-gradient(
+      5px 5px at 50% 40%,
+      var(--green-matrix) 50%,
+      transparent 50%
+    ),
+    radial-gradient(3px 3px at 70% 15%, var(--green-300) 50%, transparent 50%),
+    radial-gradient(4px 4px at 90% 35%, var(--green-neon) 50%, transparent 50%),
+    radial-gradient(
+      6px 6px at 15% 55%,
+      var(--green-matrix) 50%,
+      transparent 50%
+    ),
+    radial-gradient(3px 3px at 35% 65%, var(--green-400) 50%, transparent 50%),
+    radial-gradient(5px 5px at 55% 75%, var(--green-neon) 50%, transparent 50%),
+    radial-gradient(4px 4px at 75% 85%, var(--green-300) 50%, transparent 50%),
+    radial-gradient(3px 3px at 95% 95%, var(--green-400) 50%, transparent 50%);
+  opacity: 0.6;
+}
+
+.skeleton-particles::after {
+  background:
+    radial-gradient(4px 4px at 20% 20%, var(--green-400) 50%, transparent 50%),
+    radial-gradient(3px 3px at 40% 10%, var(--green-neon) 50%, transparent 50%),
+    radial-gradient(5px 5px at 60% 30%, var(--green-300) 50%, transparent 50%),
+    radial-gradient(
+      4px 4px at 80% 50%,
+      var(--green-matrix) 50%,
+      transparent 50%
+    ),
+    radial-gradient(3px 3px at 25% 70%, var(--green-neon) 50%, transparent 50%),
+    radial-gradient(
+      6px 6px at 45% 80%,
+      var(--green-matrix) 50%,
+      transparent 50%
+    ),
+    radial-gradient(4px 4px at 65% 90%, var(--green-400) 50%, transparent 50%),
+    radial-gradient(3px 3px at 85% 75%, var(--green-300) 50%, transparent 50%);
+  opacity: 0.4;
+  animation-delay: -7.5s;
+}
+
+@keyframes particles-float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.skeleton-section::before {
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  pointer-events: none;
+}
+
+.skeleton-section::after {
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.skeleton-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 300px;
+  align-items: center;
+  z-index: 1;
+}
+
+.skeleton-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.skeleton-greeting {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skeleton-wave {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+}
+
+.skeleton-hello {
+  width: 80px;
+  height: 22px;
+  border-radius: 4px;
+}
+
+.skeleton-name {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #f8fafc;
+  margin: 0;
+}
+
+.skeleton-name-accent {
+  display: inline-block;
+  opacity: 0%;
+  width: clamp(100px, 20vw, 200px);
+  height: clamp(40px, 6vw, 72px);
+  border-radius: 8px;
+}
+
+.skeleton-typing-container {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+.skeleton-typing {
+  width: 180px;
+  height: 24px;
+  border-radius: 4px;
+}
+
+.skeleton-cursor {
+  width: 12px;
+  height: 24px;
+  margin-left: 4px;
+  animation: skeleton-blink 1s step-end infinite;
+}
+
+@keyframes skeleton-blink {
+  0%,
+  50% {
+    opacity: 0.3;
+  }
+  51%,
+  100% {
+    opacity: 0.8;
+  }
+}
+
+.skeleton-description {
+  width: 100%;
+  max-width: 520px;
+  height: 48px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+/* CTA Buttons */
+.skeleton-cta {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.skeleton-btn-primary {
+  width: 140px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+.skeleton-btn-secondary {
+  width: 120px;
+  height: 48px;
+  border-radius: 8px;
+  border: 2px solid rgba(57, 255, 136, 0.15);
+}
+
+/* Social Links */
+.skeleton-social {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.skeleton-social-link {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid rgba(57, 255, 136, 0.1);
+}
+
+/* Image Container */
+.skeleton-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.skeleton-image-wrapper {
+  position: relative;
+  width: clamp(280px, 35vw, 400px);
+  height: clamp(280px, 35vw, 400px);
+}
+
+.skeleton-image-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: skeleton-pulse 3s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.skeleton-image-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  border: 3px solid rgba(57, 255, 136, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: skeleton-morph 8s ease-in-out infinite;
+}
+
+@keyframes skeleton-morph {
+  0% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  50% {
+    border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+  }
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+}
+
+.skeleton-initials {
+  width: clamp(60px, 15vw, 100px);
+  height: clamp(60px, 15vw, 100px);
+  border-radius: 50%;
+}
+
+/* Scroll indicator */
+.skeleton-scroll {
+  position: absolute;
+  bottom: 80%;
+  left: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+}
+
+.skeleton-scroll-mouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(57, 255, 136, 0.15);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.skeleton-scroll-wheel {
+  width: 4px;
+  height: 8px;
+  border-radius: 2px;
+  animation: scroll-skeleton 2s ease-in-out infinite;
+}
+
+@keyframes scroll-skeleton {
+  0% {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translateY(12px);
+  }
+}
+
+.skeleton-scroll-text {
+  width: 40px;
+  height: 14px;
+  border-radius: 2px;
+}
+
+/* Decorative elements */
+.skeleton-decoration-1,
+.skeleton-decoration-2 {
+  position: absolute;
+  color: rgba(57, 255, 136, 0.3);
+  animation: float-skeleton 6s ease-in-out infinite;
+}
+
+.skeleton-decoration-1 svg,
+.skeleton-decoration-2 svg {
+  width: 40px;
+  height: 40px;
+}
+
+.skeleton-decoration-1 {
+  top: 10%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.skeleton-decoration-2 {
+  bottom: 15%;
+  left: 5%;
+  animation-delay: 2s;
+}
+
+@keyframes float-skeleton {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+}
+
+/* SHIMMER ANIMATION - aplica a todos los bloques */
+.skeleton-wave,
+.skeleton-hello,
+.skeleton-name,
+.skeleton-name-accent,
+.skeleton-typing,
+.skeleton-description,
+.skeleton-btn-primary,
+.skeleton-btn-secondary,
+.skeleton-social-link,
+.skeleton-image-glow,
+.skeleton-image-placeholder,
+.skeleton-initials,
+.skeleton-scroll-wheel,
+.skeleton-scroll-text {
+  background: linear-gradient(
+    90deg,
+    rgba(57, 255, 136, 0.06) 25%,
+    rgba(57, 255, 136, 0.2) 50%,
+    rgba(57, 255, 136, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .skeleton-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .skeleton-content {
+    align-items: center;
+    order: 2;
+  }
+
+  .skeleton-image-container {
+    order: 1;
+  }
+
+  .skeleton-description {
+    max-width: 100%;
+  }
+
+  .skeleton-cta {
+    justify-content: center;
+  }
+
+  .skeleton-greeting {
+    justify-content: center;
+  }
+
+  .skeleton-typing-container {
+    justify-content: center;
+  }
+
+  .skeleton-scroll {
+    bottom: 85%;
+  }
+
+  .skeleton-decoration-1,
+  .skeleton-decoration-2 {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .skeleton-section {
+    padding: 5px 16px 60px;
+  }
+
+  .skeleton-cta {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .skeleton-btn-primary,
+  .skeleton-btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .skeleton-scroll {
+    display: none;
+  }
+
+  .skeleton-decoration {
+    display: none;
+  }
+
+  .skeleton-name {
+    font-size: 36px;
+  }
+}
+
+/* Modal Skeleton */
+.modal-skeleton {
+  padding: 1rem;
+  width: 100%;
+}
+
+.modal-skeleton-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-skeleton-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.modal-skeleton-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  flex: 1;
+}
+
+.modal-skeleton-title {
+  width: 180px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.modal-skeleton-subtitle {
+  width: 120px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+.modal-skeleton-button {
+  width: 140px;
+  height: 40px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Shimmer para modal skeleton */
+.modal-skeleton-icon,
+.modal-skeleton-title,
+.modal-skeleton-subtitle,
+.modal-skeleton-button {
+  background: linear-gradient(
+    90deg,
+    rgba(57, 255, 136, 0.06) 25%,
+    rgba(57, 255, 136, 0.2) 50%,
+    rgba(57, 255, 136, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+}
