@@ -5,6 +5,7 @@ import "./projects.css";
 import { SecondaryButton } from "../../ui/buttons/SecondaryButton";
 import { getProjects } from "../../../services/projectsApi";
 import type { Project } from "../../../types/types";
+import placeholderData from "../../../data/projects.json";
 
 const tagColors: Record<string, string> = {
   "Node.js": "tag-nodejs",
@@ -29,20 +30,11 @@ const tagColors: Record<string, string> = {
   "AWS S3": "tag-cloud",
 };
 
-// Imágenes placeholder cuando no hay imagen real
-const PLACEHOLDER_IMAGES = [
-  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
-  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
-  "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=800&q=80",
-  "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800&q=80",
-];
-
 // Obtener imagen placeholder basada en ID (consistente por proyecto)
 const getPlaceholderImage = (id: number) => {
-  const index = id % PLACEHOLDER_IMAGES.length;
-  return PLACEHOLDER_IMAGES[index];
+  const images = placeholderData.placeholderImages || [];
+  const index = id % images.length;
+  return images[index] || "";
 };
 
 // Adaptar datos de la API al formato del componente
