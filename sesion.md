@@ -110,3 +110,72 @@ El archivo `Hero.tsx` tenía un `useEffect` que actualizaba 3 estados cada **50m
 ### Pendiente
 - Revisión de tipos en Projects.tsx vs types.ts
 - Agregar funcionalidad a botones de Hero (onClick)
+
+---
+
+## Sesión 4 - 04/04/2026
+
+### Problema reportado
+- Necesidad de actualizar TanStack Query (versión 1.0.0 incorrecta)
+- Querer migrar useFetch personalizado a TanStack Query
+
+### Trabajo realizado
+
+#### 1. Migración a TanStack Query
+- Corregida dependencia: `tanstack-query: ^1.0.0` → `@tanstack/react-query@latest`
+- Configurado `QueryClientProvider` en `main.tsx`
+- Config: `staleTime: 5min`, `retry: 2`, `refetchOnWindowFocus: false`
+- Migrado `useFetch` de Hero.tsx y Header.tsx a `useQuery`
+- Eliminado hook personalizado `src/hooks/useFetch.ts`
+
+#### 2. Animación del grid en Hero
+- Agregado movimiento suave en diagonal al fondo del Hero
+- Animación infinita con `background-position: 65px 130px` (múltiplo del background-size)
+- Duración: 12 segundos
+
+#### 3. Modal de CV - Fecha de actualización
+- Mostrada fecha de última actualización del CV en el modal
+- Formato localized: "Actualizado el 4 abril 2026"
+
+#### 4. Configuración de Vite para acceso externo
+- Agregado `server: { host: true, port: 5173 }` en `vite.config.ts`
+- Permite acceso desde dispositivos externos (celular)
+
+#### 5. Projects - Migración a API
+- Migrado Projects.tsx de datos hardcodeados a TanStack Query + service API
+- Creado mapping para adaptar campos de la API:
+  - `project_id` → `id`
+  - `images[0].url` → `image`
+  - `tags[].tag` → `tags[]`
+  - `featured: 1` → `featured: true`
+- Imágenes placeholder configurables en `src/data/projects.json`
+- Placeholder detection: `isPlaceholder` flag con `opacity-70`
+
+#### 6. Botones separados para Frontend/Backend/CRUD
+- Botón Frontend (github) - borde slate-400
+- Botón Backend (github_backend) - borde emerald-400
+- Botón CRUD (github_crud) - borde amber-400
+- Todos con logo GitHub y texto coloreado a juego
+
+### Archivos modificados/creados
+- `package.json` - dependencia corregida
+- `src/main.tsx` - QueryClientProvider
+- `src/services/projectsApi.ts` - servicio para proyectos
+- `src/components/sections/projects/Projects.tsx` - migrateado a useQuery
+- `src/data/projects.json` - imágenes placeholder
+- `src/components/sections/hero/hero.css` - animación del grid
+- `src/components/layout/header/Header.tsx` - fecha de CV
+- `vite.config.ts` - server host
+
+### Archivos eliminados
+- `src/hooks/useFetch.ts`
+- `src/components/sections/projects/data.ts`
+
+### Estado actual
+- Branch: `main` (commits locales pendientes)
+- Build: ✅ passing
+- Lint: ⚠️ Falsos positivos de ModalContext (ignorar)
+
+### Pendiente
+- Merge de commits pendientes
+- Limpiar ramas obsolete
