@@ -38,16 +38,22 @@ const getPlaceholderImage = (id: number) => {
 };
 
 // Adaptar datos de la API al formato del componente
-const adaptProject = (apiProject: Project) => ({
-  id: apiProject.project_id,
-  title: apiProject.title,
-  description: apiProject.description,
-  image: apiProject.images?.[0]?.url || getPlaceholderImage(apiProject.project_id),
-  tags: apiProject.tags?.map((t) => t.tag) || [],
-  github: apiProject.github,
-  demo: apiProject.demo,
-  featured: apiProject.featured === 1,
-});
+const adaptProject = (apiProject: Project) => {
+  const hasRealImage = apiProject.images?.[0]?.url && apiProject.images[0].url.length > 0;
+  return {
+    id: apiProject.project_id,
+    title: apiProject.title,
+    description: apiProject.description,
+    image: hasRealImage 
+      ? apiProject.images[0].url 
+      : getPlaceholderImage(apiProject.project_id),
+    tags: apiProject.tags?.map((t) => t.tag) || [],
+    github: apiProject.github,
+    demo: apiProject.demo,
+    featured: apiProject.featured === 1,
+    isPlaceholder: !hasRealImage,
+  };
+};
 
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -125,7 +131,7 @@ const Projects = () => {
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="project-image-img"
+                  className={`project-image-img ${project.isPlaceholder ? "opacity-70" : ""}`}
                   loading="lazy"
                 />
                 <div className="absolute inset-0 " />
