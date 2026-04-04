@@ -90,6 +90,9 @@ const Header = () => {
                     : isDocx
                       ? "Documento Word"
                       : "Archivo"}
+                  {profile?.updated_at && (
+                    <> · Actualizado el {formatDate(profile.updated_at)}</>
+                  )}
                 </p>
               </div>
             </div>
@@ -129,6 +132,15 @@ const Header = () => {
       return `${baseName}...${ext}`;
     }
     return name;
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("es-AR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
   };
 
   const handleDownloadCV = () => {
@@ -211,6 +223,9 @@ const Header = () => {
             </p>
             <p className="text-xs sm:text-sm text-gray-400">
               {isPdf ? "Documento PDF" : isDocx ? "Documento Word" : "Archivo"}
+              {profile?.updated_at && (
+                <> · Actualizado el {formatDate(profile.updated_at)}</>
+              )}
             </p>
           </div>
         </div>
