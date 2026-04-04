@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import "./projects.css";
 import { SecondaryButton } from "../../ui/buttons/SecondaryButton";
-import { getProjects, type Project } from "./data";
+import { getProjects } from "../../../services/projectsApi";
+import type { Project } from "../../../types/types";
 
 const tagColors: Record<string, string> = {
   "Node.js": "tag-nodejs",
@@ -27,27 +29,30 @@ const tagColors: Record<string, string> = {
   "AWS S3": "tag-cloud",
 };
 
+// Adaptar datos de la API al formato del componente
+const adaptProject = (apiProject: Project) => ({
+  id: apiProject.project_id,
+  title: apiProject.title,
+  description: apiProject.description,
+  image: apiProject.images?.[0]?.url || "",
+  tags: apiProject.tags?.map((t) => t.tag) || [],
+  github: apiProject.github,
+  demo: apiProject.demo,
+  featured: apiProject.featured === 1,
+});
+
 const Projects = () => {
-  const [projectsData, setProjectsData] = useState<Project[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const loadProjects = async () => {
-      setIsLoading(true);
-      try {
-        const data = await getProjects();
-        setProjectsData(data);
-      } catch (error) {
-        console.error("Error loading projects:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    void loadProjects();
-  }, []);
+  const { data: apiProjects = [], isLoading } = useQuery({
+    queryKey: ["projects"],
+    queryFn: () => getProjects(),
+  });
+
+  // Adaptar datos de la API
+  const projectsData = apiProjects.map(adaptProject);
 
   useEffect(() => {
     const timer = setTimeout(() => {
