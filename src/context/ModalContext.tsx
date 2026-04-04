@@ -17,7 +17,7 @@ interface ModalState {
 interface ModalContextType {
   openModal: (
     title: ReactNode,
-    children: ReactNode,
+    children?: ReactNode,
     footer?: ReactNode,
   ) => void;
   closeModal: () => void;

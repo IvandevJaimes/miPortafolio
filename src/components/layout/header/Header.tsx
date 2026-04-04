@@ -1,10 +1,10 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./header.css";
 import { PrimaryButton } from "../../ui/buttons/PrimaryButton";
 import { Logo } from "../../ui/logo/Logo";
 import { ModalSkeleton } from "../../ui/skeletons/ModalSkeleton";
 import { useModal } from "../../../context/ModalContext";
-import { useFetch } from "../../../hooks/useFetch";
+import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../../../services/profileApi";
 
 const navLinks = [
@@ -19,11 +19,10 @@ const Header = () => {
   const { openModal } = useModal();
   const modalOpenedWithSkeleton = useRef(false);
 
-  const fetchProfile = useCallback(
-    (signal?: AbortSignal) => getProfile(signal),
-    [],
-  );
-  const { data: profile, isLoading } = useFetch(fetchProfile, []);
+  const { data: profile, isLoading } = useQuery({
+    queryKey: ["profile"],
+    queryFn: () => getProfile(),
+  });
 
   useEffect(() => {
     if (!isLoading && profile && modalOpenedWithSkeleton.current) {

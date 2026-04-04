@@ -1,33 +1,29 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import "./hero.css";
 import { PrimaryButton } from "../../ui/buttons/PrimaryButton";
 import { SecondaryButton } from "../../ui/buttons/SecondaryButton";
 import { Skeleton } from "../../ui/skeletons/Skeleton";
-import { useFetch } from "../../../hooks/useFetch";
+import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../../../services/profileApi";
 import { Alert } from "../../ui/alerts/Alert";
 import profileData from "../../../data/profile.json";
 
 const Hero = () => {
-  const [retryCount, setRetryCount] = useState(0);
   const [showAlert, setShowAlert] = useState(true);
-
-  const fetchProfile = useCallback(
-    (signal?: AbortSignal) => getProfile(signal),
-    [],
-  );
 
   const {
     data: apiProfile,
     isLoading,
     error,
-    setError,
-  } = useFetch(fetchProfile, [retryCount]);
+    refetch,
+  } = useQuery({
+    queryKey: ["profile"],
+    queryFn: () => getProfile(),
+  });
 
   const handleRetry = () => {
-    setError(null);
     setShowAlert(true);
-    setRetryCount((prev) => prev + 1);
+    refetch();
   };
 
   const shouldShowAlert = showAlert && error && !apiProfile;
@@ -47,7 +43,7 @@ const Hero = () => {
       {shouldShowAlert && (
         <Alert
           type="error"
-          message={error.message}
+          message={error?.message || "Error desconocido"}
           show={showAlert}
           onClose={() => setShowAlert(false)}
           onRetry={handleRetry}
