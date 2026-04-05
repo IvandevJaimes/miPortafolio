@@ -10,7 +10,6 @@ export const ProjectsEmpty = ({ onRetry }: ProjectsEmptyProps) => {
       <div className="skeleton-particles" />
 
       <div className="max-w-[1400px] mx-auto relative z-10 flex flex-col items-center justify-center min-h-[60vh]">
-        {/* Empty Icon */}
         <div className="projects-error-icon-container">
           <div className="projects-empty-icon">
             <svg
@@ -29,7 +28,6 @@ export const ProjectsEmpty = ({ onRetry }: ProjectsEmptyProps) => {
           <div className="projects-empty-ring" />
         </div>
 
-        {/* Empty Message */}
         <div className="text-center mt-8 flex items-center flex-col">
           <h3 className="projects-error-title">No hay proyectos</h3>
           <p className="projects-error-message">
@@ -37,7 +35,6 @@ export const ProjectsEmpty = ({ onRetry }: ProjectsEmptyProps) => {
           </p>
         </div>
 
-        {/* Retry Button (optional) */}
         {onRetry && (
           <button onClick={onRetry} className="projects-error-retry">
             <svg
@@ -57,7 +54,6 @@ export const ProjectsEmpty = ({ onRetry }: ProjectsEmptyProps) => {
           </button>
         )}
 
-        {/* Decorative elements */}
         <div className="projects-error-decoration-1">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />

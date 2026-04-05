@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import "./projects.css";
+import "../../ui/cards/card.css";
 import { SecondaryButton } from "../../ui/buttons/SecondaryButton";
 import { ProjectsSkeleton } from "../../ui/skeletons/ProjectsSkeleton";
 import { ProjectsError } from "../../ui/errorComponents/ProjectsError";

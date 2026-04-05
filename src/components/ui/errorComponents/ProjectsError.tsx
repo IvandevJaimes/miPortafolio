@@ -11,8 +11,8 @@ export const ProjectsError = ({
 }: ProjectsErrorProps) => {
   return (
     <section className="py-17 px-6 relative overflow-hidden bg-gradient-to-b from-[#0d0d0d] via-[#1a1919] to-[#0d0d0d]">
+      <div className="projects-error-particles" />
       <div className="max-w-[1400px] mx-auto relative z-10 flex flex-col items-center justify-center min-h-[60vh]">
-        {/* Error Icon */}
         <div className="projects-error-icon-container">
           <div className="projects-error-icon">
             <svg
@@ -31,7 +31,6 @@ export const ProjectsError = ({
           <div className="projects-error-ring" />
         </div>
 
-        {/* Error Message */}
         <div
           className="text-center mt-8 flex items-
           center flex-col"
@@ -44,7 +43,6 @@ export const ProjectsError = ({
           </p>
         </div>
 
-        {/* Retry Button */}
         <button onClick={onRetry} className="projects-error-retry">
           <svg
             viewBox="0 0 24 24"
