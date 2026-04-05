@@ -6,7 +6,7 @@ import "../../ui/cards/card.css";
 import { SecondaryButton } from "../../ui/buttons/SecondaryButton";
 import { ProjectsSkeleton } from "../../ui/skeletons/ProjectsSkeleton";
 import { ProjectsError } from "../../ui/errorComponents/ProjectsError";
-import { ProjectsEmpty } from "../../ui/ProjectsEmpty";
+import { ProjectsEmpty } from "../../ui/errorComponents/ProjectsEmpty";
 import { ProjectCard } from "../../ui/cards/ProjectCard";
 import { getProjects } from "../../../services/projectsApi";
 import type { Project } from "../../../types/types";
@@ -114,12 +114,6 @@ const Projects = () => {
               onClick={() => navigate(`/project/${project.id}`)}
             />
           ))}
-        </div>
-
-        <div className=" mt-16 flex justify-center">
-          <SecondaryButton className="view-all-btn flex items-center">
-            <span>Ver Todos</span>
-          </SecondaryButton>
         </div>
       </div>
     </section>

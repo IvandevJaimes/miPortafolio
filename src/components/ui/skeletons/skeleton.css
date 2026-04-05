@@ -542,25 +542,25 @@
   .skeleton-project-image {
     height: 192px;
   }
-  
+
   .skeleton-project-title {
     height: 28px;
   }
-  
+
   .skeleton-project-description {
     height: 72px;
   }
-  
+
   .skeleton-project-tag {
     width: 70px;
     height: 26px;
   }
-  
+
   .skeleton-project-btn {
     width: 100px;
     height: 40px;
   }
-  
+
   .skeleton-project-demo-btn {
     width: 70px;
     height: 40px;
@@ -641,13 +641,6 @@
   border-radius: 8px;
 }
 
-.skeleton-view-all-btn {
-  width: 140px;
-  height: 48px;
-  border-radius: 8px;
-}
-
-/* Shimmer animation para projects skeleton */
 .skeleton-label-line,
 .skeleton-label-text,
 .skeleton-title,
@@ -658,8 +651,7 @@
 .skeleton-project-description,
 .skeleton-project-tag,
 .skeleton-project-btn,
-.skeleton-project-demo-btn,
-.skeleton-view-all-btn {
+.skeleton-project-demo-btn {
   background: linear-gradient(
     90deg,
     rgba(57, 255, 136, 0.06) 25%,

@@ -44,10 +44,6 @@ export const ProjectsSkeleton = ({ count = 6 }: ProjectsSkeletonProps) => {
             </div>
           ))}
         </div>
-
-        <div className="mt-16 flex justify-center">
-          <div className="skeleton-view-all-btn" />
-        </div>
       </div>
     </section>
   );

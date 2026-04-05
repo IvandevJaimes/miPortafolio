@@ -226,3 +226,84 @@ El archivo `Hero.tsx` tenía un `useEffect` que actualizaba 3 estados cada **50m
 - Branch: `feat/projects-improvements`
 - Build: ✅ passing
 - Pendiente: merge a main
+
+---
+
+## Sesión 6 - 05/04/2026
+
+### Trabajo realizado
+
+#### 1. ProjectCard como componente reutilizable
+- Extraído a `src/components/ui/cards/ProjectCard.tsx`
+- Props: project, onClick, animationDelay, isHovered, onMouseEnter, onMouseLeave
+- Estilos en `src/components/ui/cards/card.css`
+- Tags, badges (estrella, "En prod"), botones (FE/BE/CRUD/Code/Demo)
+
+#### 2. Soporte para monorepo
+- Campo `monorepo?: string` en interface Project
+- Si tiene valor: muestra un solo botón "Código"
+- Si no tiene: muestra los botones separados (FE, BE, CRUD)
+
+#### 3. Partículas rojas en ProjectsError
+- Agregadas partículas flotantes en proyectosError.css
+- Mismas partículas que skeleton pero en tonos rojos (#ef4444, #f87171, #dc2626)
+
+#### 4. Limpieza de comentarios
+- Eliminados comentarios obvios de ProjectsSkeleton, ProjectsError, ProjectsEmpty
+- Borrada sección "Badges" de card.css (era obvia)
+
+#### 5. Eliminación de CSS duplicado
+- ~160 líneas duplicadas entre projects.css y card.css removidas
+- projects.css ahora solo tiene estilos de layout/container
+- card.css tiene todos los estilos de la card
+- Import agregado en Projects.tsx
+
+### Archivos creados/modificados
+- `src/components/ui/cards/ProjectCard.tsx` - nuevo componente
+- `src/components/ui/cards/card.css` - estilos de la card
+- `src/components/sections/projects/Projects.tsx` - usa ProjectCard + import card.css
+- `src/components/sections/projects/projects.css` - limpio, sin duplicados
+- `src/components/ui/errorComponents/projectsError.css` - partículas rojas
+- `src/types/types.ts` - agregado campo monorepo
+
+### Estado actual
+- Branch: `feat/projects-improvements`
+- Build: ✅ passing
+- CSS: 62.90 KB (reducido de 63.35 KB)
+- Pendiente: merge a main
+
+---
+
+## Sesión 7 - 05/04/2026
+
+### Trabajo realizado
+
+#### 1. Partículas rojas en ProjectsError
+- Agregadas partículas flotantes rojas al componente de error
+- Mismos colores y animación que skeleton pero en rojo
+- Fondo会比 más bonito cuando hay error
+
+#### 2. Limpieza de comentarios innecesarios
+- Recorrido por todo el proyecto
+- Eliminados comentarios evidentes en:
+  - ProjectsSkeleton.tsx
+  - ProjectsError.tsx
+  - ProjectsEmpty.tsx
+  - card.css
+
+#### 3. Nueva rama y limpieza de CSS duplicado
+- Rama: `fix/remove-duplicate-css`
+- Eliminado código duplicado entre projects.css y card.css (~160 líneas)
+- Import de card.css agregado en Projects.tsx
+
+### Archivos modificados
+- `src/components/ui/skeletons/ProjectsSkeleton.tsx` - comentarios eliminados
+- `src/components/ui/errorComponents/ProjectsError.tsx` - comentarios eliminados
+- `src/components/ui/ProjectsEmpty.tsx` - comentarios eliminados
+- `src/components/ui/cards/card.css` - comentarios y duplicados eliminados
+- `src/components/sections/projects/projects.css` - дубликаты удалены
+
+### Estado actual
+- Branch: `feat/projects-improvements`
+- Build: ✅ passing
+- Pendiente: merge a main
