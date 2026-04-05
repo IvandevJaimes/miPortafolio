@@ -179,3 +179,50 @@ El archivo `Hero.tsx` tenía un `useEffect` que actualizaba 3 estados cada **50m
 ### Pendiente
 - Merge de commits pendientes
 - Limpiar ramas obsolete
+
+---
+
+## Sesión 5 - 04/04/2026
+
+### Trabajo realizado
+
+#### 1. ProjectsSkeleton Component
+- Creado componente `src/components/ui/skeletons/ProjectsSkeleton.tsx`
+- Mismo estilo que Hero skeleton: partículas flotantes green-neon
+- 6 skeleton cards con imagen, título, descripción, tags, botones
+- Responsive: grid 1/2/3 columnas según breakpoint
+- Shimmer animation con colores del proyecto
+
+#### 2. ProjectsError Component
+- Creado componente `src/components/ui/errorComponents/ProjectsError.tsx`
+- Icono de error animado con pulso y anillo expansivo
+- Muestra error.message de la API
+- Botón "Reintentar" con gradiente verde-neon
+- Partículas flotantes de fondo
+- Estilos en `projectsError.css`
+
+#### 3. ProjectsEmpty Component
+- Creado componente `src/components/ui/ProjectsEmpty.tsx`
+- Similar a ProjectsError pero para caso "sin proyectos"
+- Icono de carpeta vacío con colores verde-neon
+- Prop opcional `onRetry`
+- Reutiliza estilos de projectsError.css
+
+#### 4. Integración en Projects.tsx
+- Estados manejados: isLoading → ProjectsSkeleton
+- Error → ProjectsError (con error.message)
+- Array vacío → ProjectsEmpty
+
+### Archivos creados/modificados
+- `src/components/ui/skeletons/ProjectsSkeleton.tsx` - skeleton para Projects
+- `src/components/ui/skeletons/skeleton.css` - estilos del skeleton
+- `src/components/ui/errorComponents/ProjectsError.tsx` - componente de error
+- `src/components/ui/errorComponents/projectsError.css` - estilos
+- `src/components/ui/ProjectsEmpty.tsx` - componente para lista vacía
+- `src/components/ui/ProjectsEmpty.tsx` - import de estilos
+- `src/components/sections/projects/Projects.tsx` - integrados los 3 estados
+
+### Estado actual
+- Branch: `feat/projects-improvements`
+- Build: ✅ passing
+- Pendiente: merge a main

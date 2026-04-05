@@ -536,3 +536,136 @@
   background-size: 200% 100%;
   animation: skeleton-shimmer 2s ease-in-out infinite;
 }
+
+/* Responsive */
+@media (min-width: 768px) {
+  .skeleton-project-image {
+    height: 192px;
+  }
+  
+  .skeleton-project-title {
+    height: 28px;
+  }
+  
+  .skeleton-project-description {
+    height: 72px;
+  }
+  
+  .skeleton-project-tag {
+    width: 70px;
+    height: 26px;
+  }
+  
+  .skeleton-project-btn {
+    width: 100px;
+    height: 40px;
+  }
+  
+  .skeleton-project-demo-btn {
+    width: 70px;
+    height: 40px;
+  }
+}
+
+/* ========== PROJECTS SKELETON ========== */
+
+/* Header */
+.skeleton-label-line {
+  width: 40px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.skeleton-label-text {
+  width: 120px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  width: 280px;
+  height: 48px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.skeleton-description {
+  width: 100%;
+  max-width: 520px;
+  height: 44px;
+  border-radius: 6px;
+}
+
+/* Card */
+.skeleton-project-card {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.skeleton-project-image {
+  width: 100%;
+  height: 160px;
+}
+
+.skeleton-project-title {
+  width: 70%;
+  height: 24px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.skeleton-project-description {
+  width: 100%;
+  height: 60px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.skeleton-project-tag {
+  width: 60px;
+  height: 24px;
+  border-radius: 4px;
+}
+
+.skeleton-project-btn {
+  width: 90px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+.skeleton-project-demo-btn {
+  width: 60px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+.skeleton-view-all-btn {
+  width: 140px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+/* Shimmer animation para projects skeleton */
+.skeleton-label-line,
+.skeleton-label-text,
+.skeleton-title,
+.skeleton-description,
+.skeleton-project-card,
+.skeleton-project-image,
+.skeleton-project-title,
+.skeleton-project-description,
+.skeleton-project-tag,
+.skeleton-project-btn,
+.skeleton-project-demo-btn,
+.skeleton-view-all-btn {
+  background: linear-gradient(
+    90deg,
+    rgba(57, 255, 136, 0.06) 25%,
+    rgba(57, 255, 136, 0.2) 50%,
+    rgba(57, 255, 136, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+}
