@@ -1,9 +1,9 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react"
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 type ButtonProps = {
-  children: ReactNode
-  className?: string
-} & ButtonHTMLAttributes<HTMLButtonElement>
+  children: ReactNode;
+  className?: string;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const PrimaryButton = ({
   children,
@@ -23,13 +23,11 @@ export const PrimaryButton = ({
         ${className}
       `}
     >
-      <span className="font-bold relative z-10 ">
-        {children}
-      </span>
+      <span className="font-bold relative z-10 ">{children}</span>
 
       <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-lg">
-        <span className="absolute -left-[150%] top-0 h-full w-[60%] rotate-12 bg-white/30 blur-md animate-[shine_2.5s_linear_infinite]" />
+        <span className="absolute -left-[150%] top-0 h-full w-[60%] rotate-12 bg-white/50 blur-md animate-[shine_2.5s_linear_infinite]" />
       </span>
     </button>
-  )
-}
+  );
+};

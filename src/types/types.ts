@@ -35,6 +35,8 @@ export interface Project {
   github_crud?: string;
   demo?: string;
   featured: number;
+  deployed?: number; // 1 = deployed, 0 = not deployed
+  monorepo?: string;
   created_at: string;
   updated_at: string;
   tags: ProjectTag[];

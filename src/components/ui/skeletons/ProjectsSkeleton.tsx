@@ -1,6 +1,10 @@
 import "./skeleton.css";
 
-export const ProjectsSkeleton = () => {
+interface ProjectsSkeletonProps {
+  count?: number;
+}
+
+export const ProjectsSkeleton = ({ count = 6 }: ProjectsSkeletonProps) => {
   return (
     <section className="min-h-screen py-17 px-6 relative overflow-hidden bg-gradient-to-b from-[#0d0d0d] via-[#1a1919] to-[#0d0d0d]">
       <div className="skeleton-particles" />
@@ -19,7 +23,7 @@ export const ProjectsSkeleton = () => {
 
         {/* Grid Skeleton - responsive 1/2/3 columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6">
-          {[...Array(6)].map((_, index) => (
+          {Array.from({ length: count }).map((_, index) => (
             <div key={index} className="skeleton-project-card">
               {/* Image */}
               <div className="skeleton-project-image" />
@@ -34,7 +38,7 @@ export const ProjectsSkeleton = () => {
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-1 sm:gap-2 mb-2 sm:mb-3">
-                  {[...Array(4)].map((_, i) => (
+                  {Array.from({ length: 4 }).map((_, i) => (
                     <div key={i} className="skeleton-project-tag" />
                   ))}
                 </div>
