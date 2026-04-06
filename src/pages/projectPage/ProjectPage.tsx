@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import ProjectHeader from "../../components/layout/header/ProjectHeader";
 import { ImageCarousel } from "../../components/ui/carousel/ImageCarousel";
@@ -30,6 +30,8 @@ const ProjectPage = () => {
   const { id } = useParams<{ id: string }>();
   const projectId = id ? parseInt(id, 10) : null;
 
+  const navigate = useNavigate();
+
   const {
     data: project,
     isLoading,
@@ -41,19 +43,6 @@ const ProjectPage = () => {
       projectId ? getProjectById(projectId) : Promise.resolve(null),
     enabled: !!projectId,
   });
-
-  if (!projectId) {
-    return (
-      <>
-        <ProjectHeader />
-        <main className="project-page">
-          <div className="project-page-container">
-            <p className="text-slate-400">Proyecto no encontrado</p>
-          </div>
-        </main>
-      </>
-    );
-  }
 
   if (isLoading) {
     return (
@@ -73,7 +62,7 @@ const ProjectPage = () => {
       <ProjectPageError
         error={error}
         onRetry={() => refetch()}
-        onClick={() => window.history.back()}
+        onClick={() => navigate(-1)}
       />
     );
   }

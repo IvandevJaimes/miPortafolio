@@ -1,17 +1,24 @@
 import { useState } from "react";
-import { PrimaryButton } from "../buttons/PrimaryButton";
+import { NormalButton } from "../buttons/NormalButton";
 import { SecondaryButton } from "../buttons/SecondaryButton";
 import "./projectPageError.css";
 
 interface ProjectPageErrorProps {
-  error: Error | null;
+  error: Error | string | string[] | null;
   onRetry?: () => unknown;
   onClick?: () => void;
 }
 
-const isNotFoundError = (error: Error | null): boolean => {
+const getErrorMessage = (error: Error | string | string[] | null): string => {
+  if (!error) return "El proyecto no existe o no se encontró";
+  if (typeof error === "string") return error;
+  if (Array.isArray(error)) return error.join(", ");
+  return error.message;
+};
+
+const isNotFoundError = (error: Error | string | string[] | null): boolean => {
   if (!error) return false;
-  const message = error.message.toLowerCase();
+  const message = getErrorMessage(error).toLowerCase();
   return (
     message.includes("not found") ||
     message.includes("no encontrado") ||
@@ -27,6 +34,7 @@ export const ProjectPageError = ({
 }: ProjectPageErrorProps) => {
   const [isRetrying, setIsRetrying] = useState(false);
   const is404 = isNotFoundError(error);
+  const errorMessage = getErrorMessage(error);
 
   const handleRetry = () => {
     setIsRetrying(true);
@@ -69,13 +77,17 @@ export const ProjectPageError = ({
           <h1 className="text-3xl md:text-4xl font-bold text-slate-100 mb-3">
             {is404 ? "Página no encontrada" : "Error al cargar el proyecto"}
           </h1>
-          <p className="text-slate-400 text-base md:text-lg leading-relaxed">
-            {error?.message || "El proyecto no existe o no se encontró"}
+          <p className="text-red-400 text-base md:text-lg leading-relaxed">
+            {errorMessage}
           </p>
         </div>
 
         <div className="flex flex-col items-center gap-3">
-          <SecondaryButton onClick={handleRetry} disabled={isRetrying} className="w-full sm:w-auto">
+          <NormalButton
+            onClick={handleRetry}
+            disabled={isRetrying}
+            className="w-full sm:w-auto"
+          >
             <span className="flex items-center gap-2 justify-center">
               <svg
                 viewBox="0 0 24 24"
@@ -92,9 +104,9 @@ export const ProjectPageError = ({
               </svg>
               {isRetrying ? "Reintentando..." : "Reintentar"}
             </span>
-          </SecondaryButton>
+          </NormalButton>
 
-          <PrimaryButton onClick={onClick} className="w-full sm:w-auto">
+          <SecondaryButton onClick={onClick} className="w-full sm:w-auto">
             <span className="flex items-center gap-2 justify-center">
               <svg
                 viewBox="0 0 24 24"
@@ -111,7 +123,7 @@ export const ProjectPageError = ({
               </svg>
               Volver
             </span>
-          </PrimaryButton>
+          </SecondaryButton>
         </div>
       </div>
     </main>
