@@ -1,16 +1,50 @@
 .project-page {
   min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    #0d0d0d 0%,
-    #111111 50%,
-    #0d0d0d 100%
-  );
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      rgba(57, 255, 136, 0.15),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 80% 100%,
+      rgba(57, 255, 136, 0.1),
+      transparent
+    ),
+    linear-gradient(180deg, #0d0d0d 0%, #111111 50%, #0d0d0d 100%);
   padding-top: 80px;
+  position: relative;
+  overflow-x: visible;
+  width: 100%;
+
+  background-color: transparent;
+  background-image:
+    linear-gradient(rgba(57, 255, 136, 0.12) 1px, transparent 2px),
+    linear-gradient(90deg, rgba(57, 255, 136, 0.12) 1px, transparent 2px);
+  background-size: 50px 50px;
+  background-attachment: fixed;
+  animation: grid-move 12s linear infinite;
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 100px;
+  }
+}
+
+.project-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .project-page-container {
-  max-width: 1000px;
+  max-width: 1220px;
   margin: 0 auto;
   padding: 40px 24px;
   display: flex;
@@ -19,19 +53,17 @@
   width: 100%;
   box-sizing: border-box;
   overflow-x: visible;
+  position: relative;
+  z-index: 1;
 }
 
-.project-page {
-  min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    #0d0d0d 0%,
-    #111111 50%,
-    #0d0d0d 100%
-  );
-  padding-top: 80px;
-  overflow-x: visible;
-  width: 100%;
+.project-info,
+.project-links {
+  background: rgba(13, 13, 13, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 @media (max-width: 768px) {

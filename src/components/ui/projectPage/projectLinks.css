@@ -1,5 +1,5 @@
 .project-links {
-  margin-top: 32px;
+  margin-top: 2px;
   padding-top: 32px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -68,7 +68,11 @@
 }
 
 .project-link-github .project-link-icon {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   color: #f8fafc;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -92,7 +96,11 @@
 }
 
 .project-link-demo .project-link-icon {
-  background: linear-gradient(135deg, rgba(57, 255, 136, 0.2), rgba(0, 255, 156, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(57, 255, 136, 0.2),
+    rgba(0, 255, 156, 0.1)
+  );
   color: #39ff88;
   border: 1px solid rgba(57, 255, 136, 0.4);
 }

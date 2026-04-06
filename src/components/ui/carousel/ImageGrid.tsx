@@ -58,6 +58,7 @@ export const ImageGrid = ({ images, projectTitle }: ImageGridProps) => {
       {hasPlaceholders && (
         <div className="image-grid-placeholder-badge">Imágenes ilustrativas</div>
       )}
+
       {canScroll && (
         <button
           onClick={() => scroll("left")}
