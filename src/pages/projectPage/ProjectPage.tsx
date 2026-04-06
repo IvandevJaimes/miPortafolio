@@ -6,7 +6,7 @@ import { ImageGrid } from "../../components/ui/carousel/ImageGrid";
 import { ProjectInfo } from "../../components/ui/projectPage/ProjectInfo";
 import { ProjectLinks } from "../../components/ui/projectPage/ProjectLinks";
 import { ProjectPageSkeleton } from "../../components/ui/skeletons/ProjectPageSkeleton";
-import { ProjectPageError } from "../../components/ui/errorComponents/ProjectPageError";
+import { ErrorScreen } from "../../components/ui/errorComponents/ErrorScreen";
 import { getProjectById } from "../../services/projectsApi";
 import { getProjectImages } from "../../utils/imageUtils";
 import type { Project } from "../../types/types";
@@ -59,7 +59,7 @@ const ProjectPage = () => {
 
   if (error || !project) {
     return (
-      <ProjectPageError
+      <ErrorScreen
         error={error}
         onRetry={() => refetch()}
         onClick={() => navigate(-1)}

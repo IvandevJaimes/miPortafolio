@@ -1,32 +1,29 @@
 import { useState } from "react";
 import { NormalButton } from "../buttons/NormalButton";
 import { SecondaryButton } from "../buttons/SecondaryButton";
-import "./projectPageError.css";
+import "./errorScreen.css";
 
-interface ProjectPageErrorProps {
+interface ErrorScreenProps {
   error: Error | string | string[] | null;
   onRetry?: () => unknown;
   onClick?: () => void;
 }
 
-export const ProjectPageError = ({
+const isNotFound = (error: Error | string | string[] | null): boolean => {
+  if (!error) return false;
+  const message = typeof error === "string" ? error : error instanceof Error ? error.message : error[0];
+  return message.toLowerCase().includes("not found") || 
+         message.toLowerCase().includes("no encontrado") ||
+         message.toLowerCase().includes("404");
+};
+
+export const ErrorScreen = ({
   error,
   onRetry,
   onClick,
-}: ProjectPageErrorProps) => {
+}: ErrorScreenProps) => {
   const [isRetrying, setIsRetrying] = useState(false);
-
-  const getMessage = (): string => {
-    if (!error) return "Error desconocido";
-    if (typeof error === "string") return error;
-    if (Array.isArray(error)) return error.join(", ");
-    return error.message;
-  };
-
-  const isNotFound = (): boolean => {
-    const msg = getMessage().toLowerCase();
-    return msg.includes("not found") || msg.includes("no encontrado") || msg.includes("404");
-  };
+  const notFound = isNotFound(error);
 
   const handleRetry = () => {
     setIsRetrying(true);
@@ -40,7 +37,7 @@ export const ProjectPageError = ({
 
       <div className="flex flex-col items-center justify-center text-center z-10 max-w-[500px]">
         <div className="relative w-40 h-40 flex items-center justify-center mb-8">
-          {isNotFound() ? (
+          {notFound ? (
             <div className="flex gap-2">
               <span className="project-error-404-text">4</span>
               <span className="project-error-404-text">0</span>
@@ -58,11 +55,13 @@ export const ProjectPageError = ({
 
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-slate-100 mb-3">
-            {isNotFound() ? "Proyecto no encontrado" : "Error al cargar el proyecto"}
+            {notFound ? "Proyecto no encontrado" : "Error al cargar el proyecto"}
           </h1>
-          <p className="text-red-400 text-base md:text-lg leading-relaxed">
-            {getMessage()}
-          </p>
+          {!notFound && error && (
+            <p className="text-red-400 text-base md:text-lg leading-relaxed">
+              {typeof error === "string" ? error : Array.isArray(error) ? error.join(", ") : error.message}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col items-center gap-3">
@@ -89,4 +88,4 @@ export const ProjectPageError = ({
   );
 };
 
-export default ProjectPageError;
+export default ErrorScreen;
