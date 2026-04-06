@@ -1,73 +1,116 @@
+import { useParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 import ProjectHeader from "../../components/layout/header/ProjectHeader";
 import { ImageCarousel } from "../../components/ui/carousel/ImageCarousel";
 import { ImageGrid } from "../../components/ui/carousel/ImageGrid";
 import { ProjectInfo } from "../../components/ui/projectPage/ProjectInfo";
 import { ProjectLinks } from "../../components/ui/projectPage/ProjectLinks";
+import { ProjectsSkeleton } from "../../components/ui/skeletons/ProjectsSkeleton";
+import { getProjectById } from "../../services/projectsApi";
+import type { Project } from "../../types/types";
 import "./projectPage.css";
 
-interface ProjectPageProps {
-  project?: {
-    title: string;
-    description?: string;
-    tags: string[];
-    featured: boolean;
-    deployed: boolean;
-    images: string[];
-    github?: string;
-    githubBackend?: string;
-    githubCrud?: string;
-    demo?: string;
-    monorepo?: string;
-  };
-}
+const mapProjectToView = (project: Project) => ({
+  title: project.title,
+  description: project.description,
+  tags: project.tags.map((t) => t.tag),
+  featured: project.featured === 1,
+  deployed: project.deployed === 1,
+  images: project.images.map((img) => img.url),
+  github: project.github,
+  githubBackend: project.github_backend,
+  githubCrud: project.github_crud,
+  demo: project.demo,
+  monorepo: project.monorepo,
+});
 
-// Mock data para testing - luego conectamos el service
-const mockProject = {
-  title: "E-commerce Dashboard",
-  description:
-    "Un dashboard completo para gestión de ventas, inventario y clientes. Incluye gráficos en tiempo real, gestión de pedidos, sistema de notificaciones y panel de administración.",
-  tags: [
-    "React",
-    "TypeScript",
-    "Node.js",
-    "PostgreSQL",
-    "Socket.io",
-    "TailwindCSS",
-  ],
-  featured: true,
-  deployed: true,
-  images: [
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
-    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
-    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=500&fit=crop",
-  ],
-  github: "https://github.com/username/ecommerce-dashboard",
-  demo: "https://demo.ecommerce-dashboard.com",
-};
+const ProjectPage = () => {
+  const { id } = useParams<{ id: string }>();
+  const projectId = id ? parseInt(id, 10) : null;
 
-const ProjectPage = ({ project = mockProject }: ProjectPageProps) => {
+  const {
+    data: project,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["project", projectId],
+    queryFn: () => (projectId ? getProjectById(projectId) : Promise.resolve(null)),
+    enabled: !!projectId,
+  });
+
+  if (!projectId) {
+    return (
+      <>
+        <ProjectHeader />
+        <main className="project-page">
+          <div className="project-page-container">
+            <p className="text-slate-400">Proyecto no encontrado</p>
+          </div>
+        </main>
+      </>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <>
+        <ProjectHeader />
+        <main className="project-page">
+          <div className="project-page-container">
+            <ProjectsSkeleton count={1} />
+          </div>
+        </main>
+      </>
+    );
+  }
+
+  if (error || !project) {
+    return (
+      <>
+        <ProjectHeader />
+        <main className="project-page">
+          <div className="project-page-container">
+            <div className="text-center py-20">
+              <h2 className="text-2xl font-bold text-slate-200 mb-4">Error al encontrar el proyecto</h2>
+              <p className="text-slate-400">{error?.message || "El proyecto no existe o no se encontró"}</p>
+              <button
+                onClick={() => refetch()}
+                className="mt-6 px-6 py-2 bg-green-neon text-black font-semibold rounded-lg hover:opacity-90 transition"
+              >
+                Reintentar
+              </button>
+            </div>
+          </div>
+        </main>
+      </>
+    );
+  }
+
+  const projectData = mapProjectToView(project);
+
   return (
     <>
       <ProjectHeader />
       <main className="project-page">
         <div className="project-page-container">
-          <ImageCarousel images={project.images} projectTitle={project.title} />
-          <ImageGrid images={project.images} projectTitle={project.title} />
+          <ImageCarousel images={projectData.images} projectTitle={projectData.title} />
+          <ImageGrid images={projectData.images} projectTitle={projectData.title} />
 
           <ProjectInfo
-            title={project.title}
-            description={project.description}
-            tags={project.tags}
-            featured={project.featured}
-            deployed={project.deployed}
+            title={projectData.title}
+            description={projectData.description}
+            tags={projectData.tags}
+            featured={projectData.featured}
+            deployed={projectData.deployed}
           />
 
           <ProjectLinks
-            github={project.github}
-            githubBackend={project.githubBackend}
-            githubCrud={project.githubCrud}
-            demo={project.demo}
-            monorepo={project.monorepo}
+            github={projectData.github}
+            githubBackend={projectData.githubBackend}
+            githubCrud={projectData.githubCrud}
+            demo={projectData.demo}
+            monorepo={projectData.monorepo}
           />
         </div>
       </main>
