@@ -1,4 +1,4 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import "./imageGrid.css";
 
 interface ImageGridProps {
@@ -8,6 +8,21 @@ interface ImageGridProps {
 
 export const ImageGrid = ({ images, projectTitle }: ImageGridProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [canScroll, setCanScroll] = useState(false);
+
+  const checkScroll = useCallback(() => {
+    if (!scrollRef.current || !containerRef.current) return;
+    const scrollWidth = scrollRef.current.scrollWidth;
+    const clientWidth = scrollRef.current.clientWidth;
+    setCanScroll(scrollWidth > clientWidth);
+  }, []);
+
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener("resize", checkScroll);
+    return () => window.removeEventListener("resize", checkScroll);
+  }, [checkScroll, images]);
 
   const scroll = useCallback((direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -36,18 +51,20 @@ export const ImageGrid = ({ images, projectTitle }: ImageGridProps) => {
   }
 
   return (
-    <div className="image-grid-container">
-      <button
-        onClick={() => scroll("left")}
-        className="image-grid-nav image-grid-nav-prev"
-        aria-label="Imagen anterior"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-        </svg>
-      </button>
+    <div className="image-grid-container" ref={containerRef}>
+      {canScroll && (
+        <button
+          onClick={() => scroll("left")}
+          className="image-grid-nav image-grid-nav-prev"
+          aria-label="Imagen anterior"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+      )}
 
-      <div className="image-grid-scroll" ref={scrollRef}>
+      <div className={`image-grid-scroll ${!canScroll ? "centered" : ""}`} ref={scrollRef}>
         {images.map((image, index) => (
           <div key={index} className="image-grid-item">
             <img
@@ -60,15 +77,17 @@ export const ImageGrid = ({ images, projectTitle }: ImageGridProps) => {
         ))}
       </div>
 
-      <button
-        onClick={() => scroll("right")}
-        className="image-grid-nav image-grid-nav-next"
-        aria-label="Siguiente imagen"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-        </svg>
-      </button>
+      {canScroll && (
+        <button
+          onClick={() => scroll("right")}
+          className="image-grid-nav image-grid-nav-next"
+          aria-label="Siguiente imagen"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 };

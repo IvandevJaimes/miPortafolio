@@ -36,7 +36,11 @@ const mockProject = {
   ],
   featured: true,
   deployed: true,
-  images: [],
+  images: [
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
+    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=500&fit=crop",
+  ],
   github: "https://github.com/username/ecommerce-dashboard",
   demo: "https://demo.ecommerce-dashboard.com",
 };

@@ -3,10 +3,6 @@
   position: relative;
 }
 
-.image-grid-container {
-  display: none;
-}
-
 .image-grid-nav {
   display: none;
 }
@@ -99,6 +95,10 @@
 
   .image-grid-scroll {
     flex: 1;
+  }
+
+  .image-grid-scroll.centered {
+    justify-content: center;
   }
 
   .image-grid-item {
