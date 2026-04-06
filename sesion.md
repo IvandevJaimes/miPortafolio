@@ -304,6 +304,63 @@ El archivo `Hero.tsx` tenía un `useEffect` que actualizaba 3 estados cada **50m
 - `src/components/sections/projects/projects.css` - дубликаты удалены
 
 ### Estado actual
-- Branch: `feat/projects-improvements`
+- Branch: `feat/project-page`
 - Build: ✅ passing
-- Pendiente: merge a main
+- Merge a main hecho
+
+---
+
+## Sesión 8 - 05/04/2026
+
+### Trabajo realizado
+
+#### 1. ProjectPage - Página dedicada para proyectos
+- Creada página dedicada `/project/:id` para mostrar proyectos completos
+- Componentes creados:
+  - `ImageCarousel.tsx` - carrusel con touch swipe y drag para desktop
+  - `ImageGrid.tsx` - grid de imágenes para desktop
+  - `ProjectInfo.tsx` - título, descripción, tags, badges
+  - `ProjectLinks.tsx` - enlaces a GitHub y demo
+
+#### 2. Responsive - Carrusel vs Grid
+- **< 699px**: Carrusel (rectangular, navegable)
+- **≥ 699px**: Grid de imágenes cuadradas/rectangulares
+
+#### 3. Imágenes placeholder
+- Si el proyecto no tiene imágenes, se muestran aleatorias
+- `src/utils/imageUtils.ts` - función para obtener imágenes aleatorias (3 por defecto)
+- Badge discreto "Imágenes ilustrativas" en carrusel y grid
+
+#### 4. Fondo animado
+- Grid fijo con `background-attachment: fixed`
+- Animación de movimiento (`grid-move` 12s)
+- Radiales gradients sutiles en verdes neón
+
+#### 5. Estilos y refinamientos
+- Fondo oscuro sutil en ProjectInfo y ProjectLinks
+- Botones de navegación del grid dentro del contenedor (position absolute)
+- Tags se ven todos sin importar el tamaño de pantalla
+- Descripción sin desbordamiento
+
+### Archivos creados/modificados
+- `src/pages/projectPage/ProjectPage.tsx` - página principal
+- `src/pages/projectPage/projectPage.css` - estilos con fondo animado
+- `src/components/ui/carousel/ImageCarousel.tsx` - carrusel
+- `src/components/ui/carousel/imageCarousel.css`
+- `src/components/ui/carousel/ImageGrid.tsx` - grid para desktop
+- `src/components/ui/carousel/imageGrid.css`
+- `src/components/ui/projectPage/ProjectInfo.tsx` - info del proyecto
+- `src/components/ui/projectPage/projectInfo.css`
+- `src/components/ui/projectPage/ProjectLinks.tsx` - enlaces
+- `src/components/ui/projectPage/projectLinks.css`
+- `src/utils/imageUtils.ts` - utilitario para imágenes placeholder
+- `src/App.tsx` - ruta `/project/:id`
+
+### Ramas creadas y mergeadas
+- `feat/project-page-v2` - conectar service
+- `feat/placeholder-images` - imágenes aleatorias
+- `feat/project-page-bg` - fondo animado y grid
+
+### Estado actual
+- Branch: `feat/project-page` (con main mergeado)
+- Build: ✅ passing

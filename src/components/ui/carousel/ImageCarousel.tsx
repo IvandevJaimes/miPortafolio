@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, type TouchEvent, type MouseEvent } from "react";
 import { isPlaceholderImage } from "../../../utils/imageUtils";
 import "./imageCarousel.css";
 
@@ -27,12 +27,12 @@ export const ImageCarousel = ({ images, projectTitle }: ImageCarouselProps) => {
     setCurrentIndex(index);
   }, []);
 
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = (e: TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartTime.current = Date.now();
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: TouchEvent) => {
     const currentX = e.touches[0].clientX;
     const diff = currentX - touchStartX.current;
     setTranslateX(diff);
@@ -55,12 +55,12 @@ export const ImageCarousel = ({ images, projectTitle }: ImageCarouselProps) => {
     setTranslateX(0);
   };
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleMouseDown = (e: MouseEvent) => {
     setIsDragging(true);
     setStartX(e.clientX);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging) return;
     const diff = e.clientX - startX;
     setTranslateX(diff);
