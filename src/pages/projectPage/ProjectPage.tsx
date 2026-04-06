@@ -6,6 +6,7 @@ import { ImageGrid } from "../../components/ui/carousel/ImageGrid";
 import { ProjectInfo } from "../../components/ui/projectPage/ProjectInfo";
 import { ProjectLinks } from "../../components/ui/projectPage/ProjectLinks";
 import { ProjectPageSkeleton } from "../../components/ui/skeletons/ProjectPageSkeleton";
+import { ProjectPageError } from "../../components/ui/errorComponents/ProjectPageError";
 import { getProjectById } from "../../services/projectsApi";
 import { getProjectImages } from "../../utils/imageUtils";
 import type { Project } from "../../types/types";
@@ -68,29 +69,7 @@ const ProjectPage = () => {
   }
 
   if (error || !project) {
-    return (
-      <>
-        <ProjectHeader />
-        <main className="project-page">
-          <div className="project-page-container">
-            <div className="text-center py-20">
-              <h2 className="text-2xl font-bold text-slate-200 mb-4">
-                Error al encontrar el proyecto
-              </h2>
-              <p className="text-slate-400">
-                {error?.message || "El proyecto no existe o no se encontró"}
-              </p>
-              <button
-                onClick={() => refetch()}
-                className="mt-6 px-6 py-2 bg-green-neon text-black font-semibold rounded-lg hover:opacity-90 transition"
-              >
-                Reintentar
-              </button>
-            </div>
-          </div>
-        </main>
-      </>
-    );
+    return <ProjectPageError error={error} onRetry={() => refetch()} />;
   }
 
   const projectData = mapProjectToView(project);

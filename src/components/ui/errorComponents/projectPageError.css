@@ -1,0 +1,197 @@
+/* ProjectPageError - Animaciones complejas que no se pueden hacer en Tailwind */
+
+/* Partículas flotantes */
+.project-error-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.project-error-particles::before,
+.project-error-particles::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 200%;
+  top: 0;
+  left: 0;
+  animation: error-particles-float 20s linear infinite;
+}
+
+.project-error-particles::before {
+  background:
+    radial-gradient(3px 3px at 10% 10%, #ef4444 50%, transparent 50%),
+    radial-gradient(4px 4px at 30% 25%, #f87171 50%, transparent 50%),
+    radial-gradient(5px 5px at 50% 40%, #dc2626 50%, transparent 50%),
+    radial-gradient(3px 3px at 70% 15%, #fca5a5 50%, transparent 50%),
+    radial-gradient(4px 4px at 90% 35%, #ef4444 50%, transparent 50%),
+    radial-gradient(3px 3px at 15% 55%, #f87171 50%, transparent 50%),
+    radial-gradient(4px 4px at 40% 65%, #dc2626 50%, transparent 50%),
+    radial-gradient(3px 3px at 65% 50%, #ef4444 50%, transparent 50%);
+  opacity: 0.5;
+}
+
+.project-error-particles::after {
+  background:
+    radial-gradient(2px 2px at 25% 20%, #fca5a5 50%, transparent 50%),
+    radial-gradient(3px 3px at 45% 30%, #ef4444 50%, transparent 50%),
+    radial-gradient(4px 4px at 75% 45%, #f87171 50%, transparent 50%),
+    radial-gradient(2px 2px at 85% 60%, #dc2626 50%, transparent 50%),
+    radial-gradient(3px 3px at 20% 70%, #ef4444 50%, transparent 50%),
+    radial-gradient(2px 2px at 55% 80%, #fca5a5 50%, transparent 50%),
+    radial-gradient(3px 3px at 35% 90%, #f87171 50%, transparent 50%);
+  animation-delay: -10s;
+  opacity: 0.4;
+}
+
+@keyframes error-particles-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+/* Icono de error */
+.project-error-icon {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(239, 68, 68, 0.15);
+  border: 2px solid rgba(239, 68, 68, 0.4);
+  border-radius: 50%;
+  color: #ef4444;
+  animation: error-icon-pulse 2.5s ease-in-out infinite;
+}
+
+.project-error-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+@keyframes error-icon-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* 404 Animation */
+.project-error-404-text {
+  font-size: 64px;
+  font-weight: 900;
+  color: #ef4444;
+  line-height: 1;
+  animation: error-404-bounce 2s ease-in-out infinite;
+}
+
+.project-error-404-text:nth-child(1) { animation-delay: 0s; }
+.project-error-404-text:nth-child(2) { animation-delay: 0.15s; }
+.project-error-404-text:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes error-404-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+  }
+  50% {
+    transform: translateY(-10px);
+    text-shadow: 0 0 40px rgba(239, 68, 68, 0.8);
+  }
+}
+
+/* Anillo expansivo */
+.project-error-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(239, 68, 68, 0.2);
+  animation: error-ring-expand 2.5s ease-in-out infinite;
+}
+
+@keyframes error-ring-expand {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* Botón retry */
+.project-error-retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0d0d0d;
+  background: linear-gradient(135deg, #39ff88 0%, #00ff9c 100%);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.project-error-retry:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(57, 255, 136, 0.35);
+}
+
+.project-error-retry:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.project-error-retry.retrying svg {
+  animation: retry-spin 1s linear infinite;
+}
+
+@keyframes retry-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Botón volver */
+.project-error-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.project-error-back:hover {
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .project-error-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .project-error-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .project-error-404-text {
+    font-size: 48px;
+  }
+
+  .project-error-retry {
+    width: 100%;
+    justify-content: center;
+  }
+}
