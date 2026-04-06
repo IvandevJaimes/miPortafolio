@@ -69,7 +69,13 @@ const ProjectPage = () => {
   }
 
   if (error || !project) {
-    return <ProjectPageError error={error} onRetry={() => refetch()} />;
+    return (
+      <ProjectPageError
+        error={error}
+        onRetry={() => refetch()}
+        onClick={() => window.history.back()}
+      />
+    );
   }
 
   const projectData = mapProjectToView(project);

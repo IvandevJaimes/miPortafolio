@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { PrimaryButton } from "../buttons/PrimaryButton";
+import { SecondaryButton } from "../buttons/SecondaryButton";
 import "./projectPageError.css";
 
 interface ProjectPageErrorProps {
   error: Error | null;
-  onRetry: () => void;
+  onRetry?: () => unknown;
+  onClick?: () => void;
 }
 
 const isNotFoundError = (error: Error | null): boolean => {
@@ -18,20 +20,24 @@ const isNotFoundError = (error: Error | null): boolean => {
   );
 };
 
-export const ProjectPageError = ({ error, onRetry }: ProjectPageErrorProps) => {
+export const ProjectPageError = ({
+  error,
+  onRetry,
+  onClick,
+}: ProjectPageErrorProps) => {
   const [isRetrying, setIsRetrying] = useState(false);
   const is404 = isNotFoundError(error);
 
   const handleRetry = () => {
     setIsRetrying(true);
-    onRetry();
+    onRetry?.();
     setTimeout(() => setIsRetrying(false), 2000);
   };
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0d0d0d] via-[#111] to-[#0d0d0d] px-6 py-20 relative overflow-hidden">
       <div className="project-error-particles" />
-      
+
       <div className="flex flex-col items-center justify-center text-center z-10 max-w-[500px]">
         <div className="relative w-40 h-40 flex items-center justify-center mb-8">
           {is404 ? (
@@ -42,7 +48,12 @@ export const ProjectPageError = ({ error, onRetry }: ProjectPageErrorProps) => {
             </div>
           ) : (
             <div className="project-error-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -64,23 +75,43 @@ export const ProjectPageError = ({ error, onRetry }: ProjectPageErrorProps) => {
         </div>
 
         <div className="flex flex-col items-center gap-3">
-          <button
-            onClick={handleRetry}
-            className={`project-error-retry ${isRetrying ? "retrying" : ""}`}
-            disabled={isRetrying}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-            <span>{isRetrying ? "Reintentando..." : "Reintentar"}</span>
-          </button>
+          <SecondaryButton onClick={handleRetry} disabled={isRetrying} className="w-full sm:w-auto">
+            <span className="flex items-center gap-2 justify-center">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+              {isRetrying ? "Reintentando..." : "Reintentar"}
+            </span>
+          </SecondaryButton>
 
-          <Link to="/projects" className="project-error-back">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-            </svg>
-            <span>Volver a Proyectos</span>
-          </Link>
+          <PrimaryButton onClick={onClick} className="w-full sm:w-auto">
+            <span className="flex items-center gap-2 justify-center">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                />
+              </svg>
+              Volver
+            </span>
+          </PrimaryButton>
         </div>
       </div>
     </main>
