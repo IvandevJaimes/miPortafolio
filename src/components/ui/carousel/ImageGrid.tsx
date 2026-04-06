@@ -1,4 +1,5 @@
 import { useRef, useCallback, useState, useEffect } from "react";
+import { Lightbox } from "../lightbox/Lightbox";
 import { isPlaceholderImage } from "../../../utils/imageUtils";
 import "./imageGrid.css";
 
@@ -11,6 +12,8 @@ export const ImageGrid = ({ images, projectTitle }: ImageGridProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [canScroll, setCanScroll] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const checkScroll = useCallback(() => {
     if (!scrollRef.current || !containerRef.current) return;
@@ -73,7 +76,14 @@ export const ImageGrid = ({ images, projectTitle }: ImageGridProps) => {
 
       <div className={`image-grid-scroll ${!canScroll ? "centered" : ""}`} ref={scrollRef}>
         {images.map((image, index) => (
-          <div key={index} className={`image-grid-item ${isPlaceholderImage(image) ? "placeholder" : ""}`}>
+          <div 
+            key={index} 
+            className={`image-grid-item ${isPlaceholderImage(image) ? "placeholder" : ""}`}
+            onClick={() => {
+              setSelectedIndex(index);
+              setIsLightboxOpen(true);
+            }}
+          >
             <img
               src={image}
               alt={`${projectTitle} - Imagen ${index + 1}`}
@@ -95,6 +105,14 @@ export const ImageGrid = ({ images, projectTitle }: ImageGridProps) => {
           </svg>
         </button>
       )}
+
+      <Lightbox
+        images={images}
+        initialIndex={selectedIndex}
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        projectTitle={projectTitle}
+      />
     </div>
   );
 };

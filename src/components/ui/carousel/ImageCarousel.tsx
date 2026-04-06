@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, type TouchEvent, type MouseEvent } from "react";
+import { Lightbox } from "../lightbox/Lightbox";
 import { isPlaceholderImage } from "../../../utils/imageUtils";
 import "./imageCarousel.css";
 
@@ -12,6 +13,7 @@ export const ImageCarousel = ({ images, projectTitle }: ImageCarouselProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [translateX, setTranslateX] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const touchStartX = useRef(0);
   const touchStartTime = useRef(0);
 
@@ -132,7 +134,11 @@ export const ImageCarousel = ({ images, projectTitle }: ImageCarouselProps) => {
           }}
         >
           {images.map((image, index) => (
-            <div key={index} className={`carousel-slide ${isPlaceholderImage(image) ? "placeholder" : ""}`}>
+            <div 
+              key={index} 
+              className={`carousel-slide ${isPlaceholderImage(image) ? "placeholder" : ""}`}
+              onClick={() => setIsLightboxOpen(true)}
+            >
               <img
                 src={image}
                 alt={`${projectTitle} - Imagen ${index + 1}`}
@@ -182,6 +188,14 @@ export const ImageCarousel = ({ images, projectTitle }: ImageCarouselProps) => {
           {currentIndex + 1} / {images.length}
         </div>
       </div>
+
+      <Lightbox
+        images={images}
+        initialIndex={currentIndex}
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+        projectTitle={projectTitle}
+      />
     </div>
   );
 };
