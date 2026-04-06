@@ -661,3 +661,250 @@
   background-size: 200% 100%;
   animation: skeleton-shimmer 2s ease-in-out infinite;
 }
+
+/* ========== PROJECT PAGE SKELETON ========== */
+
+.project-page-skeleton {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Carousel Skeleton */
+.skeleton-carousel {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.skeleton-carousel-image {
+  width: 100%;
+  height: 100%;
+}
+
+.skeleton-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(57, 255, 136, 0.3);
+}
+
+.skeleton-carousel-nav-prev {
+  left: 16px;
+}
+
+.skeleton-carousel-nav-next {
+  right: 16px;
+}
+
+.skeleton-carousel-indicators {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.skeleton-carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.skeleton-carousel-counter {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* Image Grid Skeleton */
+.skeleton-image-grid {
+  display: none;
+  align-items: center;
+  position: relative;
+  padding: 0 50px;
+  min-height: 220px;
+  overflow: hidden;
+}
+
+.skeleton-image-grid-nav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(57, 255, 136, 0.2);
+}
+
+.skeleton-image-grid-nav-prev {
+  left: 0;
+}
+
+.skeleton-image-grid-nav-next {
+  right: 0;
+}
+
+.skeleton-image-grid-scroll {
+  display: flex;
+  gap: 12px;
+  margin: 0 10px;
+}
+
+.skeleton-image-grid-item {
+  flex: 0 0 auto;
+  min-width: 340px;
+  height: 220px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ProjectInfo Skeleton */
+.skeleton-project-info {
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.skeleton-project-title {
+  width: 60%;
+  height: 36px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.skeleton-project-description {
+  width: 100%;
+  height: 20px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.skeleton-project-description-2 {
+  width: 80%;
+  height: 20px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.skeleton-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.skeleton-tag {
+  width: 70px;
+  height: 28px;
+  border-radius: 6px;
+}
+
+.skeleton-badges {
+  display: flex;
+  gap: 12px;
+}
+
+.skeleton-badge-featured,
+.skeleton-badge-deployed {
+  width: 90px;
+  height: 26px;
+  border-radius: 6px;
+}
+
+/* ProjectLinks Skeleton */
+.skeleton-project-links {
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-links-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.skeleton-link-btn {
+  width: 120px;
+  height: 44px;
+  border-radius: 8px;
+}
+
+.skeleton-link-btn-demo {
+  width: 100px;
+  height: 44px;
+}
+
+/* Shimmer for ProjectPage Skeleton */
+.skeleton-carousel,
+.skeleton-carousel-image,
+.skeleton-carousel-nav,
+.skeleton-carousel-dot,
+.skeleton-carousel-counter,
+.skeleton-image-grid-item,
+.skeleton-image-grid-nav,
+.skeleton-project-info,
+.skeleton-project-title,
+.skeleton-project-description,
+.skeleton-project-description-2,
+.skeleton-tag,
+.skeleton-badge-featured,
+.skeleton-badge-deployed,
+.skeleton-project-links,
+.skeleton-link-btn {
+  background: linear-gradient(
+    90deg,
+    rgba(57, 255, 136, 0.06) 25%,
+    rgba(57, 255, 136, 0.2) 50%,
+    rgba(57, 255, 136, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+}
+
+/* Responsive */
+@media (min-width: 699px) {
+  .skeleton-carousel {
+    display: none;
+  }
+
+  .skeleton-image-grid {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .skeleton-carousel {
+    aspect-ratio: 4 / 3;
+  }
+
+  .skeleton-carousel-nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .skeleton-project-info,
+  .skeleton-links-row {
+    flex-direction: column;
+  }
+
+  .skeleton-link-btn {
+    width: 100%;
+  }
+}

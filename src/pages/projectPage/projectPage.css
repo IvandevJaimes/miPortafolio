@@ -46,7 +46,7 @@
 .project-page-container {
   max-width: 1220px;
   margin: 0 auto;
-  padding: 40px 24px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -72,7 +72,7 @@
   }
 
   .project-page-container {
-    padding: 24px 16px;
+    padding: 10px 10px;
     gap: 16px;
   }
 }

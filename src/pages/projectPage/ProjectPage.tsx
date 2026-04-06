@@ -5,7 +5,7 @@ import { ImageCarousel } from "../../components/ui/carousel/ImageCarousel";
 import { ImageGrid } from "../../components/ui/carousel/ImageGrid";
 import { ProjectInfo } from "../../components/ui/projectPage/ProjectInfo";
 import { ProjectLinks } from "../../components/ui/projectPage/ProjectLinks";
-import { ProjectsSkeleton } from "../../components/ui/skeletons/ProjectsSkeleton";
+import { ProjectPageSkeleton } from "../../components/ui/skeletons/ProjectPageSkeleton";
 import { getProjectById } from "../../services/projectsApi";
 import { getProjectImages } from "../../utils/imageUtils";
 import type { Project } from "../../types/types";
@@ -36,7 +36,8 @@ const ProjectPage = () => {
     refetch,
   } = useQuery({
     queryKey: ["project", projectId],
-    queryFn: () => (projectId ? getProjectById(projectId) : Promise.resolve(null)),
+    queryFn: () =>
+      projectId ? getProjectById(projectId) : Promise.resolve(null),
     enabled: !!projectId,
   });
 
@@ -59,7 +60,7 @@ const ProjectPage = () => {
         <ProjectHeader />
         <main className="project-page">
           <div className="project-page-container">
-            <ProjectsSkeleton count={1} />
+            <ProjectPageSkeleton />
           </div>
         </main>
       </>
@@ -73,8 +74,12 @@ const ProjectPage = () => {
         <main className="project-page">
           <div className="project-page-container">
             <div className="text-center py-20">
-              <h2 className="text-2xl font-bold text-slate-200 mb-4">Error al encontrar el proyecto</h2>
-              <p className="text-slate-400">{error?.message || "El proyecto no existe o no se encontró"}</p>
+              <h2 className="text-2xl font-bold text-slate-200 mb-4">
+                Error al encontrar el proyecto
+              </h2>
+              <p className="text-slate-400">
+                {error?.message || "El proyecto no existe o no se encontró"}
+              </p>
               <button
                 onClick={() => refetch()}
                 className="mt-6 px-6 py-2 bg-green-neon text-black font-semibold rounded-lg hover:opacity-90 transition"
@@ -95,8 +100,14 @@ const ProjectPage = () => {
       <ProjectHeader />
       <main className="project-page">
         <div className="project-page-container">
-          <ImageCarousel images={projectData.images} projectTitle={projectData.title} />
-          <ImageGrid images={projectData.images} projectTitle={projectData.title} />
+          <ImageCarousel
+            images={projectData.images}
+            projectTitle={projectData.title}
+          />
+          <ImageGrid
+            images={projectData.images}
+            projectTitle={projectData.title}
+          />
 
           <ProjectInfo
             title={projectData.title}
