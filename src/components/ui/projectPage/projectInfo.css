@@ -74,6 +74,105 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  width: 100%;
+}
+
+.project-info-tags {
+  width: 100%;
+  min-width: 0;
+}
+
+.project-tag {
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+.project-info {
+  padding: 24px 0;
+  width: 100%;
+  min-width: 0;
+}
+
+.tag-nodejs {
+  background: rgba(104, 159, 99, 0.15);
+  color: #689f63;
+  border-color: rgba(104, 159, 99, 0.3);
+}
+.tag-express {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.tag-typescript {
+  background: rgba(49, 120, 198, 0.15);
+  color: #3178c6;
+  border-color: rgba(49, 120, 198, 0.3);
+}
+.tag-react {
+  background: rgba(97, 218, 251, 0.15);
+  color: #61dafb;
+  border-color: rgba(97, 218, 251, 0.3);
+}
+.tag-database {
+  background: rgba(0, 165, 224, 0.15);
+  color: #00a5e0;
+  border-color: rgba(0, 165, 224, 0.3);
+}
+.tag-auth {
+  background: rgba(255, 215, 0, 0.15);
+  color: #ffd700;
+  border-color: rgba(255, 215, 0, 0.3);
+}
+.tag-payment {
+  background: rgba(99, 91, 255, 0.15);
+  color: #635bff;
+  border-color: rgba(99, 91, 255, 0.3);
+}
+.tag-cloud {
+  background: rgba(255, 153, 0, 0.15);
+  color: #ff9900;
+  border-color: rgba(255, 153, 0, 0.3);
+}
+.tag-realtime {
+  background: rgba(0, 255, 136, 0.15);
+  color: #39ff88;
+  border-color: rgba(57, 255, 136, 0.3);
+}
+.tag-state {
+  background: rgba(118, 74, 200, 0.15);
+  color: #7649e0;
+  border-color: rgba(118, 74, 200, 0.3);
+}
+.tag-styling {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+.tag-tool {
+  background: rgba(250, 204, 21, 0.15);
+  color: #facc15;
+  border-color: rgba(250, 204, 21, 0.3);
+}
+.tag-visualization {
+  background: rgba(236, 72, 153, 0.15);
+  color: #ec4899;
+  border-color: rgba(236, 72, 153, 0.3);
+}
+.tag-email {
+  background: rgba(20, 184, 166, 0.15);
+  color: #14b8a6;
+  border-color: rgba(20, 184, 166, 0.3);
+}
+.tag-default {
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 768px) {

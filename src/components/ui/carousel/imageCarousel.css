@@ -10,7 +10,7 @@
 .carousel-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   cursor: grab;
   user-select: none;
@@ -125,7 +125,7 @@
 
 .carousel-empty {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -135,6 +135,13 @@
   border-radius: 20px;
   color: #64748b;
   gap: 12px;
+}
+
+@media (min-width: 1024px) {
+  .carousel-empty {
+    max-height: 500px;
+    aspect-ratio: 16 / 9;
+  }
 }
 
 .carousel-empty-icon {
@@ -174,5 +181,28 @@
   .carousel-indicator {
     width: 8px;
     height: 8px;
+  }
+}
+
+@media (min-width: 700px) {
+  .carousel-wrapper {
+    max-height: 500px;
+    aspect-ratio: 21 / 9;
+  }
+
+  .carousel-empty {
+    max-height: 500px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-wrapper {
+    max-height: 350px;
+    aspect-ratio: 21 / 9;
+  }
+
+  .carousel-empty {
+    max-height: 350px;
+    aspect-ratio: 21 / 9;
   }
 }

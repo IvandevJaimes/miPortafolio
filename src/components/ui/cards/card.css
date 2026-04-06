@@ -225,10 +225,10 @@
 }
 
 @media (max-width: 480px) {
-  .project-tag:nth-child(n + 4) {
+  .project-card .project-tag:nth-child(n + 4) {
     display: none;
   }
-  .tag-more {
+  .project-card .tag-more {
     display: inline-block;
   }
   .project-link {

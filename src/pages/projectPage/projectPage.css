@@ -16,6 +16,22 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: visible;
+}
+
+.project-page {
+  min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #0d0d0d 0%,
+    #111111 50%,
+    #0d0d0d 100%
+  );
+  padding-top: 80px;
+  overflow-x: visible;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
