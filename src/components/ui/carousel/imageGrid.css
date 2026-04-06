@@ -42,6 +42,7 @@
   scroll-snap-align: start;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(30, 30, 30, 0.6);
+  cursor: pointer;
 }
 
 .image-grid-img {
