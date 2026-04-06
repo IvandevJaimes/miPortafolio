@@ -3,7 +3,7 @@ import "./projectInfo.css";
 interface ProjectInfoProps {
   title: string;
   description?: string;
-  tags: string[];
+  tags?: string[] | undefined;
   featured: boolean;
   deployed: boolean;
 }
@@ -61,16 +61,18 @@ export const ProjectInfo = ({
 
       {description && <p className="project-info-description">{description}</p>}
 
-      <div className="project-info-tags">
-        <span className="project-info-tags-label">Tecnologías:</span>
-        <div className="project-info-tags-list">
-          {tags.map((tag) => (
-            <span key={tag} className={`project-tag ${tagColors[tag] || "tag-default"}`}>
-              {tag}
-            </span>
-          ))}
+      {tags && tags.length > 0 && (
+        <div className="project-info-tags">
+          <span className="project-info-tags-label">Tecnologías:</span>
+          <div className="project-info-tags-list">
+            {tags.map((tag) => (
+              <span key={tag} className={`project-tag ${tagColors[tag] || "tag-default"}`}>
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

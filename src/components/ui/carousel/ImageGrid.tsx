@@ -1,4 +1,5 @@
 import { useRef, useCallback, useState, useEffect } from "react";
+import { isPlaceholderImage } from "../../../utils/imageUtils";
 import "./imageGrid.css";
 
 interface ImageGridProps {
@@ -50,8 +51,13 @@ export const ImageGrid = ({ images, projectTitle }: ImageGridProps) => {
     );
   }
 
+  const hasPlaceholders = images.some((img) => isPlaceholderImage(img));
+
   return (
     <div className="image-grid-container" ref={containerRef}>
+      {hasPlaceholders && (
+        <div className="image-grid-placeholder-badge">Imágenes ilustrativas</div>
+      )}
       {canScroll && (
         <button
           onClick={() => scroll("left")}
@@ -66,11 +72,11 @@ export const ImageGrid = ({ images, projectTitle }: ImageGridProps) => {
 
       <div className={`image-grid-scroll ${!canScroll ? "centered" : ""}`} ref={scrollRef}>
         {images.map((image, index) => (
-          <div key={index} className="image-grid-item">
+          <div key={index} className={`image-grid-item ${isPlaceholderImage(image) ? "placeholder" : ""}`}>
             <img
               src={image}
               alt={`${projectTitle} - Imagen ${index + 1}`}
-              className="image-grid-img"
+              className={`image-grid-img ${isPlaceholderImage(image) ? "opacity-60" : ""}`}
               loading="lazy"
             />
           </div>

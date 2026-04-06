@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from "react";
+import { isPlaceholderImage } from "../../../utils/imageUtils";
 import "./imageCarousel.css";
 
 interface ImageCarouselProps {
@@ -106,8 +107,13 @@ export const ImageCarousel = ({ images, projectTitle }: ImageCarouselProps) => {
     );
   }
 
+  const hasPlaceholders = images.some((img) => isPlaceholderImage(img));
+
   return (
     <div className="carousel-container">
+      {hasPlaceholders && (
+        <div className="carousel-placeholder-badge">Imágenes ilustrativas</div>
+      )}
       <div
         className="carousel-wrapper"
         onTouchStart={handleTouchStart}
@@ -126,11 +132,11 @@ export const ImageCarousel = ({ images, projectTitle }: ImageCarouselProps) => {
           }}
         >
           {images.map((image, index) => (
-            <div key={index} className="carousel-slide">
+            <div key={index} className={`carousel-slide ${isPlaceholderImage(image) ? "placeholder" : ""}`}>
               <img
                 src={image}
                 alt={`${projectTitle} - Imagen ${index + 1}`}
-                className="carousel-image"
+                className={`carousel-image ${isPlaceholderImage(image) ? "opacity-60" : ""}`}
                 loading="lazy"
               />
             </div>

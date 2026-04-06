@@ -7,6 +7,7 @@ import { ProjectInfo } from "../../components/ui/projectPage/ProjectInfo";
 import { ProjectLinks } from "../../components/ui/projectPage/ProjectLinks";
 import { ProjectsSkeleton } from "../../components/ui/skeletons/ProjectsSkeleton";
 import { getProjectById } from "../../services/projectsApi";
+import { getProjectImages } from "../../utils/imageUtils";
 import type { Project } from "../../types/types";
 import "./projectPage.css";
 
@@ -16,7 +17,7 @@ const mapProjectToView = (project: Project) => ({
   tags: project.tags.map((t) => t.tag),
   featured: project.featured === 1,
   deployed: project.deployed === 1,
-  images: project.images.map((img) => img.url),
+  images: getProjectImages(project.images.map((img) => img.url)),
   github: project.github,
   githubBackend: project.github_backend,
   githubCrud: project.github_crud,
