@@ -120,7 +120,24 @@ export const ShareModal = ({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      console.error("Error al copiar");
+      // Fallback para móviles: método tradicional con input temporal
+      const textArea = document.createElement("textarea");
+      textArea.value = url;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      textArea.style.top = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand("copy");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {
+        console.error("Error al copiar");
+      } finally {
+        document.body.removeChild(textArea);
+      }
     }
   };
 
