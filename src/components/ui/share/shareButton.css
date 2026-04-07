@@ -1,0 +1,45 @@
+/* Share Button - Estilos para botón de compartir bonito y original */
+
+.share-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, rgba(57, 255, 136, 0.15) 0%, rgba(57, 255, 136, 0.05) 100%);
+  border: 1px solid rgba(57, 255, 136, 0.4);
+  border-radius: 12px;
+  color: #39ff88;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.share-button:hover {
+  background: linear-gradient(135deg, rgba(57, 255, 136, 0.25) 0%, rgba(57, 255, 136, 0.1) 100%);
+  border-color: rgba(57, 255, 136, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(57, 255, 136, 0.3);
+}
+
+.share-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .share-button {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .share-button span {
+    display: none;
+  }
+
+  .share-button svg {
+    width: 20px;
+    height: 20px;
+  }
+}

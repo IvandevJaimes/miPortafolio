@@ -3,6 +3,7 @@ import {
   useContext,
   useState,
   useCallback,
+  useEffect,
   type ReactNode,
 } from "react";
 import { Modal } from "../components/ui/modal/Modal";
@@ -21,6 +22,7 @@ interface ModalContextType {
     footer?: ReactNode,
   ) => void;
   closeModal: () => void;
+  isModalOpen: boolean;
 }
 
 const ModalContext = createContext<ModalContextType | null>(null);
@@ -61,6 +63,14 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
     setModalState((prev) => ({ ...prev, isOpen: false }));
   }, []);
 
+  useEffect(() => {
+    if (modalState.isOpen) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+  }, [modalState.isOpen]);
+
   const defaultFooter = (
     <button
       onClick={closeModal}
@@ -71,7 +81,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   );
 
   return (
-    <ModalContext.Provider value={{ openModal, closeModal }}>
+    <ModalContext.Provider value={{ openModal, closeModal, isModalOpen: modalState.isOpen }}>
       {children}
       <Modal
         isOpen={modalState.isOpen}

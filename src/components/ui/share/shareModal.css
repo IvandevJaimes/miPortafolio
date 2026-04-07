@@ -1,0 +1,137 @@
+/* ShareModal - Estilos para el contenido dentro del modal */
+
+.share-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Opciones del menú */
+.share-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: #e2e8f0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.share-option:hover {
+  background: rgba(57, 255, 136, 0.1);
+}
+
+.share-option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.share-option:hover .share-option-icon {
+  background: rgba(57, 255, 136, 0.2);
+}
+
+.share-option-icon svg {
+  width: 18px;
+  height: 18px;
+  color: #39ff88;
+}
+
+/* Divisor */
+.share-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 8px 0;
+}
+
+.share-social-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+/* Colores por red social */
+.share-option.share-twitter:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.share-option.share-twitter:hover .share-option-icon {
+  background: #000;
+}
+
+.share-option.share-twitter:hover .share-option-icon svg {
+  color: white;
+}
+
+.share-option.share-linkedin:hover {
+  background: rgba(10, 102, 194, 0.2);
+}
+
+.share-option.share-linkedin:hover .share-option-icon {
+  background: #0a66c2;
+}
+
+.share-option.share-linkedin:hover .share-option-icon svg {
+  color: white;
+}
+
+.share-option.share-facebook:hover {
+  background: rgba(24, 119, 242, 0.2);
+}
+
+.share-option.share-facebook:hover .share-option-icon {
+  background: #1877f2;
+}
+
+.share-option.share-facebook:hover .share-option-icon svg {
+  color: white;
+}
+
+.share-option.share-whatsapp:hover {
+  background: rgba(37, 211, 102, 0.2);
+}
+
+.share-option.share-whatsapp:hover .share-option-icon {
+  background: #25d366;
+}
+
+.share-option.share-whatsapp:hover .share-option-icon svg {
+  color: white;
+}
+
+.share-option.share-telegram:hover {
+  background: rgba(0, 136, 204, 0.2);
+}
+
+.share-option.share-telegram:hover .share-option-icon {
+  background: #0088cc;
+}
+
+.share-option.share-telegram:hover .share-option-icon svg {
+  color: white;
+}
+
+.share-option.share-reddit:hover {
+  background: rgba(255, 69, 0, 0.2);
+}
+
+.share-option.share-reddit:hover .share-option-icon {
+  background: #ff4500;
+}
+
+.share-option.share-reddit:hover .share-option-icon svg {
+  color: white;
+}

@@ -1,6 +1,5 @@
-import { ShareButton } from "./ShareButton";
+import { ShareButton } from "@/components/ui/share/ShareButton";
 import "./projectLinks.css";
-import "./shareButton.css";
 
 interface ProjectLinksProps {
   github?: string;
