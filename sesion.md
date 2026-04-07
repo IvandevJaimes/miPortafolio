@@ -364,3 +364,55 @@ El archivo `Hero.tsx` tenía un `useEffect` que actualizaba 3 estados cada **50m
 ### Estado actual
 - Branch: `feat/project-page` (con main mergeado)
 - Build: ✅ passing
+
+---
+
+## Sesión 9 - 06/04/2026
+
+### Trabajo realizado
+
+#### 1. ProjectPageSkeleton
+- Skeleton responsivo exclusivo para ProjectPage
+- Matching exacto con elementos de la página
+- Estilos en skeleton.css
+
+#### 2. ProjectPageError → ErrorScreen
+- Componente de error reutilizable
+- Muestra mensaje de la API directamente
+- 404 con animación de números
+- Partículas flotantes rojas
+- Usa botones de UI (NormalButton, SecondaryButton)
+- Renombrado a ErrorScreen para reutilización
+
+#### 3. Lightbox
+- Componente reutilizable en ui/lightbox/
+- Click en imagen para ampliar
+- Keyboard navigation (Escape, flechas)
+- Animación suave al cambiar de imagen
+- Funciona en carousel y grid
+- Responsive
+
+#### 4. Mejoras menores
+- Cursor pointer en carousel y grid
+- Fix imports de eventos en ImageCarousel
+
+### Pendiente (para próximas sesiones)
+- [ ] Compartir - Botón para copiar link o compartir en redes
+- [ ] Volver a proyectos - Link de retorno en el header
+- [ ] SEO - Meta tags para OG image, title, description
+- [ ] Transitions - Animaciones suaves entre slides del carrusel
+- [ ] Keyboard navigation - Flechas para navegar el carrusel/grid (ya implementado en Lightbox)
+
+### Archivos creados/modificados
+- `src/components/ui/skeletons/ProjectPageSkeleton.tsx`
+- `src/components/ui/errorComponents/ErrorScreen.tsx`
+- `src/components/ui/errorComponents/errorScreen.css`
+- `src/components/ui/lightbox/Lightbox.tsx`
+- `src/components/ui/lightbox/lightbox.css`
+- `src/components/ui/carousel/ImageCarousel.tsx`
+- `src/components/ui/carousel/ImageGrid.tsx`
+
+### Estado actual
+- Branch: `feat/project-page`
+- Build: ✅ passing
+- Lint: ⚠️ falsos positivos de ModalContext

@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState, type MouseEvent, type KeyboardEvent } from "react";
+import { useEffect, useCallback, useState, useRef, type MouseEvent, type TouchEvent } from "react";
 import { createPortal } from "react-dom";
 import "./lightbox.css";
 
@@ -18,23 +18,58 @@ export const Lightbox = ({
   projectTitle,
 }: LightboxProps) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(null);
+  const [prevIndex, setPrevIndex] = useState<number>(initialIndex);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+  const minSwipeDistance = 50;
 
   const goToPrevious = useCallback(() => {
+    if (isAnimating) return;
+    setPrevIndex(currentIndex);
+    setSlideDirection("right");
+    setIsAnimating(true);
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  }, [images.length]);
+    setTimeout(() => {
+      setSlideDirection(null);
+      setIsAnimating(false);
+    }, 350);
+  }, [images.length, isAnimating, currentIndex]);
 
   const goToNext = useCallback(() => {
+    if (isAnimating) return;
+    setPrevIndex(currentIndex);
+    setSlideDirection("left");
+    setIsAnimating(true);
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  }, [images.length]);
+    setTimeout(() => {
+      setSlideDirection(null);
+      setIsAnimating(false);
+    }, 350);
+  }, [images.length, isAnimating, currentIndex]);
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") goToPrevious();
-      if (e.key === "ArrowRight") goToNext();
-    },
-    [onClose, goToPrevious, goToNext]
-  );
+  const onTouchStart = (e: TouchEvent) => {
+    touchEndX.current = 0;
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const onTouchMove = (e: TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const onTouchEnd = () => {
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      goToNext();
+    } else if (isRightSwipe) {
+      goToPrevious();
+    }
+  };
 
   const handleBackdropClick = (e: MouseEvent) => {
     if (e.target === e.currentTarget) onClose();
@@ -43,7 +78,14 @@ export const Lightbox = ({
   useEffect(() => {
     if (isOpen) {
       setCurrentIndex(initialIndex);
+      setPrevIndex(initialIndex);
+      setIsAnimating(false);
+      setSlideDirection(null);
       document.body.style.overflow = "hidden";
+      
+      requestAnimationFrame(() => {
+        contentRef.current?.focus();
+      });
     }
     return () => {
       document.body.style.overflow = "";
@@ -51,14 +93,17 @@ export const Lightbox = ({
   }, [isOpen, initialIndex]);
 
   useEffect(() => {
-    const handleEsc = (e: globalThis.KeyboardEvent) => {
+    const handleKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (!isOpen) return;
+      
       if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") goToPrevious();
+      if (e.key === "ArrowRight") goToNext();
     };
-    if (isOpen) {
-      window.addEventListener("keydown", handleEsc);
-      return () => window.removeEventListener("keydown", handleEsc);
-    }
-  }, [isOpen, onClose]);
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose, goToPrevious, goToNext]);
 
   if (!isOpen || images.length === 0) return null;
 
@@ -69,7 +114,14 @@ export const Lightbox = ({
       role="dialog"
       aria-label="Galería de imágenes"
     >
-      <div className="lightbox-content" onKeyDown={handleKeyDown} tabIndex={0}>
+      <div
+        ref={contentRef}
+        className="lightbox-content"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        tabIndex={-1}
+      >
         {/* Close button */}
         <button
           onClick={onClose}
@@ -82,11 +134,23 @@ export const Lightbox = ({
         </button>
 
         {/* Main image */}
-        <div className="lightbox-image-container" key={currentIndex}>
+        <div className="lightbox-image-container">
+          {/* Previous image (salida) */}
+          {isAnimating && prevIndex !== currentIndex && (
+            <img
+              key={`out-${prevIndex}`}
+              src={images[prevIndex]}
+              alt=""
+              aria-hidden="true"
+              className={`lightbox-image lightbox-image-out slide-out-${slideDirection}`}
+            />
+          )}
+          {/* Current image (entrada) */}
           <img
+            key={`in-${currentIndex}`}
             src={images[currentIndex]}
             alt={`${projectTitle} - Imagen ${currentIndex + 1}`}
-            className="lightbox-image"
+            className={`lightbox-image ${isAnimating && slideDirection ? `lightbox-image-in slide-in-${slideDirection}` : ""}`}
           />
         </div>
 

@@ -64,19 +64,110 @@
 
 /* Image container */
 .lightbox-image-container {
+  position: relative;
   max-width: 100%;
   max-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .lightbox-image {
+  position: absolute;
   max-width: 100%;
   max-height: 80vh;
   object-fit: contain;
   border-radius: 8px;
-  animation: lightbox-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: lightbox-fade-in 0.3s ease;
+}
+
+.lightbox-image-in {
+  animation: lightbox-fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.lightbox-image-in.slide-in-left {
+  animation-name: lightbox-slide-in-left;
+}
+
+.lightbox-image-in.slide-in-right {
+  animation-name: lightbox-slide-in-right;
+}
+
+.lightbox-image-out {
+  animation: lightbox-fade-out 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 1;
+}
+
+.lightbox-image-out.slide-out-left {
+  animation-name: lightbox-slide-out-left;
+}
+
+.lightbox-image-out.slide-out-right {
+  animation-name: lightbox-slide-out-right;
+}
+
+@keyframes lightbox-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightbox-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes lightbox-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes lightbox-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes lightbox-slide-out-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+}
+
+@keyframes lightbox-slide-out-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(60px);
+  }
 }
 
 @keyframes lightbox-slide-in {
