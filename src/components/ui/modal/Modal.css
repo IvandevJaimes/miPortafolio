@@ -80,6 +80,11 @@
   background: rgba(57, 255, 136, 0.5);
 }
 
+/* Disable body scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
 /* Footer con background */
 .modal-footer {
   background: rgba(5, 5, 5, 0.15);

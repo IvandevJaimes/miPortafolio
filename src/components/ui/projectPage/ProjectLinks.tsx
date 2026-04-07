@@ -1,3 +1,4 @@
+import { ShareButton } from "@/components/ui/share/ShareButton";
 import "./projectLinks.css";
 
 interface ProjectLinksProps {
@@ -6,6 +7,8 @@ interface ProjectLinksProps {
   githubCrud?: string;
   demo?: string;
   monorepo?: string;
+  title?: string;
+  description?: string;
 }
 
 export const ProjectLinks = ({
@@ -14,16 +17,21 @@ export const ProjectLinks = ({
   githubCrud,
   demo,
   monorepo,
+  title,
+  description,
 }: ProjectLinksProps) => {
   const hasAnyLink = github || githubBackend || githubCrud || demo || monorepo;
 
-  if (!hasAnyLink) {
+  if (!hasAnyLink && !title) {
     return null;
   }
 
   return (
     <div className="project-links">
-      <h2 className="project-links-title">Links del Proyecto</h2>
+      <div className="project-links-header">
+        <h2 className="project-links-title">Links del Proyecto</h2>
+        {title && <ShareButton title={title} description={description} />}
+      </div>
 
       <div className="project-links-grid">
         {monorepo && (

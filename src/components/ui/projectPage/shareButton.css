@@ -1,0 +1,188 @@
+/* Share Button - Estilos para botón de compartir bonito y original */
+
+.share-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, rgba(57, 255, 136, 0.15) 0%, rgba(57, 255, 136, 0.05) 100%);
+  border: 1px solid rgba(57, 255, 136, 0.4);
+  border-radius: 12px;
+  color: #39ff88;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.share-button:hover {
+  background: linear-gradient(135deg, rgba(57, 255, 136, 0.25) 0%, rgba(57, 255, 136, 0.1) 100%);
+  border-color: rgba(57, 255, 136, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(57, 255, 136, 0.3);
+}
+
+.share-button.active {
+  background: rgba(57, 255, 136, 0.3);
+  border-color: #39ff88;
+}
+
+.share-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Menu desplegable */
+.share-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 280px;
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(57, 255, 136, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.share-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.share-menu-header {
+  font-size: 13px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Opciones del menú */
+.share-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: #e2e8f0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.share-option:hover {
+  background: rgba(57, 255, 136, 0.1);
+}
+
+.share-option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.share-option:hover .share-option-icon {
+  background: rgba(57, 255, 136, 0.2);
+}
+
+.share-option-icon svg {
+  width: 18px;
+  height: 18px;
+  color: #39ff88;
+}
+
+/* Divisor */
+.share-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 12px 0;
+}
+
+.share-social-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+/* Colores por red social */
+.share-option.share-twitter:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.share-option.share-twitter:hover .share-option-icon {
+  background: #000;
+}
+
+.share-option.share-twitter:hover .share-option-icon svg {
+  color: white;
+}
+
+.share-option.share-linkedin:hover {
+  background: rgba(10, 102, 194, 0.2);
+}
+
+.share-option.share-linkedin:hover .share-option-icon {
+  background: #0a66c2;
+}
+
+.share-option.share-linkedin:hover .share-option-icon svg {
+  color: white;
+}
+
+.share-option.share-facebook:hover {
+  background: rgba(24, 119, 242, 0.2);
+}
+
+.share-option.share-facebook:hover .share-option-icon {
+  background: #1877f2;
+}
+
+.share-option.share-facebook:hover .share-option-icon svg {
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .share-button {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .share-button span {
+    display: none;
+  }
+
+  .share-button svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .share-menu {
+    width: 260px;
+    right: -60px;
+  }
+}

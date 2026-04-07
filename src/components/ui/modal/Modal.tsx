@@ -35,7 +35,9 @@ export const Modal = ({
         className={`w-full max-w-lg relative rounded-2xl modal-container ${className}`}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 modal-header">
-          <div className="flex-1 pr-4 modal-title-wrapper">{title}</div>
+          <div className="flex-1 pr-4 text-white modal-title-wrapper">
+            {title}
+          </div>
           <button
             onClick={onClose}
             className="p-2 rounded-lg transition-all duration-200 modal-close-button"
