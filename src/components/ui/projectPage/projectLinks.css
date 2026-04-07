@@ -4,11 +4,20 @@
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.project-links-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
 .project-links-title {
   font-size: 1.25rem;
   font-weight: 700;
   color: #f8fafc;
-  margin-bottom: 20px;
+  margin: 0;
 }
 
 .project-links-grid {

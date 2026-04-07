@@ -97,6 +97,8 @@ const ProjectPage = () => {
             githubCrud={projectData.githubCrud}
             demo={projectData.demo}
             monorepo={projectData.monorepo}
+            title={projectData.title}
+            description={projectData.description}
           />
         </div>
       </main>
