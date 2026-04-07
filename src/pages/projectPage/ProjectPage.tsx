@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 import ProjectHeader from "../../components/layout/header/ProjectHeader";
 import { ImageCarousel } from "../../components/ui/carousel/ImageCarousel";
 import { ImageGrid } from "../../components/ui/carousel/ImageGrid";
@@ -71,6 +72,17 @@ const ProjectPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{projectData.title} | Ivan Jaimes</title>
+        <meta name="description" content={projectData.description || `Proyecto: ${projectData.title}`} />
+        <meta property="og:title" content={`${projectData.title} | Ivan Jaimes`} />
+        <meta property="og:description" content={projectData.description || `Proyecto: ${projectData.title}`} />
+        <meta property="og:image" content={projectData.images[0] || "https://ivanjaimes.dev/og-image.png"} />
+        <meta property="og:url" content={`https://ivanjaimes.dev/project/${projectId}`} />
+        <meta name="twitter:title" content={`${projectData.title} | Ivan Jaimes`} />
+        <meta name="twitter:description" content={projectData.description || `Proyecto: ${projectData.title}`} />
+        <meta name="twitter:image" content={projectData.images[0] || "https://ivanjaimes.dev/og-image.png"} />
+      </Helmet>
       <ProjectHeader />
       <main className="project-page">
         <div className="project-page-container">

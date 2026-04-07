@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HelmetProvider } from "react-helmet-async";
 import "./styles/vars.css";
 import "./styles/index.css";
 import "flowbite";
@@ -8,7 +9,7 @@ import App from "./App.tsx";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5 min de cache
+      staleTime: 1000 * 60 * 5,
       retry: 2,
       refetchOnWindowFocus: false,
     },
@@ -22,7 +23,9 @@ if (!rootElement) {
 }
 
 createRoot(rootElement).render(
-  <QueryClientProvider client={queryClient}>
-    <App />
-  </QueryClientProvider>,
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
+  </HelmetProvider>,
 );
