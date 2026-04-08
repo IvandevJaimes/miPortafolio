@@ -30,7 +30,7 @@ const Hero = () => {
 
   if (isLoading) {
     return (
-      <section className="hero-section" id="perfil">
+      <section className="hero-section" id="/">
         <Skeleton />
       </section>
     );
@@ -39,7 +39,7 @@ const Hero = () => {
   const links = profileData.links;
 
   return (
-    <section className="hero-section" id="perfil">
+    <section className="hero-section" id="/">
       {shouldShowAlert && (
         <Alert
           type="error"
