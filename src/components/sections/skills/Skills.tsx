@@ -44,6 +44,7 @@ const Skills = () => {
   const [activeCategory, setActiveCategory] = useState<string>("");
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [indicatorKey, setIndicatorKey] = useState(0);
 
   const {
     data: categories = [],
@@ -112,6 +113,7 @@ const Skills = () => {
                   key={cat.id}
                   onClick={() => {
                     setActiveCategory(String(cat.id));
+                    setIndicatorKey((prev) => prev + 1);
                   }}
                   className={`skills-tab ${activeCategory === String(cat.id) ? "active" : ""}`}
                 >
@@ -123,7 +125,10 @@ const Skills = () => {
 
             {currentCategory && (
               <div>
-                <p className="sm:hidden category-indicator text-green-400 font-medium mb-4 text-center animate-fade-in-up">
+                <p 
+                  key={indicatorKey}
+                  className="sm:hidden category-indicator text-green-400 font-medium mb-4 text-center animate-fade-in-up"
+                >
                   {currentCategory.label}
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
