@@ -287,6 +287,20 @@
   position: relative;
   width: clamp(280px, 35vw, 400px);
   height: clamp(280px, 35vw, 400px);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: wrapper-morph 8s ease-in-out infinite;
+}
+
+@keyframes wrapper-morph {
+  0% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  50% {
+    border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+  }
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
 }
 
 .hero-image-glow {
@@ -296,12 +310,13 @@
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   background: radial-gradient(
     circle,
     rgba(57, 255, 136, 0.2) 0%,
     transparent 70%
   );
-  animation: pulse-glow 3s ease-in-out infinite;
+  animation: pulse-glow 3s ease-in-out infinite, glow-morph 8s ease-in-out infinite;
 }
 
 @keyframes pulse-glow {
@@ -313,6 +328,18 @@
   50% {
     opacity: 0.8;
     transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes glow-morph {
+  0% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  50% {
+    border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+  }
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   }
 }
 
