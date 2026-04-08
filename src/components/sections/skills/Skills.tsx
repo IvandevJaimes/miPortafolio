@@ -127,7 +127,7 @@ const Skills = () => {
               <div>
                 <p 
                   key={indicatorKey}
-                  className="sm:hidden category-indicator text-green-400 font-medium mb-4 text-center animate-fade-in-up"
+                  className="sm:hidden category-indicator text-green-400 font-medium mt-8 mb-4 text-center animate-fade-in-up"
                 >
                   {currentCategory.label}
                 </p>
