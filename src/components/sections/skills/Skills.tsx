@@ -6,31 +6,61 @@ import { getSkills } from "../../../services/skillsApi";
 
 const categoryIcons: Record<string, React.ReactNode> = {
   frontend: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="w-5 h-5"
+    >
       <rect x="3" y="3" width="18" height="18" rx="2" />
       <path d="M3 9h18M9 21V9" />
     </svg>
   ),
   backend: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="w-5 h-5"
+    >
       <rect x="2" y="3" width="20" height="14" rx="2" />
       <path d="M8 21h8M12 17v4M7 8h2M7 12h4" />
     </svg>
   ),
   databases: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="w-5 h-5"
+    >
       <ellipse cx="12" cy="5" rx="9" ry="3" />
       <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
     </svg>
   ),
   languages: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="w-5 h-5"
+    >
       <polyline points="16 18 22 12 16 6" />
       <polyline points="8 6 2 12 8 18" />
     </svg>
   ),
   tools: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="w-5 h-5"
+    >
       <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
     </svg>
   ),
@@ -67,7 +97,7 @@ const Skills = () => {
   }, [categories, activeCategory]);
 
   const currentCategory = categories.find(
-    (cat) => String(cat.id) === activeCategory
+    (cat) => String(cat.id) === activeCategory,
   );
 
   return (
@@ -125,9 +155,9 @@ const Skills = () => {
 
             {currentCategory && (
               <div>
-                <p 
+                <p
                   key={indicatorKey}
-                  className="sm:hidden category-indicator text-green-400 font-medium mt-8 mb-4 text-center animate-fade-in-up"
+                  className="md:hidden category-indicator text-green-400 font-medium mt-8 mb-4 text-center animate-fade-in-up"
                 >
                   {currentCategory.label}
                 </p>
@@ -146,20 +176,20 @@ const Skills = () => {
                         }}
                       >
                         <div className="skill-card-glow" />
-                        
+
                         <div className="flex items-start justify-between mb-3">
-                          <h3 className="skill-card-title">
-                            {skill.name}
-                          </h3>
+                          <h3 className="skill-card-title">{skill.name}</h3>
                           <span className="skill-card-dot"></span>
                         </div>
-                        
+
                         <p className="skill-card-description">
                           {skill.description}
                         </p>
-                        
+
                         <div className="skill-card-meta">
-                          <span className="skill-card-category">{currentCategory.label}</span>
+                          <span className="skill-card-category">
+                            {currentCategory.label}
+                          </span>
                         </div>
                       </div>
                     );
@@ -197,15 +227,15 @@ const Skills = () => {
                     <div className="flex items-center gap-4">
                       <span className="language-card-flag">{lang.flag}</span>
                       <div className="flex-1">
-                        <h4 className="language-card-title">
-                          {lang.name}
-                        </h4>
+                        <h4 className="language-card-title">{lang.name}</h4>
                         <p className="language-card-desc">{lang.description}</p>
                       </div>
                     </div>
                     <div className="mt-4">
                       <div className="flex justify-between text-xs mb-1">
-                        <span className="language-card-level">{lang.level}</span>
+                        <span className="language-card-level">
+                          {lang.level}
+                        </span>
                         <span className="text-slate-400 font-medium">
                           {lang.percentage}%
                         </span>
@@ -214,7 +244,9 @@ const Skills = () => {
                         <div
                           className="language-card-progress-bar"
                           style={{
-                            width: isVisible ? String(lang.percentage) + "%" : "0%",
+                            width: isVisible
+                              ? String(lang.percentage) + "%"
+                              : "0%",
                           }}
                         />
                       </div>
