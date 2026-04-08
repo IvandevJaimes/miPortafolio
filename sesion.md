@@ -397,10 +397,54 @@ El archivo `Hero.tsx` tenía un `useEffect` que actualizaba 3 estados cada **50m
 - `src/components/ui/share/ShareButton.tsx` - fix import
 
 ### Estado actual
-- Branch: `feat/header-improvements`
+- Branch: `feat/project-page`
 - Build: ✅ passing
+- Mergeado con feat/header-improvements
 
 ### Pendiente
-- [ ] Agregar botón de back en ProjectPage
-- [ ] Testear funcionalidad completa
-- [ ] Simplificar header para que no sea tan grande
+- [ ] Optimizar ProjectLinks.tsx (SVG duplicado, header sin contenido)
+
+---
+
+## Sesión 12 - 07/04/2026
+
+### Trabajo realizado
+
+#### 1. Refactor del Header
+- Unificado ProjectHeader en Header.tsx
+- Ocultar nav links y menú mobile según ruta
+- Botón "Volver atrás" en páginas que no son home
+
+#### 2. Hook useCVDownload
+- Extraída toda la lógica del modal de CV a hook custom
+- Manejo de estados: loading, error, skeleton
+- getFileName, formatDate, getFileType
+
+#### 3. Componente FileIcon
+- Extraído renderIcon duplicado (3 tipos: PDF, DOCX, generic)
+- Ubicación: src/components/ui/icons/FileIcon.tsx
+
+#### 4. SEO en ProjectPage
+- Meta tags dinámicos con react-helmet-async
+- Title, description, og:* y twitter:* tags
+
+### Archivos creados
+- `src/hooks/useCVDownload.tsx` - hook para modal de CV
+- `src/components/ui/icons/FileIcon.tsx` - icono según tipo de archivo
+
+### Archivos modificados
+- `src/components/layout/header/Header.tsx` - simplificado, usa hook
+- `src/pages/projectPage/ProjectPage.tsx` - SEO tags
+- `src/components/ui/projectPage/ProjectLinks.tsx` - fix ShareButton import
+- `src/components/sections/hero/Hero.tsx` - id "/" en vez de "#perfil"
+- `src/components/layout/header/ProjectHeader.tsx` - eliminado (unificado)
+
+### Estado actual
+- Branch: `feat/project-page`
+- Build: ✅ passing
+- Pendiente: merge a main
+
+### Pendiente
+- [ ] Optimizar ProjectLinks.tsx:
+  - Si title existe pero no hay links, muestra header sin contenido útil
+  - SVG de GitHub repetido 4 veces — podría extraerse
