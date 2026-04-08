@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Icon } from "@iconify/react";
 import "./skills.css";
 import { SkillsSkeleton } from "../../ui/skeletons/SkillsSkeleton";
 import { getSkills } from "../../../services/skillsApi";
+import { getSkillIconWithFallback } from "../../../utils/iconUtils";
 
 const categoryIcons: Record<string, React.ReactNode> = {
   frontend: (
@@ -181,7 +183,14 @@ const Skills = () => {
                         <div className="skill-card-glow" />
 
                         <div className="flex items-start justify-between mb-3">
-                          <h3 className="skill-card-title">{skill.name}</h3>
+                          <div className="flex items-center gap-3">
+                            <Icon 
+                              icon={getSkillIconWithFallback(skill.name)} 
+                              className="w-6 h-6"
+                              fallback={<Icon icon="mdi:cube" className="w-6 h-6 text-slate-500" />}
+                            />
+                            <h3 className="skill-card-title">{skill.name}</h3>
+                          </div>
                           <span className="skill-card-dot"></span>
                         </div>
 
