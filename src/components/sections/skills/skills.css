@@ -319,3 +319,40 @@
     font-size: 13px;
   }
 }
+
+/* Skill Icon Container */
+.skill-icon-container {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(57, 255, 136, 0.15) 0%, rgba(57, 255, 136, 0.05) 100%);
+  border: 1px solid rgba(57, 255, 136, 0.25);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover .skill-icon-container {
+  background: linear-gradient(135deg, rgba(57, 255, 136, 0.25) 0%, rgba(57, 255, 136, 0.1) 100%);
+  border-color: rgba(57, 255, 136, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(57, 255, 136, 0.2);
+}
+
+.skill-icon {
+  width: 28px;
+  height: 28px;
+}
+
+@media (max-width: 640px) {
+  .skill-icon-container {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .skill-icon {
+    width: 24px;
+    height: 24px;
+  }
+}

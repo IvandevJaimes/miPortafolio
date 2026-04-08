@@ -21,7 +21,7 @@ const iconNameMap: Record<string, string> = {
   Webpack: "webpack",
   "Node.js": "nodejs",
   Node: "nodejs",
-  Express: "express",
+  Express: "expressjs",
   JWT: "jwt",
   NestJS: "nestjs",
   Nest: "nestjs",
@@ -117,7 +117,7 @@ export const getSkillIconName = (skillName: string): string => {
   }
 
   const found = Object.entries(iconNameMap).find(
-    ([key]) => cleanSkillName(key) === cleanedName
+    ([key]) => cleanSkillName(key) === cleanedName,
   );
   if (found) {
     return found[1];

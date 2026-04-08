@@ -184,11 +184,13 @@ const Skills = () => {
 
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex items-center gap-3">
-                            <Icon 
-                              icon={getSkillIconWithFallback(skill.name)} 
-                              className="w-6 h-6"
-                              fallback={<Icon icon="mdi:cube" className="w-6 h-6 text-slate-500" />}
-                            />
+                            <div className="skill-icon-container">
+                              <Icon 
+                                icon={getSkillIconWithFallback(skill.name)} 
+                                className="skill-icon"
+                                fallback={<Icon icon="mdi:cube" className="skill-icon text-slate-500" />}
+                              />
+                            </div>
                             <h3 className="skill-card-title">{skill.name}</h3>
                           </div>
                           <span className="skill-card-dot"></span>
