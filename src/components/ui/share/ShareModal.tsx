@@ -134,7 +134,7 @@ export const ShareModal = ({
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch {
-        console.error("Error al copiar");
+        // Silencioso - el usuario verá que no se copió
       } finally {
         document.body.removeChild(textArea);
       }
