@@ -6,7 +6,7 @@ import { useCVDownload } from "@/hooks/useCVDownload";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
-  { name: "Perfil", href: "#perfil" },
+  { name: "Perfil", href: "/" },
   { name: "Proyectos", href: "#proyectos" },
   { name: "Habilidades", href: "#habilidades" },
   { name: "Contacto", href: "#contacto" },
