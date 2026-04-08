@@ -63,100 +63,55 @@
   box-shadow: 0 0 20px rgba(57, 255, 136, 0.15);
 }
 
-/* ========== NUEVAS SKILL CARDS ========== */
+/* ========== SKILL CARD - Mismo estilo que ProjectCard ========== */
 
 .skill-card {
   position: relative;
-  background: linear-gradient(145deg, rgba(25, 25, 25, 0.9) 0%, rgba(15, 15, 15, 0.95) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 20px;
-  padding: 28px 24px;
+  padding: 24px;
   overflow: hidden;
-  transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.skill-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #39ff88, transparent);
-  opacity: 0;
-  transition: opacity 400ms ease;
-}
-
-.skill-card::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, rgba(57, 255, 136, 0.03) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 400ms ease;
-  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .skill-card:hover {
-  border-color: rgba(57, 255, 136, 0.25);
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.6),
-    0 0 40px rgba(57, 255, 136, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transform: translateY(-8px);
+  border-color: rgba(57, 255, 136, 0.3);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(57, 255, 136, 0.1);
 }
 
-.skill-card:hover::before {
-  opacity: 1;
+.skill-card.hovered {
+  border-color: rgba(57, 255, 136, 0.2);
 }
 
-.skill-card:hover::after {
-  opacity: 1;
-}
-
-/* Icono/Número decorativo */
-.skill-card-icon {
+/* Glow effect */
+.skill-card-glow {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 700;
-  color: rgba(57, 255, 136, 0.2);
-  border: 1px solid rgba(57, 255, 136, 0.15);
-  border-radius: 10px;
-  transition: all 400ms ease;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(57, 255, 136, 0.15) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
-.skill-card:hover .skill-card-icon {
-  color: rgba(57, 255, 136, 0.6);
-  border-color: rgba(57, 255, 136, 0.4);
-  transform: rotate(5deg) scale(1.1);
+.skill-card:hover .skill-card-glow {
+  opacity: 1;
 }
 
-.skill-card-icon svg {
-  width: 18px;
-  height: 18px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.5;
-}
-
-/* Título del skill */
+/* Título */
 .skill-card-title {
   font-size: 18px;
   font-weight: 700;
   color: #f8fafc;
-  margin-bottom: 12px;
-  letter-spacing: -0.02em;
-  transition: color 300ms ease;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
 }
 
 .skill-card:hover .skill-card-title {
@@ -168,83 +123,59 @@
   font-size: 14px;
   line-height: 1.6;
   color: #94a3b8;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
-/* Etiqueta de categoría/chip */
-.skill-card-chip {
-  display: inline-flex;
-  align-items: center;
+/* Tags estilo project */
+.skill-card-tags {
+  display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  padding: 6px 12px;
-  background: rgba(57, 255, 136, 0.08);
-  border: 1px solid rgba(57, 255, 136, 0.2);
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
+}
+
+.skill-card-tag {
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
   color: #39ff88;
+  background: rgba(57, 255, 136, 0.1);
+  border: 1px solid rgba(57, 255, 136, 0.2);
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
-.skill-card-chip-dot {
-  width: 6px;
-  height: 6px;
-  background: #39ff88;
-  border-radius: 50%;
-  animation: pulse-dot 2s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(0.8);
-  }
-}
-
-/* Efecto de línea decorativa */
-.skill-card-line {
-  position: absolute;
-  bottom: 0;
-  left: 24px;
-  right: 24px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(57, 255, 136, 0.3), transparent);
-  opacity: 0;
-  transition: opacity 400ms ease;
-}
-
-.skill-card:hover .skill-card-line {
-  opacity: 1;
+.skill-card:hover .skill-card-tag {
+  background: rgba(57, 255, 136, 0.15);
+  border-color: rgba(57, 255, 136, 0.3);
 }
 
 /* ========== LANGUAGE CARD ========== */
 
 .language-card {
-  background: linear-gradient(145deg, rgba(25, 25, 25, 0.9) 0%, rgba(15, 15, 15, 0.95) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 20px;
+  position: relative;
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
   padding: 24px;
-  transition: all 400ms ease;
+  transition: all 0.4s ease;
+  overflow: hidden;
 }
 
 .language-card:hover {
-  border-color: rgba(57, 255, 136, 0.25);
   transform: translateY(-4px);
-  box-shadow: 
-    0 20px 40px -12px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(57, 255, 136, 0.06);
-}
-
-.language-card:hover .language-card-flag {
-  transform: scale(1.15);
+  border-color: rgba(57, 255, 136, 0.3);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(57, 255, 136, 0.1);
 }
 
 .language-card-flag {
-  font-size: 40px;
-  transition: transform 300ms ease;
+  font-size: 36px;
+  transition: transform 0.3s ease;
+}
+
+.language-card:hover .language-card-flag {
+  transform: scale(1.1);
 }
 
 .language-card-title {
@@ -275,6 +206,24 @@
   background: linear-gradient(90deg, #39ff88, #00ff9c);
   border-radius: 2px;
   box-shadow: 0 0 10px rgba(57, 255, 136, 0.4);
+}
+
+/* Language card glow */
+.language-card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(57, 255, 136, 0.1) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.language-card:hover .language-card-glow {
+  opacity: 1;
 }
 
 @media (max-width: 640px) {

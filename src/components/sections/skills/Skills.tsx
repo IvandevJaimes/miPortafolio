@@ -86,7 +86,7 @@ const Skills = () => {
 
             {currentCategory && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
-                {currentCategory.skills?.map((skill, index) => {
+                {currentCategory.skills?.map((skill) => {
                   const isHovered = hoveredSkill === skill.name;
                   return (
                     <div
@@ -99,11 +99,7 @@ const Skills = () => {
                         setHoveredSkill(null);
                       }}
                     >
-                      <div className="skill-card-icon">
-                        <svg viewBox="0 0 24 24">
-                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                      </div>
+                      <div className="skill-card-glow" />
                       
                       <h3 className="skill-card-title">
                         {skill.name}
@@ -112,13 +108,6 @@ const Skills = () => {
                       <p className="skill-card-description">
                         {skill.description}
                       </p>
-                      
-                      <div className="skill-card-chip">
-                        <span className="skill-card-chip-dot"></span>
-                        <span>Skill {index + 1}</span>
-                      </div>
-                      
-                      <div className="skill-card-line"></div>
                     </div>
                   );
                 })}
@@ -152,6 +141,7 @@ const Skills = () => {
                 key={lang.name}
                 className="language-card flex-1 min-w-[280px] max-w-[400px]"
               >
+                <div className="language-card-glow" />
                 <div className="flex items-center gap-4">
                   <span className="language-card-flag">{lang.flag}</span>
                   <div className="flex-1">
