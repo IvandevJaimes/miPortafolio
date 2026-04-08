@@ -4,38 +4,6 @@ import "./skills.css";
 import { SkillsSkeleton } from "../../ui/skeletons/SkillsSkeleton";
 import { getSkills } from "../../../services/skillsApi";
 
-const getLevelConfig = (level: string) => {
-  switch (level) {
-    case "advanced":
-      return { bar: "bar-advanced", badge: "badge-advanced", percentage: 90 };
-    case "intermediate":
-      return {
-        bar: "bar-intermediate",
-        badge: "badge-intermediate",
-        percentage: 60,
-      };
-    default:
-      return { bar: "bar-basic", badge: "badge-basic", percentage: 30 };
-  }
-};
-
-const getLevelLabel = (level: string): string => {
-  switch (level) {
-    case "advanced":
-      return "Avanzado";
-    case "intermediate":
-      return "Intermedio";
-    default:
-      return "Básico";
-  }
-};
-
-const getSkillLevel = (displayOrder: number): string => {
-  if (displayOrder > 5) return "advanced";
-  if (displayOrder > 2) return "intermediate";
-  return "basic";
-};
-
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState<string>("");
   const [isVisible, setIsVisible] = useState(false);
@@ -118,9 +86,7 @@ const Skills = () => {
 
             {currentCategory && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
-                {currentCategory.skills?.map((skill) => {
-                  const level = getSkillLevel(skill.display_order);
-                  const config = getLevelConfig(level);
+                {currentCategory.skills?.map((skill, index) => {
                   const isHovered = hoveredSkill === skill.name;
                   return (
                     <div
@@ -133,38 +99,26 @@ const Skills = () => {
                         setHoveredSkill(null);
                       }}
                     >
-                      <div className="flex justify-between items-center mb-3">
-                        <h3 className="text-base font-semibold text-slate-50">
-                          {skill.name}
-                        </h3>
-                        <span
-                          className={`text-[10px] font-semibold px-2 py-1 rounded-full uppercase tracking-wide ${config.badge}`}
-                        >
-                          {getLevelLabel(level)}
-                        </span>
+                      <div className="skill-card-icon">
+                        <svg viewBox="0 0 24 24">
+                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
                       </div>
-                      <p className="text-sm text-slate-500 mb-4 h-8">
+                      
+                      <h3 className="skill-card-title">
+                        {skill.name}
+                      </h3>
+                      
+                      <p className="skill-card-description">
                         {skill.description}
                       </p>
-                      <div className="h-1.5 bg-white/[0.08] rounded-full overflow-hidden">
-                        <div
-                          className={`h-full rounded-full transition-all duration-1000 ${config.bar}`}
-                          style={{
-                            width: isVisible
-                              ? String(config.percentage) + "%"
-                              : "0%",
-                          }}
-                        />
+                      
+                      <div className="skill-card-chip">
+                        <span className="skill-card-chip-dot"></span>
+                        <span>Skill {index + 1}</span>
                       </div>
-                      <div className="flex justify-between items-center mt-2">
-                        <span className="text-xs text-slate-600">
-                          {skill.display_order}{" "}
-                          {skill.display_order === 1 ? "año" : "años"} exp
-                        </span>
-                        <span className="text-xs text-slate-500 font-medium">
-                          {config.percentage}%
-                        </span>
-                      </div>
+                      
+                      <div className="skill-card-line"></div>
                     </div>
                   );
                 })}
@@ -199,24 +153,24 @@ const Skills = () => {
                 className="language-card flex-1 min-w-[280px] max-w-[400px]"
               >
                 <div className="flex items-center gap-4">
-                  <span className="text-4xl">{lang.flag}</span>
+                  <span className="language-card-flag">{lang.flag}</span>
                   <div className="flex-1">
-                    <h4 className="text-lg font-semibold text-slate-50">
+                    <h4 className="language-card-title">
                       {lang.name}
                     </h4>
-                    <p className="text-sm text-slate-500">{lang.description}</p>
+                    <p className="language-card-desc">{lang.description}</p>
                   </div>
                 </div>
                 <div className="mt-4">
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-slate-500">{lang.level}</span>
+                    <span className="language-card-level">{lang.level}</span>
                     <span className="text-slate-400 font-medium">
                       {lang.percentage}%
                     </span>
                   </div>
-                  <div className="h-2 bg-white/[0.08] rounded-full overflow-hidden">
+                  <div className="language-card-progress">
                     <div
-                      className="h-full rounded-full bar-advanced"
+                      className="language-card-progress-bar"
                       style={{
                         width: isVisible ? String(lang.percentage) + "%" : "0%",
                       }}
