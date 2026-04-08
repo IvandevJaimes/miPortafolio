@@ -322,15 +322,39 @@
 
 /* Skill Icon Container */
 .skill-icon-container {
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(240, 240, 240, 0.9);
   border: 1px solid rgba(57, 255, 136, 0.25);
-  border-radius: 14px;
+  border-radius: 16px;
   transition: all 0.3s ease;
+}
+
+.skill-card:hover .skill-icon-container {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(57, 255, 136, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(57, 255, 136, 0.2);
+}
+
+.skill-icon {
+  width: 52px;
+  height: 52px;
+}
+
+@media (max-width: 640px) {
+  .skill-icon-container {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .skill-icon {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .skill-card:hover .skill-icon-container {
