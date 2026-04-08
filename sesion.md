@@ -364,3 +364,43 @@ El archivo `Hero.tsx` tenía un `useEffect` que actualizaba 3 estados cada **50m
 ### Estado actual
 - Branch: `feat/project-page` (con main mergeado)
 - Build: ✅ passing
+
+---
+
+## Sesión 11 - 07/04/2026
+
+### Trabajo realizado
+
+#### 1. SEO con react-helmet-async
+- Instalado `react-helmet-async`
+- Agregado HelmetProvider en main.tsx
+- Meta tags dinámicos en MainPage y ProjectPage
+- Meta tags por defecto para redes sociales
+
+#### 2. Merge a main
+- Mergeado feat/project-page a main
+
+#### 3. Mejoras del Header
+- Links del nav solo visibles en home (pantallas grandes)
+- Menú hamburguesa solo visible en home (móvil)
+- Botón Descargar CV siempre visible en todas las páginas
+
+#### 4. Fix de imports
+- Corregido import path de ShareButton (quitando @/)
+
+### Archivos modificados/creados
+- `index.html` - título por defecto
+- `src/main.tsx` - HelmetProvider
+- `src/pages/mainPage/MainPage.tsx` - meta tags
+- `src/pages/projectPage/ProjectPage.tsx` - meta tags dinámicos
+- `src/components/layout/header/Header.tsx` - controles por ruta
+- `src/components/ui/share/ShareButton.tsx` - fix import
+
+### Estado actual
+- Branch: `feat/header-improvements`
+- Build: ✅ passing
+
+### Pendiente
+- [ ] Agregar botón de back en ProjectPage
+- [ ] Testear funcionalidad completa
+- [ ] Simplificar header para que no sea tan grande

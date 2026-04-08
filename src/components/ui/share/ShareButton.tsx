@@ -1,4 +1,4 @@
-import { useModal } from "@/context/ModalContext";
+import { useModal } from "../../../context/ModalContext";
 import { ShareModal, type SharePlatform } from "./ShareModal";
 import "./shareButton.css";
 

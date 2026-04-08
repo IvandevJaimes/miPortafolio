@@ -1,4 +1,4 @@
-import { ShareButton } from "@/components/ui/share/ShareButton";
+import { ShareButton } from "../share/ShareButton";
 import "./projectLinks.css";
 
 interface ProjectLinksProps {
@@ -118,7 +118,12 @@ export const ProjectLinks = ({
             className="project-link-card project-link-demo"
           >
             <div className="project-link-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
