@@ -105,7 +105,7 @@ const Skills = () => {
             </button>
           </div>
         ) : (
-          <>
+          <div>
             <div className="flex flex-wrap justify-center gap-2 mb-12">
               {categories.map((cat) => (
                 <button
@@ -122,99 +122,104 @@ const Skills = () => {
             </div>
 
             {currentCategory && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
-                {currentCategory.skills?.map((skill) => {
-                  const isHovered = hoveredSkill === skill.name;
-                  return (
-                    <div
-                      key={skill.id}
-                      className={`skill-card ${isHovered ? "hovered" : ""}`}
-                      onMouseEnter={() => {
-                        setHoveredSkill(skill.name);
-                      }}
-                      onMouseLeave={() => {
-                        setHoveredSkill(null);
-                      }}
-                    >
-                      <div className="skill-card-glow" />
-                      
-                      <div className="flex items-start justify-between mb-3">
-                        <h3 className="skill-card-title">
-                          {skill.name}
-                        </h3>
-                        <span className="skill-card-dot"></span>
+              <div>
+                <p className="lg:hidden text-sm text-green-400 font-medium mb-4 text-center">
+                  {currentCategory.label}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
+                  {currentCategory.skills?.map((skill) => {
+                    const isHovered = hoveredSkill === skill.name;
+                    return (
+                      <div
+                        key={skill.id}
+                        className={`skill-card ${isHovered ? "hovered" : ""}`}
+                        onMouseEnter={() => {
+                          setHoveredSkill(skill.name);
+                        }}
+                        onMouseLeave={() => {
+                          setHoveredSkill(null);
+                        }}
+                      >
+                        <div className="skill-card-glow" />
+                        
+                        <div className="flex items-start justify-between mb-3">
+                          <h3 className="skill-card-title">
+                            {skill.name}
+                          </h3>
+                          <span className="skill-card-dot"></span>
+                        </div>
+                        
+                        <p className="skill-card-description">
+                          {skill.description}
+                        </p>
+                        
+                        <div className="skill-card-meta">
+                          <span className="skill-card-category">{currentCategory.label}</span>
+                        </div>
                       </div>
-                      
-                      <p className="skill-card-description">
-                        {skill.description}
-                      </p>
-                      
-                      <div className="skill-card-meta">
-                        <span className="skill-card-category">{currentCategory.label}</span>
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             )}
-          </>
-        )}
 
-        <div className="border-t border-white/[0.06] pt-12">
-          <h3 className="text-xl font-bold text-slate-50 text-center mb-8">
-            Idiomas
-          </h3>
-          <div className="flex flex-wrap justify-center gap-6">
-            {[
-              {
-                name: "Español",
-                level: "Nativo",
-                flag: "🇪🇸",
-                percentage: 100,
-                description: "Lectura, escritura, conversación fluida",
-              },
-              {
-                name: "Inglés",
-                level: "Técnico Básico",
-                flag: "🇺🇸",
-                percentage: 40,
-                description: "Lectura técnica, documentación, comandos",
-              },
-            ].map((lang) => (
-              <div
-                key={lang.name}
-                className="language-card flex-1 min-w-[280px] max-w-[400px]"
-              >
-                <div className="language-card-glow" />
-                <div className="flex items-center gap-4">
-                  <span className="language-card-flag">{lang.flag}</span>
-                  <div className="flex-1">
-                    <h4 className="language-card-title">
-                      {lang.name}
-                    </h4>
-                    <p className="language-card-desc">{lang.description}</p>
+            <div className="border-t border-white/[0.06] pt-12">
+              <h3 className="text-xl font-bold text-slate-50 text-center mb-8">
+                Idiomas
+              </h3>
+              <div className="flex flex-wrap justify-center gap-6">
+                {[
+                  {
+                    name: "Español",
+                    level: "Nativo",
+                    flag: "🇪🇸",
+                    percentage: 100,
+                    description: "Lectura, escritura, conversación fluida",
+                  },
+                  {
+                    name: "Inglés",
+                    level: "Técnico Básico",
+                    flag: "🇺🇸",
+                    percentage: 40,
+                    description: "Lectura técnica, documentación, comandos",
+                  },
+                ].map((lang) => (
+                  <div
+                    key={lang.name}
+                    className="language-card flex-1 min-w-[280px] max-w-[400px]"
+                  >
+                    <div className="language-card-glow" />
+                    <div className="flex items-center gap-4">
+                      <span className="language-card-flag">{lang.flag}</span>
+                      <div className="flex-1">
+                        <h4 className="language-card-title">
+                          {lang.name}
+                        </h4>
+                        <p className="language-card-desc">{lang.description}</p>
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <div className="flex justify-between text-xs mb-1">
+                        <span className="language-card-level">{lang.level}</span>
+                        <span className="text-slate-400 font-medium">
+                          {lang.percentage}%
+                        </span>
+                      </div>
+                      <div className="language-card-progress">
+                        <div
+                          className="language-card-progress-bar"
+                          style={{
+                            width: isVisible ? String(lang.percentage) + "%" : "0%",
+                          }}
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-4">
-                  <div className="flex justify-between text-xs mb-1">
-                    <span className="language-card-level">{lang.level}</span>
-                    <span className="text-slate-400 font-medium">
-                      {lang.percentage}%
-                    </span>
-                  </div>
-                  <div className="language-card-progress">
-                    <div
-                      className="language-card-progress-bar"
-                      style={{
-                        width: isVisible ? String(lang.percentage) + "%" : "0%",
-                      }}
-                    />
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
