@@ -185,10 +185,15 @@ const Skills = () => {
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex items-center gap-3">
                             <div className="skill-icon-container">
-                              <Icon 
-                                icon={getSkillIconWithFallback(skill.name)} 
+                              <Icon
+                                icon={getSkillIconWithFallback(skill.name)}
                                 className="skill-icon"
-                                fallback={<Icon icon="mdi:cube" className="skill-icon text-slate-500" />}
+                                fallback={
+                                  <Icon
+                                    icon="mdi:cube"
+                                    className="skill-icon text-slate-500"
+                                  />
+                                }
                               />
                             </div>
                             <h3 className="skill-card-title">{skill.name}</h3>
@@ -199,12 +204,6 @@ const Skills = () => {
                         <p className="skill-card-description">
                           {skill.description}
                         </p>
-
-                        <div className="skill-card-meta">
-                          <span className="skill-card-category">
-                            {currentCategory.label}
-                          </span>
-                        </div>
                       </div>
                     );
                   })}
