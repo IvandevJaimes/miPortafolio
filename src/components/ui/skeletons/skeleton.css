@@ -908,3 +908,68 @@
     width: 100%;
   }
 }
+
+/* ========== SKILLS SKELETON ========== */
+
+.skeleton-tab {
+  width: 100px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.skeleton-skill-card {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.skeleton-skill-title {
+  width: 100px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.skeleton-badge {
+  width: 70px;
+  height: 22px;
+  border-radius: 4px;
+}
+
+.skeleton-skill-description {
+  width: 100%;
+  height: 16px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.skeleton-progress-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+
+.skeleton-skill-footer {
+  width: 80px;
+  height: 12px;
+  border-radius: 4px;
+}
+
+/* Shimmer para Skills Skeleton */
+.skeleton-tab,
+.skeleton-skill-card,
+.skeleton-skill-title,
+.skeleton-badge,
+.skeleton-skill-description,
+.skeleton-progress-bar,
+.skeleton-skill-footer {
+  background: linear-gradient(
+    90deg,
+    rgba(57, 255, 136, 0.06) 25%,
+    rgba(57, 255, 136, 0.2) 50%,
+    rgba(57, 255, 136, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+}
