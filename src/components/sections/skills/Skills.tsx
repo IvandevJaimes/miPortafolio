@@ -155,12 +155,15 @@ const Skills = () => {
 
             {currentCategory && (
               <div>
-                <p
-                  key={indicatorKey}
-                  className="sm:hidden category-indicator text-green-400 font-medium mt-8 mb-4 text-center animate-fade-in-up"
-                >
-                  {currentCategory.label}
-                </p>
+                <div className="flex sm:hidden items-center justify-center">
+                  <p
+                    key={indicatorKey}
+                    className="category-indicator text-green-400 font-medium mb-4 text-center animate-fade-in-up"
+                  >
+                    {currentCategory.label}
+                  </p>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
                   {currentCategory.skills?.map((skill) => {
                     const isHovered = hoveredSkill === skill.name;
