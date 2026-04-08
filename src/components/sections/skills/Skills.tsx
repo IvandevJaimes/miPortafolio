@@ -1,8 +1,44 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import "./skills.css";
 import { SkillsSkeleton } from "../../ui/skeletons/SkillsSkeleton";
 import { getSkills } from "../../../services/skillsApi";
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  frontend: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <path d="M3 9h18M9 21V9" />
+    </svg>
+  ),
+  backend: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+      <rect x="2" y="3" width="20" height="14" rx="2" />
+      <path d="M8 21h8M12 17v4M7 8h2M7 12h4" />
+    </svg>
+  ),
+  databases: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+      <ellipse cx="12" cy="5" rx="9" ry="3" />
+      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+    </svg>
+  ),
+  languages: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </svg>
+  ),
+  tools: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+    </svg>
+  ),
+};
+
+const getCategoryIcon = (name: string) => {
+  return categoryIcons[name] || categoryIcons.tools;
+};
 
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState<string>("");
@@ -79,6 +115,7 @@ const Skills = () => {
                   }}
                   className={`skills-tab ${activeCategory === String(cat.id) ? "active" : ""}`}
                 >
+                  {getCategoryIcon(cat.name)}
                   <span className="hidden sm:inline">{cat.label}</span>
                 </button>
               ))}
