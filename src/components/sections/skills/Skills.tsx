@@ -101,13 +101,20 @@ const Skills = () => {
                     >
                       <div className="skill-card-glow" />
                       
-                      <h3 className="skill-card-title">
-                        {skill.name}
-                      </h3>
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="skill-card-title">
+                          {skill.name}
+                        </h3>
+                        <span className="skill-card-dot"></span>
+                      </div>
                       
                       <p className="skill-card-description">
                         {skill.description}
                       </p>
+                      
+                      <div className="skill-card-meta">
+                        <span className="skill-card-category">{currentCategory.label}</span>
+                      </div>
                     </div>
                   );
                 })}
