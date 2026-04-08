@@ -300,12 +300,7 @@ const Skills = () => {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 100);
-    return () => {
-      clearTimeout(timer);
-    };
+    setIsVisible(true);
   }, []);
 
   const currentCategory = categories.find((c) => c.id === activeCategory);
