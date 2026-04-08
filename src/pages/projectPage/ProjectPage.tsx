@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "../../components/layout/header/Header";
 import { ImageCarousel } from "../../components/ui/carousel/ImageCarousel";
@@ -33,6 +34,10 @@ const ProjectPage = () => {
   const projectId = id ? parseInt(id, 10) : null;
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const {
     data: project,
