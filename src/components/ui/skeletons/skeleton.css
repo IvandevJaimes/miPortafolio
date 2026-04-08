@@ -914,56 +914,112 @@
 .skeleton-tab {
   width: 100px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: 12px;
+}
+
+.skeleton-mobile-indicator {
+  width: 120px;
+  height: 28px;
+  border-radius: 20px;
 }
 
 .skeleton-skill-card {
   background: rgba(30, 30, 30, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.skeleton-skill-icon {
+  width: 72px;
+  height: 72px;
   border-radius: 16px;
-  padding: 20px;
+  flex-shrink: 0;
 }
 
 .skeleton-skill-title {
-  width: 100px;
-  height: 20px;
+  width: 120px;
+  height: 24px;
   border-radius: 4px;
-}
-
-.skeleton-badge {
-  width: 70px;
-  height: 22px;
-  border-radius: 4px;
+  flex: 1;
 }
 
 .skeleton-skill-description {
   width: 100%;
-  height: 16px;
+  height: 14px;
   border-radius: 4px;
-  margin-bottom: 16px;
 }
 
-.skeleton-progress-bar {
-  width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  margin-bottom: 8px;
+.skeleton-skill-description-2 {
+  width: 70%;
+  height: 14px;
+  border-radius: 4px;
+  margin-top: 8px;
 }
 
-.skeleton-skill-footer {
+.skeleton-skill-chip {
   width: 80px;
-  height: 12px;
+  height: 24px;
+  border-radius: 20px;
+}
+
+/* Languages Skeleton */
+.skeleton-languages-title {
+  width: 150px;
+  height: 28px;
   border-radius: 4px;
+}
+
+.skeleton-language-card {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 280px;
+  max-width: 400px;
+  flex: 1;
+}
+
+.skeleton-language-flag {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+.skeleton-language-name {
+  width: 100px;
+  height: 20px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.skeleton-language-desc {
+  width: 140px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-language-progress {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
 }
 
 /* Shimmer para Skills Skeleton */
 .skeleton-tab,
+.skeleton-mobile-indicator,
 .skeleton-skill-card,
+.skeleton-skill-icon,
 .skeleton-skill-title,
-.skeleton-badge,
 .skeleton-skill-description,
-.skeleton-progress-bar,
-.skeleton-skill-footer {
+.skeleton-skill-description-2,
+.skeleton-skill-chip,
+.skeleton-languages-title,
+.skeleton-language-card,
+.skeleton-language-flag,
+.skeleton-language-name,
+.skeleton-language-desc,
+.skeleton-language-progress {
   background: linear-gradient(
     90deg,
     rgba(57, 255, 136, 0.06) 25%,

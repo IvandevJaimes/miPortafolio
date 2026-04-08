@@ -7,23 +7,22 @@
   padding: 100px 40px 80px;
   overflow: hidden;
   position: relative;
-
   background-color: transparent;
   background-image:
-    linear-gradient(rgba(0, 255, 100, 0.15) 1px, transparent 2px),
-    linear-gradient(90deg, rgba(0, 255, 100, 0.15) 1px, transparent 2px);
-  background-size: 65px 65px;
+    linear-gradient(rgba(0, 255, 100, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 100, 0.2) 1px, transparent 1px);
+  background-size: 50px 50px;
   background-position: center center;
   background-attachment: fixed;
-  animation: grid-move 10s linear infinite;
+  animation: grid-float 18s linear infinite;
 }
 
-@keyframes grid-move {
+@keyframes grid-float {
   0% {
     background-position: 0 0;
   }
   100% {
-    background-position: 65px 130px;
+    background-position: 40px 40px;
   }
 }
 
@@ -287,6 +286,20 @@
   position: relative;
   width: clamp(280px, 35vw, 400px);
   height: clamp(280px, 35vw, 400px);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: wrapper-morph 8s ease-in-out infinite;
+}
+
+@keyframes wrapper-morph {
+  0% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  50% {
+    border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+  }
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
 }
 
 .hero-image-glow {
@@ -296,12 +309,15 @@
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   background: radial-gradient(
     circle,
     rgba(57, 255, 136, 0.2) 0%,
     transparent 70%
   );
-  animation: pulse-glow 3s ease-in-out infinite;
+  animation:
+    pulse-glow 3s ease-in-out infinite,
+    glow-morph 8s ease-in-out infinite;
 }
 
 @keyframes pulse-glow {
@@ -313,6 +329,18 @@
   50% {
     opacity: 0.8;
     transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes glow-morph {
+  0% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  50% {
+    border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+  }
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   }
 }
 

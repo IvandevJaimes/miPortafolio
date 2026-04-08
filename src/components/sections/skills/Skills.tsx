@@ -102,6 +102,29 @@ const Skills = () => {
     (cat) => String(cat.id) === activeCategory,
   );
 
+  if (isLoading) {
+    return <SkillsSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <section
+        id="habilidades"
+        className="min-h-screen py-17 px-6 relative overflow-hidden bg-gradient-to-b from-[#0d0d0d] via-[#1a1919] to-[#0d0d0d]"
+      >
+        <div className="max-w-6xl mx-auto relative z-10 text-center">
+          <p className="text-red-400 mb-4">Error al cargar habilidades</p>
+          <button
+            onClick={() => refetch()}
+            className="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+          >
+            Reintentar
+          </button>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id="habilidades"
@@ -125,151 +148,137 @@ const Skills = () => {
           </p>
         </div>
 
-        {isLoading ? (
-          <SkillsSkeleton />
-        ) : error ? (
-          <div className="text-center">
-            <p className="text-red-400 mb-4">Error al cargar habilidades</p>
-            <button
-              onClick={() => refetch()}
-              className="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
-            >
-              Reintentar
-            </button>
+        <div>
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => {
+                  setActiveCategory(String(cat.id));
+                  setIndicatorKey((prev) => prev + 1);
+                }}
+                className={`skills-tab ${activeCategory === String(cat.id) ? "active" : ""}`}
+              >
+                {getCategoryIcon(cat.name)}
+                <span className="hidden sm:inline">{cat.label}</span>
+              </button>
+            ))}
           </div>
-        ) : (
-          <div>
-            <div className="flex flex-wrap justify-center gap-2 mb-12">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => {
-                    setActiveCategory(String(cat.id));
-                    setIndicatorKey((prev) => prev + 1);
-                  }}
-                  className={`skills-tab ${activeCategory === String(cat.id) ? "active" : ""}`}
+
+          {currentCategory && (
+            <div>
+              <div className="flex sm:hidden items-center justify-center">
+                <p
+                  key={indicatorKey}
+                  className="category-indicator text-green-400 font-medium mb-4 text-center animate-fade-in-up"
                 >
-                  {getCategoryIcon(cat.name)}
-                  <span className="hidden sm:inline">{cat.label}</span>
-                </button>
-              ))}
-            </div>
-
-            {currentCategory && (
-              <div>
-                <div className="flex sm:hidden items-center justify-center">
-                  <p
-                    key={indicatorKey}
-                    className="category-indicator text-green-400 font-medium mb-4 text-center animate-fade-in-up"
-                  >
-                    {currentCategory.label}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
-                  {currentCategory.skills?.map((skill) => {
-                    const isHovered = hoveredSkill === skill.name;
-                    return (
-                      <div
-                        key={skill.id}
-                        className={`skill-card ${isHovered ? "hovered" : ""}`}
-                        onMouseEnter={() => {
-                          setHoveredSkill(skill.name);
-                        }}
-                        onMouseLeave={() => {
-                          setHoveredSkill(null);
-                        }}
-                      >
-                        <div className="skill-card-glow" />
-
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex items-center gap-3">
-                            <div className="skill-icon-container">
-                              <Icon
-                                icon={getSkillIconWithFallback(skill.name)}
-                                className="skill-icon"
-                                fallback={
-                                  <Icon
-                                    icon="mdi:cube"
-                                    className="skill-icon text-slate-500"
-                                  />
-                                }
-                              />
-                            </div>
-                            <h3 className="skill-card-title">{skill.name}</h3>
-                          </div>
-                          <span className="skill-card-dot"></span>
-                        </div>
-
-                        <p className="skill-card-description">
-                          {skill.description}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
+                  {currentCategory.label}
+                </p>
               </div>
-            )}
 
-            <div className="border-t border-white/[0.06] pt-12">
-              <h3 className="text-xl font-bold text-slate-50 text-center mb-8">
-                Idiomas
-              </h3>
-              <div className="flex flex-wrap justify-center gap-6">
-                {[
-                  {
-                    name: "Español",
-                    level: "Nativo",
-                    flag: "🇪🇸",
-                    percentage: 100,
-                    description: "Lectura, escritura, conversación fluida",
-                  },
-                  {
-                    name: "Inglés",
-                    level: "Técnico Básico",
-                    flag: "🇺🇸",
-                    percentage: 40,
-                    description: "Lectura técnica, documentación, comandos",
-                  },
-                ].map((lang) => (
-                  <div
-                    key={lang.name}
-                    className="language-card flex-1 min-w-[280px] max-w-[400px]"
-                  >
-                    <div className="language-card-glow" />
-                    <div className="flex items-center gap-4">
-                      <span className="language-card-flag">{lang.flag}</span>
-                      <div className="flex-1">
-                        <h4 className="language-card-title">{lang.name}</h4>
-                        <p className="language-card-desc">{lang.description}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
+                {currentCategory.skills?.map((skill) => {
+                  const isHovered = hoveredSkill === skill.name;
+                  return (
+                    <div
+                      key={skill.id}
+                      className={`skill-card ${isHovered ? "hovered" : ""}`}
+                      onMouseEnter={() => {
+                        setHoveredSkill(skill.name);
+                      }}
+                      onMouseLeave={() => {
+                        setHoveredSkill(null);
+                      }}
+                    >
+                      <div className="skill-card-glow" />
+
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="skill-icon-container">
+                            <Icon
+                              icon={getSkillIconWithFallback(skill.name)}
+                              className="skill-icon"
+                              fallback={
+                                <Icon
+                                  icon="mdi:cube"
+                                  className="skill-icon text-slate-500"
+                                />
+                              }
+                            />
+                          </div>
+                          <h3 className="skill-card-title">{skill.name}</h3>
+                        </div>
+                        <span className="skill-card-dot"></span>
                       </div>
+
+                      <p className="skill-card-description">
+                        {skill.description}
+                      </p>
                     </div>
-                    <div className="mt-4">
-                      <div className="flex justify-between text-xs mb-1">
-                        <span className="language-card-level">
-                          {lang.level}
-                        </span>
-                        <span className="text-slate-400 font-medium">
-                          {lang.percentage}%
-                        </span>
-                      </div>
-                      <div className="language-card-progress">
-                        <div
-                          className="language-card-progress-bar"
-                          style={{
-                            width: isVisible
-                              ? String(lang.percentage) + "%"
-                              : "0%",
-                          }}
-                        />
-                      </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <div className="border-t border-white/[0.06] pt-12">
+            <h3 className="text-xl font-bold text-slate-50 text-center mb-8">
+              Idiomas
+            </h3>
+            <div className="flex flex-wrap justify-center gap-6">
+              {[
+                {
+                  name: "Español",
+                  level: "Nativo",
+                  flag: "🇪🇸",
+                  percentage: 100,
+                  description: "Lectura, escritura, conversación fluida",
+                },
+                {
+                  name: "Inglés",
+                  level: "Técnico Básico",
+                  flag: "🇺🇸",
+                  percentage: 40,
+                  description: "Lectura técnica, documentación, comandos",
+                },
+              ].map((lang) => (
+                <div
+                  key={lang.name}
+                  className="language-card flex-1 min-w-[280px] max-w-[400px]"
+                >
+                  <div className="language-card-glow" />
+                  <div className="flex items-center gap-4">
+                    <span className="language-card-flag">{lang.flag}</span>
+                    <div className="flex-1">
+                      <h4 className="language-card-title">{lang.name}</h4>
+                      <p className="language-card-desc">{lang.description}</p>
                     </div>
                   </div>
-                ))}
-              </div>
+                  <div className="mt-4">
+                    <div className="flex justify-between text-xs mb-1">
+                      <span className="language-card-level">
+                        {lang.level}
+                      </span>
+                      <span className="text-slate-400 font-medium">
+                        {lang.percentage}%
+                      </span>
+                    </div>
+                    <div className="language-card-progress">
+                      <div
+                        className="language-card-progress-bar"
+                        style={{
+                          width: isVisible
+                            ? String(lang.percentage) + "%"
+                            : "0%",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
