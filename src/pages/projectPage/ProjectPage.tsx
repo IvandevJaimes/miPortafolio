@@ -11,6 +11,7 @@ import { ErrorScreen } from "../../components/ui/errorComponents/ErrorScreen";
 import { getProjectById } from "../../services/projectsApi";
 import { getProjectImages } from "../../utils/imageUtils";
 import type { Project } from "../../types/types";
+import siteData from "../../data/site.json";
 import "./projectPage.css";
 
 const mapProjectToView = (project: Project) => ({
@@ -69,6 +70,7 @@ const ProjectPage = () => {
   }
 
   const projectData = mapProjectToView(project);
+  const { url, ogImage } = siteData;
 
   return (
     <>
@@ -88,13 +90,11 @@ const ProjectPage = () => {
         />
         <meta
           property="og:image"
-          content={
-            projectData.images[0] || "https://ivanjaimes.dev/og-image.png"
-          }
+          content={projectData.images[0] || ogImage}
         />
         <meta
           property="og:url"
-          content={`https://ivanjaimes.dev/project/${projectId}`}
+          content={`${url}/project/${projectId}`}
         />
         <meta
           name="twitter:title"
@@ -106,9 +106,7 @@ const ProjectPage = () => {
         />
         <meta
           name="twitter:image"
-          content={
-            projectData.images[0] || "https://ivanjaimes.dev/og-image.png"
-          }
+          content={projectData.images[0] || ogImage}
         />
       </Helmet>
       <Header />
