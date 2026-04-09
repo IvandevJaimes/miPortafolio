@@ -229,45 +229,56 @@
 
 .language-card {
   position: relative;
-  background: rgba(30, 30, 30, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(35, 35, 35, 0.8), rgba(20, 20, 20, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
   padding: 24px;
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
 .language-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(57, 255, 136, 0.3);
+  transform: translateY(-6px);
+  border-color: rgba(57, 255, 136, 0.4);
   box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.4),
-    0 0 60px rgba(57, 255, 136, 0.1);
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(57, 255, 136, 0.15);
 }
 
 .language-card-flag {
-  font-size: 36px;
+  font-size: 40px;
   transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .language-card:hover .language-card-flag {
-  transform: scale(1.1);
+  transform: scale(1.15) rotate(-5deg);
 }
 
 .language-card-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #f8fafc;
+  font-size: 20px;
+  font-weight: 700;
+  color: #f1f5f9;
+  letter-spacing: 0.02em;
 }
 
 .language-card-desc {
   font-size: 14px;
   color: #94a3b8;
+  line-height: 1.5;
+  margin-top: 4px;
 }
 
 .language-card-level {
-  font-size: 12px;
-  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  background: rgba(57, 255, 136, 0.15);
+  color: #39ff88;
+  border-radius: 20px;
+  border: 1px solid rgba(57, 255, 136, 0.3);
 }
 
 .language-card-progress {

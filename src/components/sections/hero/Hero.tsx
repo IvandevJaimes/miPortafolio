@@ -6,7 +6,7 @@ import { Skeleton } from "../../ui/skeletons/Skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../../../services/profileApi";
 import { Alert } from "../../ui/alerts/Alert";
-import profileData from "../../../data/profile.json";
+import portfolioData from "../../../data/portfolioData.json";
 
 const Hero = () => {
   const [showAlert, setShowAlert] = useState(true);
@@ -36,7 +36,7 @@ const Hero = () => {
     );
   }
 
-  const links = profileData.links;
+  const links = portfolioData.links;
 
   return (
     <section className="hero-section" id="/">
@@ -57,15 +57,15 @@ const Hero = () => {
           </div>
 
           <h1 className="hero-name">
-            {profileData.name.split(" ")[0]}{" "}
+            {portfolioData.name.split(" ")[0]}{" "}
             <span className="hero-name-accent">
-              {profileData.name.split(" ")[1]}
+              {portfolioData.name.split(" ")[1]}
             </span>
           </h1>
 
           <div className="hero-typing-container">
             <span className="hero-typing-text">
-              {apiProfile?.tags ? apiProfile.tags : profileData.title}
+              {apiProfile?.tags ? apiProfile.tags : portfolioData.title}
             </span>
             <span className="hero-typing-cursor">|</span>
           </div>
@@ -74,7 +74,7 @@ const Hero = () => {
             {apiProfile?.presentation ? (
               <p>{apiProfile.presentation}</p>
             ) : (
-              <p>{profileData.presentation}</p>
+              <p>{portfolioData.presentation}</p>
             )}
           </div>
 
@@ -145,7 +145,7 @@ const Hero = () => {
               {apiProfile?.image_url ? (
                 <img
                   src={apiProfile.image_url}
-                  alt={`Foto de perfil de ${profileData.name}`}
+                  alt={`Foto de perfil de ${portfolioData.name}`}
                   className="hero-image-profile"
                 />
               ) : (

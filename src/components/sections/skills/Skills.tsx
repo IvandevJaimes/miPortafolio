@@ -5,71 +5,49 @@ import "./skills.css";
 import { SkillsSkeleton } from "../../ui/skeletons/SkillsSkeleton";
 import { getSkills } from "../../../services/skillsApi";
 import { getSkillIconWithFallback } from "../../../utils/iconUtils";
+import portfolioData from "../../../data/portfolioData.json";
 
-const categoryIcons: Record<string, React.ReactNode> = {
-  frontend: (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      className="w-5 h-5"
-    >
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <path d="M3 9h18M9 21V9" />
-    </svg>
-  ),
-  backend: (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      className="w-5 h-5"
-    >
-      <rect x="2" y="3" width="20" height="14" rx="2" />
-      <path d="M8 21h8M12 17v4M7 8h2M7 12h4" />
-    </svg>
-  ),
-  databases: (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      className="w-5 h-5"
-    >
-      <ellipse cx="12" cy="5" rx="9" ry="3" />
-      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-    </svg>
-  ),
-  languages: (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      className="w-5 h-5"
-    >
-      <polyline points="16 18 22 12 16 6" />
-      <polyline points="8 6 2 12 8 18" />
-    </svg>
-  ),
-  tools: (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      className="w-5 h-5"
-    >
-      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-    </svg>
-  ),
+interface SvgChild {
+  type: string;
+  props: Record<string, unknown>;
+}
+
+interface SvgIconConfig {
+  viewBox: string;
+  fill: string;
+  stroke: string;
+  strokeWidth: number;
+  className: string;
+  children: SvgChild[];
+}
+
+const renderSvgFromConfig = (config: SvgIconConfig): React.ReactNode => {
+  const elements = config.children.map((child, index) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const props = child.props as Record<string, any>;
+    return React.createElement(child.type, { key: index, ...props });
+  });
+
+  return React.createElement(
+    "svg",
+    {
+      viewBox: config.viewBox,
+      fill: config.fill,
+      stroke: config.stroke,
+      strokeWidth: config.strokeWidth,
+      className: config.className,
+    },
+    ...elements,
+  );
 };
 
-const getCategoryIcon = (name: string) => {
-  return categoryIcons[name] || categoryIcons.tools;
+const getCategoryIcon = (name: string): React.ReactNode => {
+  const icons = portfolioData.skillCategoryIcons as Record<
+    string,
+    SvgIconConfig
+  >;
+  const iconConfig = icons[name] || icons.tools;
+  return renderSvgFromConfig(iconConfig);
 };
 
 const Skills = () => {
@@ -226,22 +204,14 @@ const Skills = () => {
               Idiomas
             </h3>
             <div className="flex flex-wrap justify-center gap-6">
-              {[
-                {
-                  name: "Español",
-                  level: "Nativo",
-                  flag: "🇪🇸",
-                  percentage: 100,
-                  description: "Lectura, escritura, conversación fluida",
-                },
-                {
-                  name: "Inglés",
-                  level: "Técnico Básico",
-                  flag: "🇺🇸",
-                  percentage: 40,
-                  description: "Lectura técnica, documentación, comandos",
-                },
-              ].map((lang) => (
+              {(
+                portfolioData.languages as Array<{
+                  name: string;
+                  flag: string;
+                  level: string;
+                  description: string;
+                }>
+              ).map((lang) => (
                 <div
                   key={lang.name}
                   className="language-card flex-1 min-w-[280px] max-w-[400px]"
@@ -250,28 +220,11 @@ const Skills = () => {
                   <div className="flex items-center gap-4">
                     <span className="language-card-flag">{lang.flag}</span>
                     <div className="flex-1">
-                      <h4 className="language-card-title">{lang.name}</h4>
+                      <div className="flex items-center justify-between">
+                        <h4 className="language-card-title">{lang.name}</h4>
+                        <span className="language-card-level">{lang.level}</span>
+                      </div>
                       <p className="language-card-desc">{lang.description}</p>
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <div className="flex justify-between text-xs mb-1">
-                      <span className="language-card-level">
-                        {lang.level}
-                      </span>
-                      <span className="text-slate-400 font-medium">
-                        {lang.percentage}%
-                      </span>
-                    </div>
-                    <div className="language-card-progress">
-                      <div
-                        className="language-card-progress-bar"
-                        style={{
-                          width: isVisible
-                            ? String(lang.percentage) + "%"
-                            : "0%",
-                        }}
-                      />
                     </div>
                   </div>
                 </div>

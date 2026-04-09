@@ -61,9 +61,6 @@ export const SkillsSkeleton = ({ count = 3 }: SkillsSkeletonProps) => {
                     <div className="skeleton-language-desc" />
                   </div>
                 </div>
-                <div className="mt-4">
-                  <div className="skeleton-language-progress" />
-                </div>
               </div>
             ))}
           </div>

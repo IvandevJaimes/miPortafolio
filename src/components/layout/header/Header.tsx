@@ -29,7 +29,7 @@ const Header = () => {
             {!isHome && (
               <button
                 onClick={() => navigate(-1)}
-                className="flex items-center justify-center w-10 h-10 rounded-lg bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
+                className="flex items-center justify-center cursor-pointer w-10 h-10 rounded-lg bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
                 aria-label="Volver atrás"
               >
                 <svg
