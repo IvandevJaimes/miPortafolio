@@ -1,33 +1,6 @@
-/* Animaciones -solo esto no se puede hacer en Tailwind */
-@keyframes alert-appear {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+/* ========== DATA ERROR PARTICLES ========== */
 
-@keyframes alert-disappear {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-}
-
-.alert-exit {
-  animation: alert-disappear 0.3s ease forwards;
-}
-
-/* ========== PROJECTS ERROR PARTICLES ========== */
-
-.projects-error-particles {
+.data-error-particles {
   position: absolute;
   top: 0;
   left: 0;
@@ -37,18 +10,18 @@
   z-index: 0;
 }
 
-.projects-error-particles::before,
-.projects-error-particles::after {
+.data-error-particles::before,
+.data-error-particles::after {
   content: "";
   position: absolute;
   width: 100%;
   height: 200%;
   top: 0;
   left: 0;
-  animation: particles-float-red 15s linear infinite;
+  animation: data-particles-float 15s linear infinite;
 }
 
-.projects-error-particles::before {
+.data-error-particles::before {
   background:
     radial-gradient(3px 3px at 10% 10%, #ef4444 50%, transparent 50%),
     radial-gradient(4px 4px at 30% 25%, #f87171 50%, transparent 50%),
@@ -62,7 +35,7 @@
   opacity: 0.6;
 }
 
-.projects-error-particles::after {
+.data-error-particles::after {
   background:
     radial-gradient(2px 2px at 25% 20%, #fca5a5 50%, transparent 50%),
     radial-gradient(3px 3px at 45% 30%, #ef4444 50%, transparent 50%),
@@ -76,7 +49,7 @@
   opacity: 0.5;
 }
 
-@keyframes particles-float-red {
+@keyframes data-particles-float {
   from {
     transform: translateY(0);
   }
@@ -85,9 +58,9 @@
   }
 }
 
-/* ========== PROJECTS ERROR ========== */
+/* ========== DATA ERROR ========== */
 
-.projects-error-icon-container {
+.data-error-icon-container {
   position: relative;
   width: 100px;
   height: 100px;
@@ -96,7 +69,7 @@
   justify-content: center;
 }
 
-.projects-error-icon {
+.data-error-icon {
   width: 80px;
   height: 80px;
   display: flex;
@@ -106,24 +79,24 @@
   border: 2px solid rgba(239, 68, 68, 0.3);
   border-radius: 50%;
   color: #ef4444;
-  animation: error-pulse 2s ease-in-out infinite;
+  animation: data-error-pulse 2s ease-in-out infinite;
 }
 
-.projects-error-icon svg {
+.data-error-icon svg {
   width: 40px;
   height: 40px;
 }
 
-.projects-error-ring {
+.data-error-ring {
   position: absolute;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   border: 2px solid rgba(239, 68, 68, 0.2);
-  animation: error-ring 2s ease-in-out infinite;
+  animation: data-error-ring 2s ease-in-out infinite;
 }
 
-@keyframes error-pulse {
+@keyframes data-error-pulse {
   0%,
   100% {
     transform: scale(1);
@@ -135,7 +108,7 @@
   }
 }
 
-@keyframes error-ring {
+@keyframes data-error-ring {
   0% {
     transform: scale(0.9);
     opacity: 0.8;
@@ -146,21 +119,21 @@
   }
 }
 
-.projects-error-title {
+.data-error-title {
   font-size: 1.5rem;
   font-weight: 700;
   color: #f8fafc;
   margin-bottom: 0.75rem;
 }
 
-.projects-error-message {
+.data-error-message {
   font-size: 1rem;
   color: #94a3b8;
   max-width: 400px;
   line-height: 1.6;
 }
 
-.projects-error-retry {
+.data-error-retry {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -176,89 +149,37 @@
   transition: all 0.3s ease;
 }
 
-.projects-error-retry:hover {
+.data-error-retry:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(57, 255, 136, 0.35);
 }
 
-.projects-error-retry:active {
+.data-error-retry:active {
   transform: translateY(0);
 }
 
 @media (max-width: 640px) {
-  .projects-error-icon-container {
+  .data-error-icon-container {
     width: 80px;
     height: 80px;
   }
 
-  .projects-error-icon {
+  .data-error-icon {
     width: 60px;
     height: 60px;
   }
 
-  .projects-error-icon svg {
+  .data-error-icon svg {
     width: 30px;
     height: 30px;
   }
 
-  .projects-error-title {
+  .data-error-title {
     font-size: 1.25rem;
   }
 
-  .projects-error-message {
+  .data-error-message {
     font-size: 0.875rem;
     padding: 0 1rem;
-  }
-}
-
-/* ========== PROJECTS EMPTY ========== */
-
-.projects-empty-icon {
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(57, 255, 136, 0.1);
-  border: 2px solid rgba(57, 255, 136, 0.2);
-  border-radius: 50%;
-  color: #39ff88;
-  animation: empty-pulse 2s ease-in-out infinite;
-}
-
-.projects-empty-icon svg {
-  width: 40px;
-  height: 40px;
-}
-
-.projects-empty-ring {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 2px solid rgba(57, 255, 136, 0.15);
-  animation: empty-ring 2s ease-in-out infinite;
-}
-
-@keyframes empty-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.8;
-  }
-}
-
-@keyframes empty-ring {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1.3);
-    opacity: 0;
   }
 }

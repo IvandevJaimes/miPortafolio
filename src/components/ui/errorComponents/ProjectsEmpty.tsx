@@ -1,4 +1,4 @@
-import "./projectsError.css";
+import "./projectsEmpty.css";
 
 interface ProjectsEmptyProps {
   onRetry?: () => void;

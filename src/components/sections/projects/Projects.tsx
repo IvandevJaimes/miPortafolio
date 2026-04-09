@@ -4,12 +4,15 @@ import { useQuery } from "@tanstack/react-query";
 import "./projects.css";
 import "../../ui/cards/card.css";
 import { ProjectsSkeleton } from "../../ui/skeletons/ProjectsSkeleton";
-import { ProjectsError } from "../../ui/errorComponents/ProjectsError";
 import { ProjectsEmpty } from "../../ui/errorComponents/ProjectsEmpty";
 import { ProjectCard } from "../../ui/cards/ProjectCard";
 import { getProjects } from "../../../services/projectsApi";
 import type { Project } from "../../../types/types";
 import placeholderData from "../../../data/projects.json";
+
+interface ProjectsProps {
+  onError?: (error: Error) => void;
+}
 
 const getPlaceholderImage = (id: number) => {
   const images = placeholderData.placeholderImages || [];
@@ -39,7 +42,7 @@ const adaptProject = (apiProject: Project) => {
   };
 };
 
-const Projects = () => {
+const Projects = ({ onError }: ProjectsProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const navigate = useNavigate();
@@ -48,7 +51,6 @@ const Projects = () => {
     data: apiProjects = [],
     isLoading,
     error,
-    refetch,
   } = useQuery({
     queryKey: ["projects"],
     queryFn: () => getProjects(),
@@ -65,9 +67,9 @@ const Projects = () => {
   }
 
   if (error) {
-    return (
-      <ProjectsError onRetry={() => refetch()} errorMessage={error?.message} />
-    );
+    const errorObj = error instanceof Error ? error : new Error(String(error));
+    onError?.(errorObj);
+    return null; // El padre maneja la renderización del error
   }
 
   if (projectsData.length === 0) {

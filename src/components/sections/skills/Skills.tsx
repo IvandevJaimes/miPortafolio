@@ -7,6 +7,10 @@ import { getSkills } from "../../../services/skillsApi";
 import { getSkillIconWithFallback } from "../../../utils/iconUtils";
 import portfolioData from "../../../data/portfolioData.json";
 
+interface SkillsProps {
+  onError?: (error: Error) => void;
+}
+
 interface SvgChild {
   type: string;
   props: Record<string, unknown>;
@@ -50,7 +54,7 @@ const getCategoryIcon = (name: string): React.ReactNode => {
   return renderSvgFromConfig(iconConfig);
 };
 
-const Skills = () => {
+const Skills = ({ onError }: SkillsProps) => {
   const [activeCategory, setActiveCategory] = useState<string>("");
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
@@ -60,7 +64,6 @@ const Skills = () => {
     data: categories = [],
     isLoading,
     error,
-    refetch,
   } = useQuery({
     queryKey: ["skills"],
     queryFn: () => getSkills(),
@@ -85,22 +88,9 @@ const Skills = () => {
   }
 
   if (error) {
-    return (
-      <section
-        id="habilidades"
-        className="min-h-screen py-17 px-6 relative overflow-hidden bg-gradient-to-b from-[#0d0d0d] via-[#1a1919] to-[#0d0d0d]"
-      >
-        <div className="max-w-6xl mx-auto relative z-10 text-center">
-          <p className="text-red-400 mb-4">Error al cargar habilidades</p>
-          <button
-            onClick={() => refetch()}
-            className="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
-          >
-            Reintentar
-          </button>
-        </div>
-      </section>
-    );
+    const errorObj = error instanceof Error ? error : new Error(String(error));
+    onError?.(errorObj);
+    return null; // El padre maneja la renderización del error
   }
 
   return (
