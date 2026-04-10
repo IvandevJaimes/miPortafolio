@@ -12,6 +12,13 @@ const navLinks = [
   { name: "Contacto", href: "#contacto" },
 ];
 
+const scrollToSection = (href: string) => {
+  if (href.startsWith("#")) {
+    const el = document.getElementById(href.slice(1));
+    el?.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { handleDownloadCV } = useCVDownload();
@@ -57,14 +64,14 @@ const Header = () => {
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-1">
                 {navLinks.map((link) => (
-                  <a
+                  <button
                     key={link.name}
-                    href={link.href}
+                    onClick={() => scrollToSection(link.href)}
                     className="nav-link px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative group"
                   >
                     {link.name}
                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#39ff88] to-[#00ff9c] transition-all duration-300 group-hover:w-full" />
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
@@ -126,14 +133,16 @@ const Header = () => {
         >
           <div className="px-4 py-3 space-y-2">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
+                onClick={() => {
+                  scrollToSection(link.href);
+                  setIsOpen(false);
+                }}
+                className="block w-full text-left px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200"
               >
                 {link.name}
-              </a>
+              </button>
             ))}
           </div>
         </div>
