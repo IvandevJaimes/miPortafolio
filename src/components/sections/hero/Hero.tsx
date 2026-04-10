@@ -79,8 +79,18 @@ const Hero = () => {
           </div>
 
           <div className="hero-cta">
-            <PrimaryButton>Ver Proyectos</PrimaryButton>
-            <SecondaryButton>Contactar</SecondaryButton>
+            <PrimaryButton onClick={() => {
+              const el = document.getElementById("proyectos");
+              el?.scrollIntoView({ behavior: "smooth" });
+            }}>
+              Ver Proyectos
+            </PrimaryButton>
+            <SecondaryButton onClick={() => {
+              const el = document.getElementById("contacto");
+              el?.scrollIntoView({ behavior: "smooth" });
+            }}>
+              Contactar
+            </SecondaryButton>
           </div>
 
           <div className="hero-social">
