@@ -120,11 +120,11 @@ const Header = () => {
 
       {isHome && (
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${
-            isOpen ? "max-h-64 opacity-70 bg-black" : "max-h-0 opacity-0"
+          className={`md:hidden overflow-hidden transition-all duration-300  ${
+            isOpen ? "max-h-64" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="px-4 py-3 space-y-2 backdrop-blur-sm">
+          <div className="px-4 py-3 space-y-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}

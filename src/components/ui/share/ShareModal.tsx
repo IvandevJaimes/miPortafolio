@@ -96,11 +96,6 @@ export const ShareModal = ({
   description,
   platforms = defaultPlatforms,
 }: ShareModalProps) => {
-  // Used in copyToClipboard and handleShare
-  void url;
-  void title;
-  void description;
-  
   const [copied, setCopied] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 

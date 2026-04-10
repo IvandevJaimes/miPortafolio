@@ -27,8 +27,7 @@ interface SvgIconConfig {
 
 const renderSvgFromConfig = (config: SvgIconConfig): React.ReactNode => {
   const elements = config.children.map((child, index) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const props = child.props as Record<string, any>;
+    const props = child.props as Record<string, unknown>;
     return React.createElement(child.type, { key: index, ...props });
   });
 

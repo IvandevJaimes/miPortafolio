@@ -17,9 +17,9 @@ interface ModalState {
 
 interface ModalContextType {
   openModal: (
-    title: ReactNode,
-    children?: ReactNode,
-    footer?: ReactNode,
+    _title: ReactNode,
+    _children?: ReactNode,
+    _footer?: ReactNode,
   ) => void;
   closeModal: () => void;
   isModalOpen: boolean;
@@ -48,12 +48,12 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   });
 
   const openModal = useCallback(
-    (title: ReactNode, children: ReactNode, footer?: ReactNode) => {
+    (_title: ReactNode, _children: ReactNode, _footer?: ReactNode) => {
       setModalState({
         isOpen: true,
-        title,
-        children,
-        footer: footer ?? null,
+        title: _title,
+        children: _children,
+        footer: _footer ?? null,
       });
     },
     [],

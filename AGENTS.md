@@ -1,5 +1,3 @@
-# AGENTS.md — Reglas de Código para miPortafolio
-
 ## Principios Generales
 
 - **Código limpio**: menos es más, legible > inteligente
@@ -12,16 +10,19 @@
 ## Estilo de Código
 
 ### Variables y Funciones
+
 - `camelCase` para todo: `const userName`, `function getUserById`
 - **Siempre funciones flecha**: `const handleClick = () => {}`
 - Nombres descriptivos pero concisos: `isLoading` > `flag`, `projectsData` > `data`
 
 ### Componentes React
+
 - **PascalCase**: `UserProfile.tsx`, `ProjectCard.tsx`
 - Props interfaces con `Props` suffix: `interface UserCardProps`
 - Un componente por archivo (salvo small helpers)
 
 ### CSS
+
 - **kebab-case**: `.hero-container`, `project-card-glow`
 - Custom properties para colores/tokens: `--color-primary`
 - **NUNCA** estilos inline salvo rarezas puntuales
@@ -30,14 +31,14 @@
 
 ## Tailwind + CSS (Equilibrio Obligatorio)
 
-| Usar Tailwind | Usar CSS |
-|---------------|----------|
-| `flex`, `grid`, `block` | Animaciones complejas (`@keyframes`) |
-| `p-4`, `m-auto`, `gap-2` | Media queries complejas |
-| Breakpoints simples (`md:flex`) | Pseudoelementos (`::before`, `::after`) |
-| Colores, spacing, typography | Selectores complejos (`:not()`, `:has()`) |
-| Responsive básico | Estados complejos (`hover`, `focus-within`) |
-| Utilities rápidas | Custom properties/variables |
+| Usar Tailwind                   | Usar CSS                                    |
+| ------------------------------- | ------------------------------------------- |
+| `flex`, `grid`, `block`         | Animaciones complejas (`@keyframes`)        |
+| `p-4`, `m-auto`, `gap-2`        | Media queries complejas                     |
+| Breakpoints simples (`md:flex`) | Pseudoelementos (`::before`, `::after`)     |
+| Colores, spacing, typography    | Selectores complejos (`:not()`, `:has()`)   |
+| Responsive básico               | Estados complejos (`hover`, `focus-within`) |
+| Utilities rápidas               | Custom properties/variables                 |
 
 **Regla de oro**: Tailwind para estructura y layout, CSS para efectos y casos especiales.
 
@@ -86,22 +87,22 @@
 
 ```typescript
 // 1. React
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 // 2. Router
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 // 3. Componentes propios
-import { Button, Modal } from '@/components/ui';
+import { Button, Modal } from "@/components/ui";
 
 // 4. Servicios/APIs
-import { getUser } from '@/services';
+import { getUser } from "@/services";
 
 // 5. Tipos
-import type { User } from '@/types';
+import type { User } from "@/types";
 
 // 6. Estilos
-import './styles.css';
+import "./styles.css";
 ```
 
 ---
