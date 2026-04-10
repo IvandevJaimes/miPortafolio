@@ -74,14 +74,16 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   const defaultFooter = (
     <button
       onClick={closeModal}
-      className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+      className="px-4 py-2 cursor-pointer text-gray-400 hover:text-white transition-colors"
     >
       Cerrar
     </button>
   );
 
   return (
-    <ModalContext.Provider value={{ openModal, closeModal, isModalOpen: modalState.isOpen }}>
+    <ModalContext.Provider
+      value={{ openModal, closeModal, isModalOpen: modalState.isOpen }}
+    >
       {children}
       <Modal
         isOpen={modalState.isOpen}

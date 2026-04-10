@@ -4,6 +4,7 @@ import { getProfile } from "../services/profileApi";
 import { useModal } from "../context/ModalContext";
 import FileIcon from "../components/ui/icons/FileIcon";
 import { ModalSkeleton } from "../components/ui/skeletons/ModalSkeleton";
+import { NormalButton } from "../components/ui/buttons/NormalButton";
 
 interface Profile {
   cv: string;
@@ -71,7 +72,7 @@ export const useCVDownload = (): UseCVDownloadReturn => {
           <h2 className="text-lg sm:text-xl font-bold text-white">
             Descargar CV
           </h2>,
-          <ModalSkeleton />
+          <ModalSkeleton />,
         );
         return;
       }
@@ -81,7 +82,7 @@ export const useCVDownload = (): UseCVDownloadReturn => {
           <h2 className="text-xl font-bold text-white">CV no disponible</h2>,
           <div className="text-gray-300">
             <p>El CV no está disponible actualmente.</p>
-          </div>
+          </div>,
         );
         return;
       }
@@ -109,30 +110,18 @@ export const useCVDownload = (): UseCVDownloadReturn => {
               </p>
             </div>
           </div>
-          <a
-            href={cvUrl}
-            download
-            className="inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-green-500 hover:bg-green-400 text-black font-medium rounded-lg transition-colors text-sm sm:text-base"
+          <NormalButton
+            onClick={() => {
+              window.open(cvUrl);
+            }}
+            className="!py-2 !px-4 !text-sm"
           >
-            <svg
-              className="w-4 h-4 sm:w-5 sm:h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-              />
-            </svg>
-            Descargar CV
-          </a>
-        </div>
+            Descargar
+          </NormalButton>
+        </div>,
       );
     },
-    [openModal, profile]
+    [openModal, profile],
   );
 
   const handleDownloadCV = useCallback(() => {
