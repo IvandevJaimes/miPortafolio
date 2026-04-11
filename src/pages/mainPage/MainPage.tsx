@@ -64,9 +64,9 @@ const MainPage = () => {
           <>
             <Projects onError={handleError} />
             <Skills onError={handleError} />
-            <Contact onError={handleError} />
           </>
         )}
+        <Contact />
       </main>
     </>
   );

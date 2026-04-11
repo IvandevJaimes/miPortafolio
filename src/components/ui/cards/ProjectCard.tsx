@@ -78,8 +78,8 @@ export const ProjectCard = ({
           {project.deployed && (
             <span className="project-badge-deployed">
               <span className="flex items-center gap-1">
-                <span className="w-1 h-1 bg-emerald-300 rounded-full animate-pulse" />
-                En prod
+                <span className="w-[7px] h-[7px] bg-emerald-300 rounded-full animate-pulse" />
+                En producción
               </span>
             </span>
           )}
