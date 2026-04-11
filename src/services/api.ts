@@ -1,5 +1,5 @@
-const API_URL = import.meta.env.VITE_API_URL || "";
-const DEFAULT_TIMEOUT = 10000;
+export const API_URL = import.meta.env.VITE_API_URL || "";
+export const DEFAULT_TIMEOUT = 10000;
 
 export class ApiError extends Error {
   status: number;
@@ -55,7 +55,11 @@ export const fetchApi = async <T>(
     }
     return data.data;
   } catch (error) {
-    if (error instanceof Error && error.name === "AbortError") {
+    const err = error as Error & { name?: string; message?: string };
+    if (
+      err.name === "AbortError" ||
+      (err.message && err.message.toLowerCase().includes("abort"))
+    ) {
       throw new ApiError(0, "Tiempo de espera agotado");
     }
     if (error instanceof ApiError) {

@@ -28,18 +28,22 @@ const Contact = () => {
   const { links } = portfolioData;
 
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const onSubmit = (data: ContactFormData) => {
     setShowErrorAlert(false);
     setShowSuccessAlert(false);
+    setErrorMessage("");
 
     mutate(data, {
       onSuccess: () => {
         setShowSuccessAlert(true);
         reset();
       },
-      onError: () => {
+      onError: (error) => {
+        const apiError = error as { message?: string };
+        setErrorMessage(apiError.message || "Error al enviar el mensaje");
         setShowErrorAlert(true);
       },
     });
@@ -50,8 +54,8 @@ const Contact = () => {
       {showErrorAlert && (
         <Alert
           type="error"
-          title="Error al enviar:"
-          message="Hubo un problema. Intentalo de nuevo."
+          title="Error al enviar"
+          message={errorMessage}
           show={showErrorAlert}
           onClose={() => setShowErrorAlert(false)}
         />
