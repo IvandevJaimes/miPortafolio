@@ -10,6 +10,8 @@ export const SecondaryButton = ({
   className = "",
   ...props
 }: ButtonProps) => {
+  const isDisabled = props.disabled;
+
   return (
     <button
       {...props}
@@ -17,9 +19,13 @@ export const SecondaryButton = ({
         relative inline-flex items-center justify-center 
         overflow-hidden rounded-lg px-6 py-3 font-medium 
         transition-all duration-300 ease-in-out 
-        hover:scale-[0.98] cursor-pointer 
-        bg-transparent text-white border-2 border-[rgba(57,255,136,0.3)]
-        hover:border-[#39ff88] hover:bg-[rgba(57,255,136,0.1)] hover:translate-y-[-2px]
+        cursor-pointer 
+        bg-transparent text-white 
+        border-2 border-[rgba(57,255,136,0.3)]
+        ${isDisabled 
+          ? "opacity-50 cursor-not-allowed" 
+          : "hover:scale-[0.98] hover:border-[#39ff88] hover:bg-[rgba(57,255,136,0.1)] hover:translate-y-[-2px]"
+        }
         ${className}
       `}
     >

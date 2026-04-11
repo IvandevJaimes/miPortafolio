@@ -78,7 +78,7 @@ export const Alert = ({
 
   return (
     <div
-      className={`fixed bottom-5 right-5 z-[9999] flex items-center gap-[5px] px-2 py-2 rounded-lg shadow-lg pointer-events-auto text-xs sm:text-sm md:text-base ${typeClasses[type]} ${isExiting ? "animate-[alert-disappear_0.3s_ease_forwards]" : "animate-[alert-appear_0.3s_ease-out]"}`}
+      className={`fixed top-5 right-5 z-[9999] flex items-center gap-[5px] px-2 py-2 rounded-lg shadow-lg pointer-events-auto text-xs sm:text-sm md:text-base ${typeClasses[type]} ${isExiting ? "animate-[alert-disappear_0.3s_ease_forwards]" : "animate-[alert-appear_0.3s_ease-out]"}`}
       role="alert"
     >
       <div

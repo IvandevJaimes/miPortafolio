@@ -1,64 +1,70 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import "./contact.css";
 import { SecondaryButton } from "../../ui/buttons/SecondaryButton";
 import portfolioData from "../../../data/portfolioData.json";
+import { useMutation } from "@tanstack/react-query";
+import { sendContactMessage } from "@/services/contactApi";
+import { Alert } from "@/components/ui/alerts/Alert";
 
-interface ContactProps {
-  onError?: (error: Error) => void;
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
 }
 
-const Contact = ({ onError }: ContactProps) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+const Contact = () => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: sendContactMessage,
   });
-  const [formStatus, setFormStatus] = useState<
-    "idle" | "sending" | "sent" | "error"
-  >("idle");
 
-  void onError;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormData>();
 
   const { links } = portfolioData;
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
+  const onSubmit = (data: ContactFormData) => {
+    setShowErrorAlert(false);
+    setShowSuccessAlert(false);
+
+    mutate(data, {
+      onSuccess: () => {
+        setShowSuccessAlert(true);
+        reset();
+      },
+      onError: () => {
+        setShowErrorAlert(true);
+      },
+    });
   };
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setFormStatus("sending");
-
-    setTimeout(() => {
-      setFormStatus("sent");
-      setFormData({ name: "", email: "", message: "" });
-    }, 1500);
-  };
-
-  if (formStatus === "sent") {
-    return (
-      <section id="contacto" className="contact-section">
-        <div className="contact-container">
-          <div className="contact-success">
-            <div className="contact-success-icon">✓</div>
-            <h2 className="contact-success-title">¡Mensaje Enviado!</h2>
-            <p className="contact-success-desc">
-              Gracias por contactarme. Te responderé lo antes posible.
-            </p>
-            <SecondaryButton onClick={() => setFormStatus("idle")}>
-              Enviar otro mensaje
-            </SecondaryButton>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="contacto" className="contact-section">
+      {showErrorAlert && (
+        <Alert
+          type="error"
+          title="Error al enviar:"
+          message="Hubo un problema. Intentalo de nuevo."
+          show={showErrorAlert}
+          onClose={() => setShowErrorAlert(false)}
+        />
+      )}
+      {showSuccessAlert && (
+        <Alert
+          type="success"
+          title="Enviado"
+          message="Gracias por contactarme. Te responderé pronto."
+          show={showSuccessAlert}
+          onClose={() => setShowSuccessAlert(false)}
+        />
+      )}
       <div className="contact-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-15">
           <div className="flex flex-col gap-4 ">
@@ -131,69 +137,114 @@ const Contact = ({ onError }: ContactProps) => {
           </div>
 
           <div className="contact-form-wrapper">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-              <div className="flex flex-col gap-2">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col gap-5"
+            >
+              <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="name"
                   className="text-sm font-medium text-slate-400"
                 >
                   Nombre
                 </label>
+                {errors?.name && (
+                  <span className="contact-form-error text-red-500">
+                    {errors.name.message}
+                  </span>
+                )}
                 <input
                   type="text"
                   id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="contact-form-input"
+                  {...register("name", {
+                    required: "El nombre es requerido",
+                    minLength: { value: 2, message: "Mínimo 2 caracteres" },
+                    maxLength: { value: 200, message: "Demasiados caracteres" },
+                  })}
+                  className={`contact-form-input ${errors.name ? "error" : ""}`}
                   placeholder="Tu nombre"
                 />
               </div>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="email"
                   className="text-sm font-medium text-slate-400"
                 >
                   Email
                 </label>
+                {errors?.email && (
+                  <span className="contact-form-error text-red-500">
+                    {errors.email.message}
+                  </span>
+                )}
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="contact-form-input"
+                  {...register("email", {
+                    required: "El email es requerido",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Email inválido",
+                    },
+                  })}
+                  className={`contact-form-input ${errors.email ? "error" : ""}`}
                   placeholder="tu@email.com"
                 />
               </div>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 relative">
                 <label
                   htmlFor="message"
                   className="text-sm font-medium text-slate-400"
                 >
                   Mensaje
                 </label>
+                {errors?.message && (
+                  <span className="contact-form-error text-red-500">
+                    {errors.message.message}
+                  </span>
+                )}
                 <textarea
                   id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  className="contact-form-input resize-none min-h-[120px]"
+                  {...register("message", {
+                    required: "El mensaje es requerido",
+                    minLength: { value: 10, message: "Mínimo 10 caracteres" },
+                    maxLength: {
+                      value: 2000,
+                      message: "Máximo 2000 caracteres",
+                    },
+                  })}
+                  className={`contact-form-input resize-none min-h-[120px] ${errors.message ? "error" : ""}`}
                   placeholder="Tu mensaje..."
                   rows={5}
                 />
               </div>
 
-              <SecondaryButton
-                type="submit"
-                disabled={formStatus === "sending"}
-              >
-                {formStatus === "sending" ? "Enviando..." : "Enviar Mensaje"}
+              <SecondaryButton type="submit" disabled={isPending}>
+                {isPending ? (
+                  <span className="flex items-center gap-2">
+                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    Enviando...
+                  </span>
+                ) : (
+                  "Enviar Mensaje"
+                )}
               </SecondaryButton>
             </form>
           </div>

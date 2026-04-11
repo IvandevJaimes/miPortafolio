@@ -61,3 +61,9 @@ export interface SkillCategory {
   updated_at: string;
   skills?: Skill[];
 }
+
+export interface ContactMessage {
+  name: string;
+  email: string;
+  message: string;
+}
