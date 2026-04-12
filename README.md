@@ -1,4 +1,4 @@
-# Ivan Jaimes Portfolio
+# Portafolio personal
 
 Portafolio personal de desarrollador fullstack construido con React, TypeScript y Vite.
 Aplicación web moderna y responsive diseñada para mostrar proyectos, habilidades y experiencia de forma clara y profesional. Implementa buenas prácticas de desarrollo frontend, consumo de APIs y además se integra con un backend propio para la gestión dinámica de contenido.
