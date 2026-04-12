@@ -4,8 +4,12 @@ import { Logo } from "@/components/ui/logo/Logo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const links = portfolioData.links;
 
+  const links: Record<string, string> = {
+    github: portfolioData.links.github,
+    linkedin: portfolioData.links.linkedin,
+    gmail: portfolioData.links.gmail,
+  };
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

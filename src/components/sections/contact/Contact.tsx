@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
 import "./contact.css";
 import { SecondaryButton } from "../../ui/buttons/SecondaryButton";
 import portfolioData from "../../../data/portfolioData.json";
-import { useMutation } from "@tanstack/react-query";
 import { sendContactMessage } from "@/services/contactApi";
 import { Alert } from "@/components/ui/alerts/Alert";
 
@@ -18,14 +18,18 @@ const Contact = () => {
     mutationFn: sendContactMessage,
   });
 
+  const links: Record<string, string> = {
+    github: portfolioData.links.github,
+    linkedin: portfolioData.links.linkedin,
+    gmail: portfolioData.links.gmail,
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<ContactFormData>();
-
-  const { links } = portfolioData;
 
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
