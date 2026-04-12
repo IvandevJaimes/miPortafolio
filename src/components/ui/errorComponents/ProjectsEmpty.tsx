@@ -6,7 +6,10 @@ interface ProjectsEmptyProps {
 
 export const ProjectsEmpty = ({ onRetry }: ProjectsEmptyProps) => {
   return (
-    <section className="py-17 px-6 relative overflow-hidden bg-gradient-to-b from-[#0d0d0d] via-[#1a1919] to-[#0d0d0d]">
+    <section
+      className="py-17 px-6 relative overflow-hidden bg-gradient-to-b from-[#0d0d0d] via-[#1a1919] to-[#0d0d0d]"
+      id="proyectos"
+    >
       <div className="skeleton-particles" />
 
       <div className="max-w-[1400px] mx-auto relative z-10 flex flex-col items-center justify-center min-h-[60vh]">
