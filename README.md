@@ -2,6 +2,8 @@
 
 Portafolio personal de desarrollador fullstack construido con React, TypeScript y Vite.
 
+● Repo backend: https://github.com/IvandevJaimes/miPortafolioApi
+
 ## Tecnologías utilizadas
 
 ### Frontend
