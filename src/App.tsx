@@ -16,8 +16,9 @@ const App = () => {
             path="*"
             element={
               <ErrorScreen
-                error="404 - Página no encontrada"
-                onClick={() => window.location.href = "/"}
+                type="404"
+                showRetry={false}
+                onGoBack={() => window.location.href = "/"}
               />
             }
           />

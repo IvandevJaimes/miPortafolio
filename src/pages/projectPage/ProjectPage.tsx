@@ -65,11 +65,28 @@ const ProjectPage = () => {
   }
 
   if (error || !project) {
+    const err = error as Error & { status?: number };
+    const errorMessage =
+      err?.message || (typeof error === "string" ? error : undefined);
+
+    const isConnectionError =
+      errorMessage?.toLowerCase().includes("conexión") ||
+      errorMessage?.toLowerCase().includes("timeout") ||
+      errorMessage?.toLowerCase().includes("abort") ||
+      errorMessage?.toLowerCase().includes("network");
+
+    const isNotFound = !isConnectionError && (!project || err?.status === 404);
+
+    const errorType = isNotFound ? "404" : "error";
+
     return (
       <ErrorScreen
-        error={error}
+        type={errorType}
+        title={isNotFound ? "Proyecto no encontrado" : undefined}
+        message={!isNotFound ? errorMessage : undefined}
+        showRetry={!isNotFound}
         onRetry={() => refetch()}
-        onClick={() => navigate(-1)}
+        onGoBack={() => navigate(-1)}
       />
     );
   }
@@ -93,14 +110,8 @@ const ProjectPage = () => {
           property="og:description"
           content={projectData.description || `Proyecto: ${projectData.title}`}
         />
-        <meta
-          property="og:image"
-          content={projectData.images[0] || ogImage}
-        />
-        <meta
-          property="og:url"
-          content={`${url}/project/${projectId}`}
-        />
+        <meta property="og:image" content={projectData.images[0] || ogImage} />
+        <meta property="og:url" content={`${url}/project/${projectId}`} />
         <meta
           name="twitter:title"
           content={`${projectData.title} | Ivan Jaimes`}
@@ -109,10 +120,7 @@ const ProjectPage = () => {
           name="twitter:description"
           content={projectData.description || `Proyecto: ${projectData.title}`}
         />
-        <meta
-          name="twitter:image"
-          content={projectData.images[0] || ogImage}
-        />
+        <meta name="twitter:image" content={projectData.images[0] || ogImage} />
       </Helmet>
       <Header />
       <main className="project-page">

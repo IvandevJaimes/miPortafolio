@@ -4,30 +4,35 @@ import { SecondaryButton } from "../buttons/SecondaryButton";
 import { useNavigate } from "react-router-dom";
 import "./errorScreen.css";
 
+export type ErrorScreenType = "404" | "error" | "generic";
+
 interface ErrorScreenProps {
-  error: Error | string | string[] | null;
+  type?: ErrorScreenType;
+  title?: string;
+  message?: string;
+  showRetry?: boolean;
+  showGoBack?: boolean;
   onRetry?: () => unknown;
-  onClick?: () => void;
+  onGoBack?: () => void;
 }
 
-const isNotFound = (error: Error | string | string[] | null): boolean => {
-  if (!error) return false;
-  const message =
-    typeof error === "string"
-      ? error
-      : error instanceof Error
-        ? error.message
-        : error[0];
-  return (
-    message.toLowerCase().includes("not found") ||
-    message.toLowerCase().includes("no encontrado") ||
-    message.toLowerCase().includes("404")
-  );
+const ERROR_TITLES: Record<ErrorScreenType, string> = {
+  "404": "Página no encontrada",
+  "error": "Error al cargar",
+  "generic": "Algo salió mal",
 };
 
-export const ErrorScreen = ({ error, onRetry, onClick }: ErrorScreenProps) => {
+export const ErrorScreen = ({
+  type = "generic",
+  title,
+  message,
+  showRetry = true,
+  showGoBack = true,
+  onRetry,
+  onGoBack,
+}: ErrorScreenProps) => {
   const [isRetrying, setIsRetrying] = useState(false);
-  const notFound = isNotFound(error);
+  const navigate = useNavigate();
 
   const handleRetry = () => {
     setIsRetrying(true);
@@ -35,15 +40,16 @@ export const ErrorScreen = ({ error, onRetry, onClick }: ErrorScreenProps) => {
     setTimeout(() => setIsRetrying(false), 2000);
   };
 
-  const navigate = useNavigate();
-
   const handleGoBack = () => {
-    if (onClick) {
-      onClick();
+    if (onGoBack) {
+      onGoBack();
     } else {
       navigate(-1);
     }
   };
+
+  const displayTitle = title || ERROR_TITLES[type];
+  const show404Animation = type === "404";
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0d0d0d] via-[#111] to-[#0d0d0d] px-6 py-20 relative overflow-hidden">
@@ -51,7 +57,7 @@ export const ErrorScreen = ({ error, onRetry, onClick }: ErrorScreenProps) => {
 
       <div className="flex flex-col items-center justify-center text-center z-10 max-w-[500px]">
         <div className="relative w-40 h-40 flex items-center justify-center mb-8">
-          {notFound ? (
+          {show404Animation ? (
             <div className="flex gap-2">
               <span className="project-error-404-text">4</span>
               <span className="project-error-404-text">0</span>
@@ -78,66 +84,64 @@ export const ErrorScreen = ({ error, onRetry, onClick }: ErrorScreenProps) => {
 
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-slate-100 mb-3">
-            {notFound
-              ? "Proyecto no encontrado"
-              : "Error al cargar el proyecto"}
+            {displayTitle}
           </h1>
-          {!notFound && error && (
+          {message && (
             <p className="text-red-400 text-base md:text-lg leading-relaxed">
-              {typeof error === "string"
-                ? error
-                : Array.isArray(error)
-                  ? error.join(", ")
-                  : error.message}
+              {message}
             </p>
           )}
         </div>
 
         <div className="flex flex-col items-center gap-3">
-          <NormalButton
-            onClick={handleRetry}
-            disabled={isRetrying}
-            className="w-full sm:w-auto"
-          >
-            <span className="flex items-center gap-2 justify-center">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                />
-              </svg>
-              {isRetrying ? "Reintentando..." : "Reintentar"}
-            </span>
-          </NormalButton>
+          {showRetry && (
+            <NormalButton
+              onClick={handleRetry}
+              disabled={isRetrying}
+              className="w-full sm:w-auto"
+            >
+              <span className="flex items-center gap-2 justify-center">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+                {isRetrying ? "Reintentando..." : "Reintentar"}
+              </span>
+            </NormalButton>
+          )}
 
-          <SecondaryButton
-            onClick={handleGoBack}
-            className="w-full sm:w-auto"
-          >
-            <span className="flex items-center gap-2 justify-center">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                />
-              </svg>
-              Volver
-            </span>
-          </SecondaryButton>
+          {showGoBack && (
+            <SecondaryButton
+              onClick={handleGoBack}
+              className="w-full sm:w-auto"
+            >
+              <span className="flex items-center gap-2 justify-center">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                  />
+                </svg>
+                Volver
+              </span>
+            </SecondaryButton>
+          )}
         </div>
       </div>
     </main>
