@@ -101,9 +101,7 @@ export const ShareModal = ({
 
   useEffect(() => {
     const handleClickOutside = (e: globalThis.MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        // No cerramos aquí porque el modal ya maneja el cierre
-      }
+      if (menuRef.current?.contains(e.target as Node)) return;
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -114,8 +112,8 @@ export const ShareModal = ({
       await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      return;
     } catch {
-      // Fallback para móviles: método tradicional con input temporal
       const textArea = document.createElement("textarea");
       textArea.value = url;
       textArea.style.position = "fixed";
@@ -124,15 +122,10 @@ export const ShareModal = ({
       document.body.appendChild(textArea);
       textArea.focus();
       textArea.select();
-      try {
-        document.execCommand("copy");
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      } catch {
-        // Silencioso - el usuario verá que no se copió
-      } finally {
-        document.body.removeChild(textArea);
-      }
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
@@ -142,13 +135,10 @@ export const ShareModal = ({
   };
 
   const nativeShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({ title, text: description, url });
-      } catch {
-        // User cancelled or error
-      }
-    }
+    if (!navigator.share) return;
+    try {
+      await navigator.share({ title, text: description, url });
+    } catch { /* silenciado */ }
   };
 
   return (

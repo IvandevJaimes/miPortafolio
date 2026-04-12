@@ -38,8 +38,7 @@ const Hero = () => {
 
   const setTypedRef = (element: HTMLSpanElement | null) => {
     if (!element) return;
-    
-    // Destruir instancia previa si existe
+
     if (typedInstanceRef.current) {
       typedInstanceRef.current.destroy();
     }
@@ -54,7 +53,6 @@ const Hero = () => {
     });
   };
 
-  // Cleanup al desmontar
   useEffect(() => {
     return () => {
       if (typedInstanceRef.current) {
