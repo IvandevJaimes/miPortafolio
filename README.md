@@ -1,73 +1,88 @@
-# React + TypeScript + Vite
+# Ivan Jaimes Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portafolio personal de desarrollador fullstack construido con React, TypeScript y Vite.
 
-Currently, two official plugins are available:
+## Tecnologías utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Frontend
 
-## React Compiler
+- React 19
+- TypeScript
+- Vite 7
+- React Router DOM 7
+- TanStack Query 5
+- Tailwind CSS 4
+- Flowbite & Flowbite React
+- React Helmet Async
+- React Hook Form
+- Typed.js
+- Iconify React
+- Mammoth (para procesar documentos)
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### Herramientas de desarrollo
 
-## Expanding the ESLint configuration
+- ESLint 9
+- PostCSS 10
+- Autoprefixer 10
+- TypeScript 5.9
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Estructura del proyecto
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/
+│   ├── layout/         # Header y Footer
+│   ├── sections/       # Secciones principales (Hero, Projects, Skills, Contact)
+│   └── ui/             # Componentes reutilizables (botones, tarjetas, iconos)
+├── context/            # Context API (ModalContext)
+├── data/               # Datos estáticos (site.json)
+├── pages/              # Páginas de la aplicación (MainPage, ProjectPage)
+├── services/           # Servicios API (projects, skills, contact, profile)
+└── App.tsx             # Componente raíz con routing
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Características
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Diseño responsive
+- Navegación cliente-side con React Router
+- Manejo de estados con React Query
+- Temas y componentes UI con Tailwind CSS y Flowbite
+- Optimización de meta tags para SEO y redes sociales
+- Manejo de errores y estados de carga
+- Formulario de contacto integrado
+- Visualización de habilidades y proyectos
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Scripts disponibles
+
+- `dev`: Inicia el servidor de desarrollo con Vite
+- `build`: Compila TypeScript y genera build de producción
+- `lint`: Ejecuta ESLint para análisis de código
+- `preview`: Vista previa del build de producción
+
+## Configuración de despliegue
+
+El proyecto está configurado para desplegarse en Vercel mediante `vercel.json` que redirige todas las rutas al index.html para soportar el routing cliente-side de React Router.
+
+## Requisitos
+
+- Node.js 18+
+- npm o yarn
+
+## Instalación
+
+```bash
+npm install
+```
+
+## Desarrollo
+
+```bash
+npm run dev
+```
+
+## Producción
+
+```bash
+npm run build
+npm run preview
 ```
