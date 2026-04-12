@@ -5,6 +5,7 @@ import Header from "../../components/layout/header/Header";
 import Projects from "../../components/sections/projects/Projects";
 import Skills from "../../components/sections/skills/Skills";
 import Contact from "../../components/sections/contact/Contact";
+import Footer from "../../components/layout/footer/Footer";
 import { DataError } from "../../components/ui/errorComponents/DataError";
 import siteData from "../../data/site.json";
 
@@ -68,6 +69,7 @@ const MainPage = () => {
         )}
         <Contact />
       </main>
+      <Footer />
     </>
   );
 };
