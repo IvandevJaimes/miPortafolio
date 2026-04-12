@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./hero.css";
 import { PrimaryButton } from "../../ui/buttons/PrimaryButton";
 import { SecondaryButton } from "../../ui/buttons/SecondaryButton";
@@ -7,6 +7,11 @@ import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "../../../services/profileApi";
 import { Alert } from "../../ui/alerts/Alert";
 import portfolioData from "../../../data/portfolioData.json";
+
+interface PortfolioData {
+  tags?: string[];
+}
+import Typed from "typed.js";
 
 const Hero = () => {
   const [showAlert, setShowAlert] = useState(true);
@@ -25,6 +30,38 @@ const Hero = () => {
     setShowAlert(true);
     refetch();
   };
+
+  const typedInstanceRef = useRef<Typed | null>(null);
+
+  const tagsArray = (portfolioData as PortfolioData).tags || [];
+  const shouldAnimate = tagsArray.length > 1;
+
+  const setTypedRef = (element: HTMLSpanElement | null) => {
+    if (!element) return;
+    
+    // Destruir instancia previa si existe
+    if (typedInstanceRef.current) {
+      typedInstanceRef.current.destroy();
+    }
+
+    typedInstanceRef.current = new Typed(element, {
+      strings: tagsArray,
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 2000,
+      loop: true,
+      showCursor: false,
+    });
+  };
+
+  // Cleanup al desmontar
+  useEffect(() => {
+    return () => {
+      if (typedInstanceRef.current) {
+        typedInstanceRef.current.destroy();
+      }
+    };
+  }, []);
 
   const shouldShowAlert = showAlert && error && !apiProfile;
 
@@ -64,8 +101,8 @@ const Hero = () => {
           </h1>
 
           <div className="hero-typing-container">
-            <span className="hero-typing-text">
-              {apiProfile?.tags ? apiProfile.tags : portfolioData.title}
+            <span ref={shouldAnimate ? setTypedRef : undefined} className="hero-typing-text">
+              {!shouldAnimate && (tagsArray[0] || portfolioData.title)}
             </span>
             <span className="hero-typing-cursor">|</span>
           </div>

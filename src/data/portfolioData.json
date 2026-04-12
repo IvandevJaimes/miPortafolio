@@ -1,6 +1,7 @@
 {
   "name": "Ivan Jaimes",
   "title": "Backend Developer",
+  "tags": ["Node.js", "TypeScript", "Express", "React", "PostgreSQL"],
   "image_url": "https://res.cloudinary.com/djr71v0p3/image/upload/v1774975286/portfolio/lrg9qk6bb6brjqsqaiw8.jpg",
   "presentation": "Desarrollador Fullstack junior orientado al backend. Construyo APIs robustas y escalables con Node.js, TypeScript y Express, combinadas con interfaces modernas en React. Apasionado por la arquitectura de sistemas y el código limpio.",
   "links": {
